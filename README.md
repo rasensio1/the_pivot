@@ -7,12 +7,3 @@ take an e-commerce store and pivot the codebase to satisfy additional requiremen
 
 
 [Project Outline](https://github.com/turingschool/lesson_plans/blob/master/ruby_03-professional_rails_applications/the_pivot.md) | [Heroku](#)
-
-
-### Team workflow 
-- **Tools** 
-  - [waffle](https://waffle.io/applegrain/dinners_ready) 
-  - [travis]  (https://travis-ci.org/applegrain/dinners_ready)
-  - hound (rubocop locally to test before PR)
-  - [code climate](https://codeclimate.com/github/applegrain/dinners_ready) 
-  - simple cov 
