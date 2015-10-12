@@ -16,8 +16,6 @@ gem "twilio-ruby"
 gem "bootstrap-sass"
 gem "autoprefixer-rails"
 
-gem "skylight"
-
 group :development, :test do
   gem 'byebug'
   gem 'rspec-rails'
