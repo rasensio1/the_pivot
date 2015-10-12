@@ -1,13 +1,15 @@
 <div id="list-group">
-  <div class="well grey">
-    <%= link_to "Full Menu", "/menu", class: "list-group-item side-nav-element" %>
-    <%= link_to "Breakfast", "/menu/Breakfast", class: "list-group-item side-nav-element" %>
-    <%= link_to "Lunch", "/menu/Lunch", class: "list-group-item side-nav-element" %>
-    <%= link_to "Dinner", "/menu/Dinner", class: "list-group-item side-nav-element" %>
-    <div class="small-spacer"></div>
+  <div class="well">
+    <ul>
+      <li><%= link_to "All Photos", "/menu", class: "side-nav-element"%></li>
+      <li><%= link_to "Landscape", "/menu/Breakfast", class: "side-nav-element" %></li>
+      <li><%= link_to "Urban", "/menu/Lunch", class: "side-nav-element" %></li>
+      <li><%= link_to "Portrait", "/menu/Dinner", class: "side-nav-element" %></li>
+      <li><%= link_to "Pets", "/menu/Dinner", class: "side-nav-element" %></li>
+      <li><%= link_to "Food", "/menu/Dinner", class: "side-nav-element" %></li>
+  </div>
     <div class = "well" >
       <h4> Want your own shop? </h4>
       <%= link_to "Sign Up!", "/menu/Dinner", class: "list-group-item text-center" %>
     </div>
-  </div>
 </div>
