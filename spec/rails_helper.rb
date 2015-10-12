@@ -17,6 +17,8 @@ RSpec.configure do |config|
 
   config.infer_spec_type_from_file_location!
 
+  config.backtrace_exclusion_patterns << %r{/gems/}
+
   Capybara.register_driver :selenium do |app|
     Capybara::Selenium::Driver.new(app, browser: :chrome)
   end

@@ -5,8 +5,6 @@ RSpec.describe "a user with a non empty cart", type: :feature do
   let!(:user) { Fabricate(:user) }
 
   before do
-    allow_any_instance_of(OrdersController)
-      .to receive(:send_text_message).and_return(true)
     visit menu_path
 
     within(".item-info") do
