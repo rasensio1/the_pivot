@@ -1,5 +1,3 @@
-require 'twilio-ruby'
-
 class OrdersController < ApplicationController
 
   def create
@@ -28,18 +26,6 @@ class OrdersController < ApplicationController
     cart.items.each do |cart_item|
       order.order_items.new(item: cart_item.item, quantity: cart_item.quantity)
     end
-  end
-
-  def send_text_message
-    send_to = current_user.phone_number
-    twilio_phone_number = "5733033256"
-    @twilio_client = Twilio::REST::Client.new Rails.application.secrets.twilio_account_sid, Rails.application.secrets.twilio_auth_token
-
-    @twilio_client.account.messages.create(
-      from: "+1#{twilio_phone_number}",
-      to: "+1#{send_to}",
-      body: "Your order is on it's way! Dinner will arrive in 1230912309 minutes. - Dinner's Ready"
-    )
   end
 
   def create_order
