@@ -6,7 +6,7 @@ class OrdersController < ApplicationController
     if current_user
       create_order
       empty_cart
-      notify_user
+      flash[:success] = "Order placed! Dinners on the way!"
       redirect_to orders_path
     else
       flash[:warning] = "Sign In to complete your order, Dinners almost ready!"
@@ -38,12 +38,8 @@ class OrdersController < ApplicationController
     @twilio_client.account.messages.create(
       from: "+1#{twilio_phone_number}",
       to: "+1#{send_to}",
-      body: "Your order is on it's way! Dinner will arrive in #{estimated_delivery_time} minutes. - Dinner's Ready"
+      body: "Your order is on it's way! Dinner will arrive in 1230912309 minutes. - Dinner's Ready"
     )
-  end
-
-  def estimated_delivery_time
-    current_user.delivery_time
   end
 
   def create_order
@@ -56,10 +52,5 @@ class OrdersController < ApplicationController
   def empty_cart
     session[:cart] = {}
     cart.empty
-  end
-
-  def notify_user
-    send_text_message if current_user.phone_number
-    flash[:success] = "Order placed! Dinners on the way!"
   end
 end
