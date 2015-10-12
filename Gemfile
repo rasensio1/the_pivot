@@ -16,7 +16,6 @@ gem "twilio-ruby"
 gem "bootstrap-sass"
 gem "autoprefixer-rails"
 
-gem "google_directions"
 gem "skylight"
 
 group :development, :test do
@@ -38,6 +37,7 @@ group :development, :test do
   gem 'database_cleaner'
 
   gem 'simplecov', require: false
+
   gem 'codeclimate-test-reporter', require: nil
 
   gem 'web-console', '~> 2.0'
