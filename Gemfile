@@ -9,10 +9,13 @@ gem "jquery-rails"
 gem "jbuilder", "~> 2.0"
 gem "sdoc", "~> 0.4.0", group: :doc
 gem "bcrypt", "~> 3.1.7"
+
 gem "twilio"
 gem "twilio-ruby"
+
 gem "bootstrap-sass"
 gem "autoprefixer-rails"
+
 gem "google_directions"
 gem "skylight"
 
@@ -23,14 +26,20 @@ group :development, :test do
   gem 'guard-rspec'
   gem 'capybara'
   gem 'fabrication'
+
   gem 'shoulda-matchers'
+
   gem 'launchy'
   gem 'pry-rails'
+
   gem 'selenium-webdriver'
   gem 'chromedriver-helper'
+
   gem 'database_cleaner'
+
   gem 'simplecov', require: false
   gem 'codeclimate-test-reporter', require: nil
+
   gem 'web-console', '~> 2.0'
 end
 
