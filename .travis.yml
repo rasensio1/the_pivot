@@ -6,12 +6,6 @@ script:
 - bundle exec rake db:create db:schema:load
 - bundle exec rspec
 
-#need to get the real token, ryan will have to setup
-#addons:
-#  code_climate:
-#    repo_token: a46f18b88fdabd9f0b5c24c45ca8dc4b5dc58b8d8a983b65affd5232f482df9c bundle
-#      exec rake
-
 deploy:
   provider: heroku
   api_key:
