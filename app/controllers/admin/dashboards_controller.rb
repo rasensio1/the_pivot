@@ -1,4 +1,4 @@
-class Admin::DashboardsController < Admin::BaseController
+class Stores::Admin::DashboardsController < Stores::Admin::BaseController
   def show
   end
 end

@@ -12,10 +12,10 @@ Rails.application.routes.draw do
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
 
-  namespace "admin" do
+  namespace :stores, path: ":store", as: :store do
     resources :items, except: [:show]
-    resource :dashboard, only: [:show]
     resources :orders, only: [:index, :show, :update]
+    get "/dashboard", to: "#edit"
   end
 
   namespace :menu do
