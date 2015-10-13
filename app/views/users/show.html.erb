@@ -1,4 +1,13 @@
-<h1><%= current_user.username.capitalize %>'s Profile</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <h1><%= current_user.username.capitalize %>'s Profile</h1>
+    </div>
+    <div>
+      <%= link_to "Create Store", new_store_path, class: "btn btn-primary" %>
+    </div>
+  </div>
+</div>
 
 <div class="row">
   <div class="col-md-3"><h4>Account Information</h4></div>
@@ -22,4 +31,3 @@
       </tr>
   </table>
 </div>
-
