@@ -30,12 +30,6 @@ RSpec.configure do |config|
     click_button "Sign In"
   end
 
-  if ENV["CI"]
-    require "codeclimate-test-reporter"
-    CodeClimate::TestReporter.start
-  else
     require "simplecov"
     SimpleCov.start
-  end
-
 end
