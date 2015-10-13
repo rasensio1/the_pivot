@@ -1,4 +1,4 @@
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="navbar-header">
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
       <span class="sr-only">Toggle navigation</span>
@@ -7,17 +7,14 @@
       <span class="icon-bar"></span>
     </button>
     <div>
-      <%= link_to image_tag("header_logo_web_3.png", html_option = { class: "img-responsive img-circle navbar-brand" }), root_path %>
+      <a class="navbar-brand" href="#">PR</a>
     </div>
   </div>
+
   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-nav navbar-right">
-      <li>
-        <%= link_to "Menu", menu_path %>
-      </li>
-      <li>
-        <%= link_to "Cart", cart_path %>
-      </li>
+      <li> <%= link_to "Menu", menu_path %> </li>
+      <li> <%= link_to "Cart", cart_path %> </li>
       <li>
         <% if current_user %>
           <% if current_user && current_user.admin? %>

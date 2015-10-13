@@ -1,64 +1,50 @@
-<!-- Jumbotron Header -->
-<header class="jumbotron hero-spacer">
-  <div>
-    <%= image_tag "home-page-logo-large-2.png", html_option = { class: "img-responsive center-block vertical-center" } %>
-  </div>
-</header>
+<%= render partial: "layouts/flash_message" %>
 
-<hr>
+<div class="jumbotron text-center">
+  <h1> Photo's Ready! </h1>
+</div>
 
-<%= render partial: "layouts/page_title", locals: { page_title: "Home Cooked Meals" } %>
+<div class="items-list">
+  <div class="row">
 
-<div class="row text-center">
+    <div class="col-md-3">
+          <%= render partial: "layouts/sidebar" %>
+    </div>
 
-  <div class="col-md-3 col-sm-6 hero-feature category-feature">
-    <div class="thumbnail">
-      <%= link_to image_tag("dinner_served.jpg"), menu_path %>
-      <div class="caption">
-        <h3><%= link_to "Full Menu", "/menu" %></h3>
-
-        <p>Browse all the meals!</p>
+    <div class="col-md-9 text-center">
+      <div class="well">
+        <h2> Popular Photographs </h2>
       </div>
+      <%= render partial: "layouts/photos" %>
     </div>
   </div>
 
-  <div class="col-md-3 col-sm-6 hero-feature category-feature">
-    <div class="thumbnail">
-      <%= link_to image_tag("breakfast.jpg"), "/menu/Breakfast" %>
-      <div class="caption">
-        <h3><%= link_to "Breakfast", "/menu/Breakfast" %></h3>
-
-        <p>Get the day started right!</p>
+  <div class="row">
+    <div class="col-md-offset-3 col-md-9 text-center">
+      <div class="well">
+        <h2> Popular Photographers</h2>
       </div>
-    </div>
-  </div>
-
-  <div class="col-md-3 col-sm-6 hero-feature category-feature">
-    <div class="thumbnail">
-      <%= link_to image_tag("lunch.jpg"), "menu/Lunch" %>
-
-      <div class="caption">
-        <h3><%= link_to "Lunch", "/menu/Lunch" %></h3>
-
-        <p>Fast and Filling!</p>
+      <div class="row item-info item-list">
+        <% 3.times do %>
+          <div class="col-sm-4 col-lg-4 col-md-4 item-box">
+            <h4> Photographer B </h4>
+            <div class="thumbnail">
+              <%= link_to image_tag('http://placehold.it/320x150', alt: "A picture", class: "item-image"), "#" %>
+              <div class="caption">
+                <h4 class="pull-right"><%= number_to_currency(10.00) %></h4>
+                <h4> <%= link_to "Picture Name", "#" %> </h4>
+                <p> <%= "Blah blah blah this is the description" %> </p>
+              </div>
+              <p> <%= button_to "Add to Cart", "#", method: :post, class: "btn btn-primary btn-large center-block" %> </p>
+            </div>
+          </div>
+        <% end %>
       </div>
-    </div>
-  </div>
 
-  <div class="col-md-3 col-sm-6 hero-feature category-feature">
-    <div class="thumbnail">
-      <%= link_to image_tag("dinner.jpg"), "menu/Dinner" %>
 
-      <div class="caption">
-        <h3><%= link_to "Dinner", "/menu/Dinner" %></h3>
-
-        <p>It's time for some Home Cooking!</p>
-
-      </div>
     </div>
   </div>
 
 </div>
-<hr>
 
 
