@@ -8,4 +8,3 @@ take an e-commerce store and pivot the codebase to satisfy additional requiremen
 
 [Project Outline](https://github.com/turingschool/lesson_plans/blob/master/ruby_03-professional_rails_applications/the_pivot.md) | [Heroku](#)
 
-[![Code Climate](https://codeclimate.com/github/rasensio1/the_pivot/badges/gpa.svg)](https://codeclimate.com/github/rasensio1/the_pivot) [![Test Coverage](https://codeclimate.com/github/rasensio1/the_pivot/badges/coverage.svg)](https://codeclimate.com/github/rasensio1/the_pivot/coverage)

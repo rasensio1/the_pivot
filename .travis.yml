@@ -1,12 +1,16 @@
 language: ruby
 rvm:
-  - 2.2.2
-
+- 2.2.2
 script:
-  - bundle install
-  - bundle exec rake db:create db:schema:load
-  - bundle exec rspec
+- bundle install
+- bundle exec rake db:create db:schema:load
+- bundle exec rspec
 
-addons:
-  code_climate:
-    repo_token: a46f18b88fdabd9f0b5c24c45ca8dc4b5dc58b8d8a983b65affd5232f482df9c bundle exec rake
+deploy:
+  provider: heroku
+  api_key:
+    secure: U18cx9ytwhRDtQTtTctwow/sAkg+yYfGbN/nVCPrDBAg0qXHpBbvQmGApktdZ+bmPtHNcgFrfan0KPmmlSZR/OsY0bznOk+Ilk5+fwaS+pHgZ0P/+iWNWcVWVWs8a3tCZRw28cEhMOWkzauqM231pNDWanuPIjHcs4/Q5P+U3ibrfFemO3N1BzryrQTyB47lvPL83mqqs0FJEzGKpogc/QX3oqbRxofNBtfY0ck7ZYXuwZkSHZ5QIebM/j7/degqw/Xrg5VooKoiLXk4iQ/Cih7npqh2j3tGeH44OSRRP56FIv8ydoXNBZNqSzL8cNKX6npzUjqK31ASPRwLKW3Px9ulVduk8wcUu3+ZUrfsudFJgwHDU+vVIHMw8X7dWacgw9NcL94xCKH46Pcs1BmkjgIj3DNwYmovCzb6OHB19WWXdiom/JC8eY4C4+hUsI/RjMZ3WnKADMxSK0Rll9eZzCq9cCIOTSKoKZByiTPuHQi6oCvF4NDTnSa6W5tbpHbaV56mnOBKL3LMER9yv4wONovGQ+/Kw2K0bwdcZPe8pPlvI+UXQNPMyKoUMD8zsyGE7P/n4c9jNhOjh2P5Jqum1I+z1Ozhk02A6ciSg4/G5YOt9RiqIh+tbholNKF7MGaMsOyHoknABgFxDByLkgzgIK9JpniCbyb/GNM0bt4Btlg=
+  app: tranquil-everglades-2904
+  on:
+    repo: rasensio1/the_pivot
+    branch: master
