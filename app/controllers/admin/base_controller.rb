@@ -1,7 +1,6 @@
 class Admin::BaseController < ApplicationController
 
   def require_shop_admin
-    byebug
-    authorization_error unless current_user.shop.id == params[:id]
+    authorization_error unless current_user.store.id == params[:id].to_i
   end
 end

@@ -21,7 +21,7 @@ RSpec.describe "a user can create a store", type: :feature do
       expect(current_path).to eq(edit_admin_store_path(Store.first))
       expect(page).to have_content("Example Store")
       expect(page).to have_content("Example Tagline")
-      expect(flash[:success]).to be_present
+      expect(page).to have_content("Store successfully created!") 
     end
 
   end
