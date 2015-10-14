@@ -2,14 +2,20 @@ require "rails_helper"
 
 RSpec.describe "a user with one previous order", type: :feature do
   let!(:item) { Fabricate(:item) }
+  let!(:photo) { Fabricate(:photo) }
   let!(:user) { Fabricate(:user) }
   let!(:status) { Status.create(name: "Completed") }
   let!(:category) { Category.create(name: "Lunch") }
 
   before do
     sign_in(user)
-    visit menu_path
-    3.times { click_button "Add to Cart" }
+    visit root_path 
+
+    3.times do
+      within(".popular-photographs") do
+        click_button "Add to Cart" 
+      end
+    end
 
     visit cart_path
     click_link "Check Out"
@@ -56,17 +62,17 @@ RSpec.describe "a user with one previous order", type: :feature do
 
         it "views the order item" do
           within(".order") do
-            expect(page).to have_content item.name
-            expect(page).to have_content item.price
-            expect(page).to have_content (item.price * 3).to_s
+            expect(page).to have_content photo.title
+            expect(page).to have_content photo.standard_price
             expect(page).to have_content "3"
+            expect(page).to have_content (photo.standard_price * 3).to_s
             expect(page).to have_link "View"
           end
         end
 
         it "views the order total" do
           within(".total") do
-            expect(page).to have_content (item.price * 3).to_s
+            expect(page).to have_content (photo.standard_price * 3).to_s
           end
         end
 

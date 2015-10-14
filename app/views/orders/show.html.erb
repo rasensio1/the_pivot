@@ -42,7 +42,7 @@
                           width:  80,
                           class:  "img-circle"
                         ),
-                        meal_path(id: order_item.item_id) %></td>
+                        meal_path(id: order_item.photo_id) %></td>
         <td><%= link_to order_item.name, meal_path(order_item) %></td>
         <td><%= number_to_currency(order_item.price) %></td>
         <td><%= order_item.quantity %></td>
