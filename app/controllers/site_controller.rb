@@ -1,8 +1,5 @@
 class SiteController < ApplicationController
   def index
-  end
-
-  def show
-    render :new_index
+    @photos = Photo.all
   end
 end

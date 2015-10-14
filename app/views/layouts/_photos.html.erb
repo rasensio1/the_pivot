@@ -1,21 +1,16 @@
       <div class="row item-info item-list">
 
-        <% 3.times do %>
+        <% @photos.each do |photo| %>
           <div class="col-sm-4 col-lg-4 col-md-4 item-box">
             <div class="thumbnail">
-              <%= link_to image_tag('http://placehold.it/320x150', alt: "A picture", class: "item-image"), "#" %>
+              <%= link_to image_tag("#{photo.image_url}", alt: "A picture", class: "item-image"), "#" %>
               <div class="caption">
-                <h4 class="pull-right"><%= number_to_currency(10.00) %></h4>
-                <h4>
-                  <%= link_to "Picture Name", "#" %>
-                </h4>
-
-                <p>
-                  <%= "Blah blah blah this is the description" %>
-                </p>
+                <h4 class="pull-right"><%= number_to_currency(photo.standard_price) %></h4>
+                <h4> <%= link_to "#{photo.title}", "#" %> </h4>
+                <p> <%= photo.description %> </p>
               </div>
               <p>
-                <%= button_to "Add to Cart", "#", method: :post, class: "btn btn-primary btn-large center-block" %>
+                <%= button_to "Add to Cart", cart_items_path(photo_id: photo.id), method: :post, class: "btn btn-primary btn-large center-block" %>
               </p>
             </div>
           </div>
