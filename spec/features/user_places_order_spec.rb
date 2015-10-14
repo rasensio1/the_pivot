@@ -62,7 +62,7 @@ RSpec.describe "a user with a non empty cart", type: :feature do
             expect(page).to have_content "Order Number"
             expect(page).to have_content "1"
             expect(page).to have_content "Total"
-            expect(page).to have_content (item.price * 3).to_s
+            expect(page).to have_content photo.standard_price.to_s
           end
         end
 
