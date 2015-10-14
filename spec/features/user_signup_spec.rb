@@ -24,7 +24,7 @@ RSpec.describe "a user who signs up", type: :feature do
       expect(current_path).to eq(sign_up_path)
 
       within(".create-user-form") do
-        fill_in "Username", with: "Ruffus"
+        fill_in "Name", with: "Ruffus"
         click_button "Sign Up"
       end
 

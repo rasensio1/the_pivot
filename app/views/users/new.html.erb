@@ -6,23 +6,13 @@
     <div class="create-user-form">
       <%= form_for(@user, url: sign_up_path) do |f| %>
         <div class="form-group">
-          <%= f.label :username %>
-          <%= f.text_field :username, class: "form-control", placeholder: "Username" %>
+          <%= f.label :name %>
+          <%= f.text_field :name, class: "form-control", placeholder: "Name" %>
         </div>
 
-        <div class="form-group">
-          <%= f.label :street_name %>
-          <%= f.text_field :street_name, class: "form-control", placeholder: "Street Name & Number" %>
-        </div>
-
-        <div class="form-group">
-          <%= f.label :zipcode %>
-          <%= f.text_field :zipcode, class: "form-control", placeholder: "Zipcode" %>
-        </div>
-
-        <div class="form-group">
-          <%= f.label :phone_number %>
-          <%= f.text_field :phone_number, class: "form-control", placeholder: "Phone number" %>
+        <div class="">
+          <%= f.label :email %>
+          <%= f.text_field :email , class: "form-control", placeholder: "Email" %>
         </div>
 
         <div class="form-group">
