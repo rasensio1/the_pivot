@@ -1,38 +1,38 @@
 class Admin::PhotosController < Admin::BaseController
   def index
-    @items = Item.all
+    @photos = Photo.all
   end
 
   def new
-    @item = Item.new
+    @photo = Photo.new
   end
 
   def create
-    @item = Item.new(item_params)
-    @item.category_id = params[:item][:category].to_i
-    if @item.save
-      redirect_to meal_path(@item)
-      flash.now[:notice] = "#{@item.name} created"
+    @photo = Photo.new(photo_params)
+    @photo.category_id = params[:photo][:category].to_i
+    if @photo.save
+      redirect_to meal_path(@photo)
+      flash.now[:notice] = "#{@photo.name} created"
     else
       render :new
     end
   end
 
   def edit
-    @item = Item.find(params[:id])
+    @photo = Photo.find(params[:id])
   end
 
   def update
-    @item = Item.find(params[:id])
-    @item.update(item_params)
+    @photo = Photo.find(params[:id])
+    @photo.update(photo_params)
 
-    redirect_to admin_items_path
+    redirect_to admin_photos_path
   end
 
   private
 
-  def item_params
-    params.require(:item).permit(:name,
+  def photo_params
+    params.require(:photo).permit(:name,
                                  :description,
                                  :price,
                                  :image_url,

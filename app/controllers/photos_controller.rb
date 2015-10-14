@@ -1,9 +1,9 @@
 class PhotosController < ApplicationController
   def index
-    @items = Item.all
+    @photos = Photo.all
   end
 
   def show
-    @item = Item.find(params[:id])
+    @photo = Photo.find(params[:id])
   end
 end
