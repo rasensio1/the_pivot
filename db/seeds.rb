@@ -1,53 +1,88 @@
 class Seed
-  attr_reader :seed
+
   def initialize
-    @seed
+    @store_count = 20
+    @user_count = 99
+    @photo_count = 512
   end
 
   def run
     create_categories
-    create_items
+    create_users
+    create_stores
+    create_photos
     create_statuses
   end
 
   def create_categories
-    names = %w(Breakfast Lunch Dinner)
-    
-    [*0..2].each do |num|
-      Category.create(name: names[num])
+    @categories = %w(Abstract Animals Architecture
+                Business Christmas Fashion
+                Food Holidays Lifestyle Nature
+                People Plants Seasons Technology
+                Wedding)
+
+    @categories.each do |category|
+      Category.create(name: category)
+    end
+  end
+
+  def create_users
+    User.create!(name: "Josh",
+                 email: "josh@turing.io",
+                 password:              "password",
+                 password_confirmation: "password")
+
+    password = "password"
+    @user_count.times do |n|
+      name  = Faker::Name.name
+      email = "example-#{n+1}@wheresmy.ninja"
+      User.create!(name:  name,
+                   email: email,
+                   password:              password,
+                   password_confirmation: password)
+    end
+
+    User.create!(name: "Andrew",
+                 email: "andrew@turing.io",
+                 password:              "password",
+                 password_confirmation: "password")
+
+    User.create!(name: "Jorge",
+                 email: "jorge@turing.io",
+                 password:              "password",
+                 password_confirmation: "password")
+  end
+
+  def create_stores
+    @store_count.times do |index|
+      user_id = (index + 1) * 3
+      user = User.find(user_id)
+      Store.create(name: user.name + "'s Photo Depot",
+                    tagline: "Better than those other Photo Depots",
+                    user_id: user_id)
+    end
+  end
+
+  def create_photos
+    image_root = "http://aws-something/"
+    @photo_count.times do |index|
+      Photo.create(title: "Example Title #{index + 1}",
+                    description: "Fairly long and very expressive title that makes you really think about your place in life #{index + 1}",
+                    standard_price: (rand(5) * 100) + 99,
+                    commercial_price: ((rand(20) + 89) * 100) + 99,
+                    image_url: image_root + (index + 1).to_s + ".jpg",
+                    store_id: (index % 20) + 1
+                    )
     end
   end
 
   def create_statuses
-    names = %w(Ordered Paid Cancelled Completed)
-    [*0..3].each do |num|
-      Status.create(name: names[num])
+    statuses = %w(Ordered Paid Cancelled Completed)
+    statuses.each do |status|
+      Status.create(name: status)
     end
   end
 
-  def create_items
-    id = %w(1 2 3)
-    price = %w(3 5 7 9 11 13 15)
-    [*1...15].each do |num|
-      Item.create(name: name.rotate(num).first,
-                  description: description,
-                  price: price.rotate(num).first,
-                  image_url: image_url,
-                  category_id: id.rotate(num).first)
-    end
-  end
-
-  def name
-    %w(Pizza Hamburger Hotdog Chilli Hummus Vanilla Corn Beans Steak Rice Olives Soup Lentils Fish Tofu)
-  end
-
-  def description
-    "Very tasty."
-  end
-
-  def image_url
-    "http://i.livescience.com/images/i/000/048/850/i02/capybara-02.jpg?1324347800"
-  end
 end
 
 seed = Seed.new

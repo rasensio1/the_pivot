@@ -20,6 +20,7 @@ group :development, :test do
   gem 'guard-rspec'
   gem 'capybara'
   gem 'fabrication'
+  gem "faker", "1.4.2"
 
   gem 'shoulda-matchers'
 
