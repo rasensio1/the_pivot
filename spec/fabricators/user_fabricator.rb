@@ -1,8 +1,6 @@
 Fabricator(:user) do
-  username "Jason"
+  name "Jason"
   password "password"
+  email "jason@yeah.com"
   role 0
-  zipcode 80202
-  street_name "1510 Blake Street"
-  phone_number "5732681897"
 end

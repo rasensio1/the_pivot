@@ -25,10 +25,9 @@ RSpec.describe "a user with a non empty cart", type: :feature do
         it "is required to login" do
           expect(current_path).to eq login_path
 
-          within(".alert") do
-            expect(page).to have_content(
-              "Sign In to complete your order, Dinners almost ready!")
-          end
+          expect(page).to have_content(
+            "Sign In to complete your order, Dinners almost ready!")
+
           within(".login-form") do
             expect(page).to have_button "Sign In"
           end
@@ -52,14 +51,12 @@ RSpec.describe "a user with a non empty cart", type: :feature do
         end
 
         it "sees order confirmation message" do
-          within(".alert") do
-            expect(page).to have_content "Order placed! Dinners on the way!"
-          end
+          expect(page).to have_content "Order placed! Dinners on the way!"
         end
 
         it "sees order" do
           within(".page-title") do
-            expect(page).to have_content "#{user.username}'s Orders"
+            expect(page).to have_content "#{user.name}'s Orders"
           end
 
           within(".orders") do

@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   namespace "admin" do
     resources :photos, except: [:show]
     resources :orders, only: [:index, :show, :update]
+    resource :dashboard, only: [:show]   
     resources :stores, only: [:edit]
   end
 

@@ -8,11 +8,8 @@ RSpec.describe "a user with one previous order", type: :feature do
 
   before do
     sign_in(user)
-
-    within(".item-info") do
-      expect(page).to have_content item.name
-      3.times { click_button "Add to Cart" }
-    end
+    visit menu_path
+    3.times { click_button "Add to Cart" }
 
     visit cart_path
     click_link "Check Out"
