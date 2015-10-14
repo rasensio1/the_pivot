@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   delete "/logout", to: "sessions#destroy"
 
   namespace "admin" do
-    resources :items, except: [:show]
+    resources :photos, except: [:show]
     resources :orders, only: [:index, :show, :update]
     resource :dashboard, only: [:show]   
     resources :stores, only: [:edit]
@@ -22,11 +22,9 @@ Rails.application.routes.draw do
     resources :categories, only: [:show]
   end
 
-  get "/menu", to: "items#index", as: :menu
+  resources :photos, only: [:index, :show]
+  
   post "/menu", to: "location#check_zipcode", as: :zipcode
-  get "meals/:id", to: "items#show", as: :meal
-
-
   get "menu/:id", to: "menu/categories#show"
 
   post "/cart_items", to: "cart_items#create"

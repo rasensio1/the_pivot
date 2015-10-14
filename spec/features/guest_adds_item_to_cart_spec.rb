@@ -7,13 +7,13 @@ RSpec.describe "the cart", type: :feature do
     let!(:photo) { Fabricate(:photo) }
 
     it "can add photos to the cart from root" do
-      visit root_path 
+      visit root_path
 
       expect(page).to have_content photo.title
       within(".popular-photographs") do
-        click_button "Add to Cart" 
+        click_button "Add to Cart"
       end
-      expect(current_path).to eq root_path 
+      expect(current_path).to eq root_path
 
       click_link "Cart"
       expect(current_path).to eq cart_path
@@ -23,12 +23,12 @@ RSpec.describe "the cart", type: :feature do
     end
 
     it "can login and his/her items persist in the cart" do
-      visit root_path 
+      visit root_path
 
       within(".popular-photographs") do
-        click_button "Add to Cart" 
+        click_button "Add to Cart"
       end
-      expect(current_path).to eq root_path 
+      expect(current_path).to eq root_path
 
       sign_in(user)
 
@@ -45,11 +45,11 @@ RSpec.describe "the cart", type: :feature do
 
     it "can add items to the cart" do
       sign_in(user)
-      visit root_path 
+      visit root_path
 
       2.times do
         within(".popular-photographs") do
-          click_button "Add to Cart" 
+          click_button "Add to Cart"
         end
       end
 
@@ -59,5 +59,4 @@ RSpec.describe "the cart", type: :feature do
       expect(page).to have_content "2"
     end
   end
-
 end

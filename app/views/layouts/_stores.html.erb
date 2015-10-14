@@ -1,0 +1,14 @@
+<div class="row item-info item-list">
+  <% @stores.each do |store| %>
+    <div class="col-sm-4 col-lg-4 col-md-4 item-box">
+      <div class="thumbnail">
+        <%#= link_to image_tag(photo.image_url, alt: "A picture", class: "item-image"), photo_path(photo) %>
+        <div class="caption">
+          <h4><%= store.name %></h4>
+          <h4><%#= link_to store.name, store_path(store) %></h4>
+          <p><%= store.tagline %></p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
