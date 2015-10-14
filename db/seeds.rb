@@ -4,9 +4,6 @@ class Seed
     @store_count = 20
     @user_count = 99
     @photo_count = 512
-  end
-
-  def run
     create_categories
     create_users
     create_stores
@@ -35,7 +32,7 @@ class Seed
     password = "password"
     @user_count.times do |n|
       name  = Faker::Name.name
-      email = "example-#{n+1}@wheresmy.ninja"
+      email = Faker::Internet.email
       User.create!(name:  name,
                    email: email,
                    password:              password,
@@ -86,4 +83,3 @@ class Seed
 end
 
 seed = Seed.new
-seed.run
