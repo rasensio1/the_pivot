@@ -1,27 +1,29 @@
 require "rails_helper"
 
 RSpec.describe "a user with past orders", type: :feature do
-  let!(:item) { Fabricate(:item) }
+  let!(:photo) { Fabricate(:photo) }
   let!(:user) { Fabricate(:user) }
   let!(:status) { Status.create(name: "pending") }
   let!(:order) { Order.create(user_id: user.id, status_id: status.id) }
 
   before do
     sign_in(user)
+    visit root_path
 
-    visit menu_path
-    within(".item-info") do
-      expect(page).to have_content item.name
-      3.times { click_button "Add to Cart" }
+    3.times do
+      within(".popular-photographs") do
+        click_button "Add to Cart" 
+      end
     end
+
     visit cart_path
     click_link "Check Out"
 
-    visit menu_path
-    within(".item-info") do
-      expect(page).to have_content item.name
-      click_button "Add to Cart"
+    visit root_path
+    within(".popular-photographs") do
+      click_button "Add to Cart" 
     end
+
     visit cart_path
     click_link "Check Out"
 
@@ -43,10 +45,10 @@ RSpec.describe "a user with past orders", type: :feature do
           expect(page).to have_content("Order Number")
           expect(page).to have_content("Total")
           expect(page).to have_content("Order Updated Date")
-          expect(page).to have_link(item.id)
-          expect(page).to have_link(item.id)
-          expect(page).to have_content((item.price * 3).to_s)
-          expect(page).to have_content(item.price)
+          expect(page).to have_link(photo.id)
+          expect(page).to have_link(photo.id)
+          expect(page).to have_content((photo.standard_price * 3).to_s)
+          expect(page).to have_content(photo.standard_price)
         end
       end
 
