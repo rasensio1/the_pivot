@@ -7,6 +7,7 @@ class CartItemsController < ApplicationController
     photo = Photo.find(params[:photo_id])
     cart.add_item(photo)
     session[:cart] = cart.data
+    flash[:success] = "Successfully added #{photo.title} from your cart."
     redirect_to :back
   end
 
