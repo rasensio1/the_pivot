@@ -23,22 +23,19 @@ RSpec.describe "the cart", type: :feature do
     end
 
     it "can login and his/her items persist in the cart" do
-      visit menu_path
+      visit root_path 
 
-      within(".item-info") do
-        expect(page).to have_content item.name
-        3.times { click_button "Add to Cart" }
-        expect(current_path).to eq menu_path
+      within(".popular-photographs") do
+        click_button "Add to Cart" 
       end
+      expect(current_path).to eq root_path 
 
       sign_in(user)
 
       click_link "Cart"
 
-      within(".table-striped") do
-        expect(page).to have_content item.name
-        expect(page).to have_content "3"
-      end
+      expect(page).to have_content photo.title
+      expect(page).to have_content "1"
     end
   end
 
