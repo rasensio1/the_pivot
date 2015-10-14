@@ -9,6 +9,6 @@ class CartItem < SimpleDelegator
   end
 
   def subtotal
-    @item.price * quantity
+    @item.standard_price * quantity
   end
 end

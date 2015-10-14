@@ -22,7 +22,7 @@ RSpec.describe "the cart", type: :feature do
       expect(page).to have_content "1"
     end
 
-    xit "can login and his/her items persist in the cart" do
+    it "can login and his/her items persist in the cart" do
       visit menu_path
 
       within(".item-info") do

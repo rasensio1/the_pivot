@@ -4,10 +4,10 @@ class Cart
     @data = data || Hash.new
   end
 
-  def items
-    data.map do |item_id, quantity|
-      item = Item.find(item_id)
-      CartItem.new(item, quantity)
+  def photos 
+    data.map do |photo_id, quantity|
+      photo = Photo.find(photo_id)
+      CartItem.new(photo, quantity)
     end
   end
 

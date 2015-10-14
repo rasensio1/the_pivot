@@ -1,6 +1,6 @@
 class CartItemsController < ApplicationController
   def index
-    @cart_items = cart.items
+    @cart_items = cart.photos
   end
 
   def create
