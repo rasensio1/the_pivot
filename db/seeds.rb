@@ -12,6 +12,7 @@ class Seed
 
   def create_categories
     names = %w(Breakfast Lunch Dinner)
+    
     [*0..2].each do |num|
       Category.create(name: names[num])
     end
