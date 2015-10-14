@@ -25,7 +25,7 @@ RSpec.configure do |config|
     visit root_path
 
     click_link "Sign In"
-    fill_in "email address", with: user.email
+    fill_in "Email", with: user.email
     fill_in "Password", with: user.password
     click_button "Sign In"
   end
