@@ -60,26 +60,4 @@ RSpec.describe "the cart", type: :feature do
     end
   end
 
-  context "a user that's logged in" do
-    let!(:item) { Fabricate(:item) }
-    let!(:user) { Fabricate(:user) }
-
-    xit "can add items to the cart" do
-      sign_in(user)
-      visit menu_path
-
-      within(".item-info") do
-        expect(page).to have_content item.name
-        2.times { click_button "Add to Cart" }
-        expect(current_path).to eq menu_path
-      end
-
-      click_link "Cart"
-
-      within(".table-striped") do
-        expect(page).to have_content item.name
-        expect(page).to have_content "2"
-      end
-    end
-  end
 end
