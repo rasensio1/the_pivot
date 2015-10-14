@@ -4,23 +4,20 @@ RSpec.describe "the cart", type: :feature do
   context "a user that's not logged in" do
     let!(:item) { Fabricate(:item) }
     let!(:user) { Fabricate(:user) }
+    let!(:photo) { Fabricate(:photo) }
 
-    it "can add items to the cart" do
-      visit menu_path
+    it "can add items to the cart from root" do
+      visit root_path 
 
-      within(".item-info") do
-        expect(page).to have_content item.name
-        3.times { click_button "Add to Cart" }
-        expect(current_path).to eq menu_path
-      end
+      expect(page).to have_content photo.title
+      click_button "Add to Cart" 
+      expect(current_path).to eq menu_path
 
       click_link "Cart"
       expect(current_path).to eq cart_path
 
-      within(".table-striped") do
-        expect(page).to have_content item.name
-        expect(page).to have_content "3"
-      end
+      expect(page).to have_content photo.name
+      expect(page).to have_content "1"
     end
 
     it "can login and his/her items persist in the cart" do
