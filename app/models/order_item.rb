@@ -1,6 +1,6 @@
 class OrderItem < ActiveRecord::Base
   belongs_to :order
-  belongs_to :item
+  belongs_to :photo
 
   def image_url
     current_item.image_url

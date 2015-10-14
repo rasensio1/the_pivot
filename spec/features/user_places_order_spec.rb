@@ -1,15 +1,14 @@
 require "rails_helper"
 
 RSpec.describe "a user with a non empty cart", type: :feature do
-  let!(:item) { Fabricate(:item) }
   let!(:user) { Fabricate(:user) }
+  let!(:photo) { Fabricate(:photo) }
 
   before do
-    visit menu_path
+    visit root_path 
 
-    within(".item-info") do
-      expect(page).to have_content item.name
-      3.times { click_button "Add to Cart" }
+    within(".popular-photographs") do
+      click_button "Add to Cart" 
     end
   end
 
