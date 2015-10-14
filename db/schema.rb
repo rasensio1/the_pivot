@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151013221658) do
+ActiveRecord::Schema.define(version: 20151014061013) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,19 @@ ActiveRecord::Schema.define(version: 20151013221658) do
 
   add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
+  create_table "photos", force: :cascade do |t|
+    t.string   "title"
+    t.string   "description"
+    t.integer  "standard_price"
+    t.integer  "commercial_price"
+    t.string   "image_url"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.integer  "store_id"
+  end
+
+  add_index "photos", ["store_id"], name: "index_photos_on_store_id", using: :btree
+
   create_table "statuses", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -68,15 +81,14 @@ ActiveRecord::Schema.define(version: 20151013221658) do
   add_index "stores", ["user_id"], name: "index_stores_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string  "username"
     t.string  "password_digest"
     t.integer "role",            default: 0
-    t.integer "zipcode"
-    t.string  "phone_number"
-    t.string  "street_name"
+    t.string  "name"
+    t.string  "email"
   end
 
   add_foreign_key "order_items", "items"
   add_foreign_key "order_items", "orders"
+  add_foreign_key "photos", "stores"
   add_foreign_key "stores", "users"
 end

@@ -12,6 +12,7 @@ gem "bcrypt", "~> 3.1.7"
 
 gem "bootstrap-sass"
 gem "autoprefixer-rails"
+gem "faker", "1.4.2"
 
 group :development, :test do
   gem 'byebug'

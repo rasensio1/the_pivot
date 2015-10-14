@@ -1,7 +1,8 @@
 require "rails_helper"
 
 RSpec.describe "a user can create a store", type: :feature do
-  let(:user) {User.create(username: "Example User",
+  let(:user) {User.create(email: "something@yah.com",
+                          name: "ryan",
                           password: "password",
                           password_confirmation: "password")}
 
