@@ -15,8 +15,8 @@ RSpec.describe "a user can create a store", type: :feature do
       expect(current_path).to eq(profile_path)
       click_link "Create Store"
       expect(current_path).to eq(new_store_path)
-      fill_in("name", with: "Example Store")
-      fill_in("tagline", with: "Example Tagline")
+      fill_in("store[name]", with: "Example Store")
+      fill_in("store[tagline]", with: "Example Tagline")
       click_button "Create Store"
       expect(current_path).to eq(store_admin_path)
       expect(page).to have_content("Example Store")
