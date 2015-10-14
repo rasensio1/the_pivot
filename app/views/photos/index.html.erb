@@ -15,9 +15,9 @@
             <div class="thumbnail">
               <%= link_to image_tag(photo.image_url, alt: "image url", class: "item-image"), photo_path(photo) %>
               <div class="caption">
-                <h4 class="pull-right"><%= number_to_currency(photo.price) %></h4>
+                <h4 class="pull-right"><%= number_to_currency(photo.standard_price_dollars) %></h4>
                 <h4>
-                  <%= link_to photo.name, photo_path(photo) %>
+                  <%= link_to photo.title, photo_path(photo) %>
                 </h4>
 
                 <p>
@@ -30,6 +30,9 @@
             </div>
           </div>
         <% end %>
+      </div>
+      <div class="row text-center">
+        <%= will_paginate %>
       </div>
     </div>
   </div>

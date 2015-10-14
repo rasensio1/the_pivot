@@ -8,7 +8,7 @@ RSpec.describe "a user with one previous order", type: :feature do
 
   before do
     sign_in(user)
-    visit menu_path
+    visit photos_path
     3.times { click_button "Add to Cart" }
 
     visit cart_path

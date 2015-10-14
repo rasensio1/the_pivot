@@ -6,12 +6,12 @@ RSpec.describe "the cart", type: :feature do
     let!(:user) { Fabricate(:user) }
 
     it "can add items to the cart" do
-      visit menu_path
+      visit photos_path
 
       within(".item-info") do
         expect(page).to have_content item.name
         3.times { click_button "Add to Cart" }
-        expect(current_path).to eq menu_path
+        expect(current_path).to eq photos_path
       end
 
       click_link "Cart"
@@ -24,12 +24,12 @@ RSpec.describe "the cart", type: :feature do
     end
 
     it "can login and his/her items persist in the cart" do
-      visit menu_path
+      visit photos_path
 
       within(".item-info") do
         expect(page).to have_content item.name
         3.times { click_button "Add to Cart" }
-        expect(current_path).to eq menu_path
+        expect(current_path).to eq photos_path
       end
 
       sign_in(user)
@@ -49,12 +49,12 @@ RSpec.describe "the cart", type: :feature do
 
     it "can add items to the cart" do
       sign_in(user)
-      visit menu_path
+      visit photos_path
 
       within(".item-info") do
         expect(page).to have_content item.name
         2.times { click_button "Add to Cart" }
-        expect(current_path).to eq menu_path
+        expect(current_path).to eq photos_path
       end
 
       click_link "Cart"
@@ -72,12 +72,12 @@ RSpec.describe "the cart", type: :feature do
 
     it "can add items to the cart" do
       sign_in(user)
-      visit menu_path
+      visit photos_path
 
       within(".item-info") do
         expect(page).to have_content item.name
         2.times { click_button "Add to Cart" }
-        expect(current_path).to eq menu_path
+        expect(current_path).to eq photos_path
       end
 
       click_link "Cart"
