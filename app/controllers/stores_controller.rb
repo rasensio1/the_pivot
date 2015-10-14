@@ -9,8 +9,7 @@ class StoresController < ApplicationController
 
     if store.save
       flash[:success] = "Store successfully created!"
-      byebug
-      redirect_to store_admin_dashboard_path(store)
+      redirect_to edit_admin_store_path(store)
     else
       flash[:warning] = "Failed"
       redirect_to new_store_path

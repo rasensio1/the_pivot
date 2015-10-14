@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources :items, except: [:show]
     resource :dashboard, only: [:show]
     resources :orders, only: [:index, :show, :update]
+    resources :stores, only: [:edit]
   end
 
   namespace :menu do
