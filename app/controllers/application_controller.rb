@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  helper_method :current_user, :cart, :current_admin
+  helper_method :current_user, :cart, :current_admin, :dollars
 
   def cart
     @cart ||= Cart.new(session[:cart])
@@ -20,4 +20,5 @@ class ApplicationController < ActionController::Base
   def authorization_error
     render file: "/public/404_authorization.html", layout: false, status: 404
   end
+
 end
