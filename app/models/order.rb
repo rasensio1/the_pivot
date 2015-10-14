@@ -4,7 +4,7 @@ class Order < ActiveRecord::Base
   has_many :items, through: :order_items
 
   def customer_name
-    User.find(user_id).username
+    User.find(user_id).name
   end
 
   def total

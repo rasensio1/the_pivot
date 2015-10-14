@@ -9,8 +9,7 @@ RSpec.describe "the profile view", type: :feature do
     end
 
     it "views profile info in navbar" do
-      expect(current_path).to eq menu_path
-      expect(page).to have_content "YeeHaw! #{user.username} is signed in!"
+      expect(page).to have_content "YeeHaw! #{user.name} is signed in!"
       expect(page).to have_link "Profile"
 
       within(".navbar-nav") do
@@ -18,7 +17,7 @@ RSpec.describe "the profile view", type: :feature do
       end
 
       expect(current_path).to eq profile_path
-      expect(page).to have_content "#{user.username}'s Profile"
+      expect(page).to have_content "#{user.name}'s Profile"
     end
   end
 

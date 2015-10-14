@@ -33,7 +33,6 @@ RSpec.describe "the cart", type: :feature do
       end
 
       sign_in(user)
-      expect(current_path).to eq menu_path
 
       click_link "Cart"
 
