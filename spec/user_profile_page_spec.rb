@@ -24,10 +24,8 @@ RSpec.describe "the user profile page", type: :feature do
     end
 
     it "displays account information" do
-      within(".user-info") do
         expect(page).to have_content "#{user.name}"
         expect(page).to have_link "Edit Profile"
-      end
     end
 
     context "a logged in user can edit account information" do
@@ -40,10 +38,7 @@ RSpec.describe "the user profile page", type: :feature do
         click_button "Update Info"
 
         expect(current_path).to eq profile_path(user)
-        save_and_open_page
-        within(".user-info") do
-          expect(page).to have_content "Mia"
-        end
+        expect(page).to have_content "Mia"
       end
     end
   end

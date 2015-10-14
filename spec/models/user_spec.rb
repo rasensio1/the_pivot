@@ -8,8 +8,8 @@ RSpec.describe "the user", type: :model do
       expect(user).to be_valid
     end
 
-    it "is invalid without a username" do
-      user.username = nil
+    it "is invalid without a name" do
+      user.name = nil
       expect(user).to_not be_valid
     end
 
@@ -18,18 +18,8 @@ RSpec.describe "the user", type: :model do
       expect(user).to_not be_valid
     end
 
-    it "is invalid without a street name" do
-      user.street_name = nil
-      expect(user).to_not be_valid
-    end
-
-    it "is invalid without a zipcode" do
-      user.zipcode = nil
-      expect(user).to_not be_valid
-    end
-
-    it "is invalid without a phone number" do
-      user.phone_number = nil
+    it "is invalid without an email" do
+      user.email = nil
       expect(user).to_not be_valid
     end
 
@@ -37,12 +27,5 @@ RSpec.describe "the user", type: :model do
       expect(user.role).to eq "default"
     end
 
-    it "has an associated zipcode" do
-      expect(user.zipcode).to eq 80202
-    end
-
-    it "has an associated phone number" do
-      expect(user.phone_number).to eq "5732681897"
-    end
   end
 end
