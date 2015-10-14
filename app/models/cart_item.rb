@@ -1,14 +1,14 @@
 class CartItem < SimpleDelegator
   attr_reader :quantity,
-              :item
+              :photo
 
-  def initialize(item, quantity = 0)
-    super(item)
-    @item = item
+  def initialize(photo, quantity = 0)
+    super(photo)
+    @photo = photo 
     @quantity = quantity
   end
 
   def subtotal
-    @item.price * quantity
+    @photo.standard_price * quantity
   end
 end

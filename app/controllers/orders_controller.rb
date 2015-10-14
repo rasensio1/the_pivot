@@ -23,8 +23,8 @@ class OrdersController < ApplicationController
   private
 
   def add_order_items(order)
-    cart.items.each do |cart_item|
-      order.order_items.new(item: cart_item.item, quantity: cart_item.quantity)
+    cart.photos.each do |cart_item|
+      order.order_items.new(photo: cart_item.photo, quantity: cart_item.quantity)
     end
   end
 
