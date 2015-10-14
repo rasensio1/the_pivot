@@ -1,7 +1,6 @@
 require "rails_helper"
 
 RSpec.describe "a user with one previous order", type: :feature do
-  let!(:item) { Fabricate(:item) }
   let!(:photo) { Fabricate(:photo) }
   let!(:user) { Fabricate(:user) }
   let!(:status) { Status.create(name: "Completed") }

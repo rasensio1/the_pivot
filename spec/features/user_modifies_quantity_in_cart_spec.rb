@@ -1,24 +1,28 @@
 require "rails_helper"
 
 RSpec.describe "the cart quantity", type: :feature do
-  context "a user with items in the cart" do
-    let!(:item) { Fabricate(:item) }
     let!(:user) { Fabricate(:user) }
+    let!(:photo) { Fabricate(:photo) }
     let!(:category) { Category.create(name: "Lunch") }
 
-    it "adds items to the cart" do
-      visit menu_path
+    before do
+      sign_in(user)
+      visit root_path 
+    end
 
-      within(".item-info") do
-        expect(page).to have_content item.name
-        2.times { click_button "Add to Cart" }
-        expect(current_path).to eq menu_path
+  context "a user with photos in the cart" do
+    it "adds photos to the cart" do
+
+    2.times do
+      within(".popular-photographs") do
+        click_button "Add to Cart" 
       end
+    end
 
       click_link "Cart"
 
       within(".table-striped") do
-        expect(page).to have_content item.name
+        expect(page).to have_content photo.title
         expect(page).to have_content "2"
         click_button "+"
       end
@@ -26,20 +30,18 @@ RSpec.describe "the cart quantity", type: :feature do
       expect(page).to have_content "3"
     end
 
-    it "decreases quantity of items from the cart" do
-      sign_in(user)
-      visit menu_path
+    it "decreases quantity of photos from the cart" do
 
-      within(".item-info") do
-        expect(page).to have_content item.name
-        2.times { click_button "Add to Cart" }
-        expect(current_path).to eq menu_path
+      2.times do
+        within(".popular-photographs") do
+          click_button "Add to Cart" 
+        end
       end
 
       click_link "Cart"
 
       within(".table-striped") do
-        expect(page).to have_content item.name
+        expect(page).to have_content photo.title 
         expect(page).to have_content "2"
         click_button "-"
       end
@@ -48,57 +50,59 @@ RSpec.describe "the cart quantity", type: :feature do
     end
 
     it "displays total cost" do
-      sign_in(user)
-      visit menu_path
-
-      2.times { click_button "Add to Cart" }
+      2.times do
+        within(".popular-photographs") do
+          click_button "Add to Cart" 
+        end
+      end
       click_link "Cart"
 
       within(".total") do
-        expect(page).to have_content "Total: $24"
+        expect(page).to have_content((photo.standard_price * 2).to_s)
       end
     end
 
     it "displays the subtotal" do
-      sign_in(user)
-      visit menu_path
-
-      4.times { click_button "Add to Cart" }
+      4.times do
+        within(".popular-photographs") do
+          click_button "Add to Cart" 
+        end
+      end
       click_link "Cart"
 
       within(".subtotal") do
-        expect(page).to have_content "$48"
+        expect(page).to have_content((photo.standard_price * 4).to_s)
       end
     end
 
-    xit "removes items from the cart" do
-      sign_in(user)
-      visit menu_path
-      click_button "Add to Cart" 
+    it "removes photos from the cart" do
+      within(".popular-photographs") do
+        click_button "Add to Cart" 
+      end
       click_link "Cart"
 
       click_link "Remove"
-      expect(page).to have_content "Successfully removed #{item.name} from your cart."
+      expect(page).to have_content "Successfully removed #{photo.title} from your cart."
 
       within(".table-striped") do
-        expect(page).to_not have_content item.name
+        expect(page).to_not have_content photo.title
       end
 
-      click_link item.name
+      click_link photo.title
 
-      expect(current_path).to eq meal_path(item)
+      expect(current_path).to eq meal_path(photo)
     end
 
-    it "removes the item if the quantity is zero" do
-      sign_in(user)
-      visit menu_path
-      2.times { click_button "Add to Cart" }
+    it "removes the photo if the quantity is zero" do
+        within(".popular-photographs") do
+          click_button "Add to Cart" 
+        end
       click_link "Cart"
 
-      2.times { click_button "-" }
+      click_button "-" 
 
       within(".table-striped") do
-        expect(page).to_not have_content item.name
+        expect(page).to_not have_content photo.title 
       end
     end
   end

@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe "the item", type: :model do
-  let(:item) { Fabricate(:item) }
+  let!(:photo) { Fabricate(:photo) }
 
   context "an item" do
     it "is valid" do
