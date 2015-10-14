@@ -4,8 +4,8 @@ class CartItemsController < ApplicationController
   end
 
   def create
-    item = Item.find(params[:item_id])
-    cart.add_item(item)
+    photo = Photo.find(params[:photo_id])
+    cart.add_item(photo)
     session[:cart] = cart.data
     redirect_to :back
   end
