@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources :items, except: [:show]
     resource :dashboard, only: [:show]
     resources :orders, only: [:index, :show, :update]
+    resources :stores, only: [:edit]
   end
 
   namespace :menu do
@@ -36,6 +37,6 @@ Rails.application.routes.draw do
   delete "/cart_items", to: "cart_items#destroy"
 
   resources :orders, only: [:create, :index, :show]
+
+  resources :stores, only: [:new, :create]
 end
-
-
