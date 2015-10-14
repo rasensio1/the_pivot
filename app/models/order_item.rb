@@ -7,7 +7,7 @@ class OrderItem < ActiveRecord::Base
   end
 
   def name
-    current_item.name
+    current_item.title
   end
 
   def description
@@ -15,7 +15,7 @@ class OrderItem < ActiveRecord::Base
   end
 
   def price
-    current_item.price
+    current_item.standard_price
   end
 
   def category_id
@@ -23,12 +23,12 @@ class OrderItem < ActiveRecord::Base
   end
 
   def subtotal
-    current_item.price * quantity
+    current_item.standard_price * quantity
   end
 
   private
 
   def current_item
-    Item.find(item_id)
+    Photo.find(photo_id)
   end
 end
