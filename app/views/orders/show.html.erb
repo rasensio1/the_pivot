@@ -42,8 +42,8 @@
                           width:  80,
                           class:  "img-circle"
                         ),
-                        meal_path(id: order_item.photo_id) %></td>
-        <td><%= link_to order_item.name, meal_path(order_item) %></td>
+                        photo_path(id: order_item.photo_id) %></td>
+        <td><%= link_to order_item.name, photo_path(order_item) %></td>
         <td><%= number_to_currency(order_item.price) %></td>
         <td><%= order_item.quantity %></td>
         <div class="subtotal">
@@ -51,7 +51,7 @@
         </div>
         <td><%= @order.status %></td>
         <td><%= order_item.updated_at %></td>
-        <td><%= link_to "View", meal_path(id: order_item.id) %></td>
+        <td><%= link_to "View", photo_path(id: order_item.id) %></td>
       </tr>
     <% end %>
   </table>
