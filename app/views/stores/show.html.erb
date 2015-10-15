@@ -9,7 +9,10 @@
         <h2><%= @store.name %></h2>
       </div>
       <div class="row item-info item-list">
-        <%= render partial: "layouts/photo", collection: @store.photos %>
+        <%= render partial: "layouts/photo", collection: @photos %>
+      </div>
+      <div class="row text-center">
+        <%= will_paginate @photos %>
       </div>
     </div>
   </div>

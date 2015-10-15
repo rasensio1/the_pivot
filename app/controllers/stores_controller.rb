@@ -18,7 +18,7 @@ class StoresController < ApplicationController
 
   def show
     @store = Store.find(params[:id])
-    @photos = @store.photos
+    @photos = @store.photos.paginate(page: params[:page])
   end
 
   private
