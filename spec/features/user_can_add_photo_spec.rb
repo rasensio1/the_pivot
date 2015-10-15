@@ -17,7 +17,9 @@ RSpec.describe "photos" do
       commercial_price = 5
       image_url = "the image url"
 
-      visit new_admin_photo_path
+      click_on "My Store"
+
+      click_on "Add a photo"
 
       fill_in("photo[title]", with: title)
       fill_in("photo[description]", with: description)
