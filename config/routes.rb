@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   namespace "admin" do
     resources :photos, except: [:show]
     resources :orders, only: [:index, :show, :update]
-    resource :dashboard, only: [:show]   
+    resource :dashboard, only: [:show]
     resources :stores, only: [:edit]
   end
 
@@ -22,18 +22,11 @@ Rails.application.routes.draw do
     resources :categories, only: [:show]
   end
 
-  resources :photos, only: [:index, :show]
-  
-  post "/menu", to: "location#check_zipcode", as: :zipcode
-  get "menu/:id", to: "menu/categories#show"
-
-  post "/cart_items", to: "cart_items#create"
-  put "/cart_items", to: "cart_items#update"
   get "/cart", to: "cart_items#index"
-
+  post "/cart_items", to: "cart_items#create"
   delete "/cart_items", to: "cart_items#destroy"
 
+  resources :photos, only: [:index, :show]
   resources :orders, only: [:create, :index, :show]
-
   resources :stores, only: [:new, :create]
 end
