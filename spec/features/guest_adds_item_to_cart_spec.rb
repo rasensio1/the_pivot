@@ -1,62 +1,68 @@
 require "rails_helper"
 
 RSpec.describe "the cart", type: :feature do
-  context "a user that's not logged in" do
-    let!(:item) { Fabricate(:item) }
-    let!(:user) { Fabricate(:user) }
-    let!(:photo) { Fabricate(:photo) }
+  fixtures :users
+  fixtures :stores
+  fixtures :photos
+
+  let!(:user) {User.first}
+
+  context "a guest" do
 
     it "can add photos to the cart from root" do
+      visit cart_path
+      expect(page).to_not have_content "Example Title"
+
       visit root_path
 
-      expect(page).to have_content photo.title
       within(".popular-photographs") do
-        click_button "Add to Cart"
+        first(:button, "Add to Cart").click
       end
+
       expect(current_path).to eq root_path
+      expect(page).to have_content "Successfully added"
 
       click_link "Cart"
-      expect(current_path).to eq cart_path
 
-      expect(page).to have_content photo.title
-      expect(page).to have_content "1"
+      expect(current_path).to eq cart_path
+      expect(page).to have_content "Example Title"
+      expect(page).to have_content "Example Description"
     end
 
-    it "can login and his/her items persist in the cart" do
+    it "can login and items persist in the cart" do
+      visit cart_path
+      expect(page).to_not have_content "Example Title"
+
       visit root_path
-
       within(".popular-photographs") do
-        click_button "Add to Cart"
+        first(:button, "Add to Cart").click
       end
-      expect(current_path).to eq root_path
-
       sign_in(user)
 
       click_link "Cart"
 
-      expect(page).to have_content photo.title
-      expect(page).to have_content "1"
+      expect(page).to have_content "Example Title"
+      expect(page).to have_content "Example Description"
     end
   end
 
-  context "a user that's logged in" do
-    let!(:photo) { Fabricate(:photo) }
-    let!(:user) { Fabricate(:user) }
+  context "a logged in user" do
 
     it "can add items to the cart" do
+      visit cart_path
+      expect(page).to_not have_content "Example Title"
+
       sign_in(user)
       visit root_path
 
-      2.times do
-        within(".popular-photographs") do
-          click_button "Add to Cart"
-        end
+      within(".popular-photographs") do
+        first(:button, "Add to Cart").click
       end
 
       click_link "Cart"
 
-      expect(page).to have_content photo.title
-      expect(page).to have_content "2"
+      expect(page).to have_content "Example Title"
+      expect(page).to have_content "Example Description"
     end
   end
 end

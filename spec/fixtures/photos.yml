@@ -1,7 +1,7 @@
 <% 50.times do |n| %>
 photo_<%= n + 1 %>:
-  title:  <%= "Title #{n + 1}" %>
-  description: <%= "Description #{n + 1}" %>
+  title:  <%= "Example Title #{n + 1}" %>
+  description: <%= "Example Description #{n + 1}" %>
   standard_price: <%= n*100 + 99 %>
   commercial_price: <%= n*100 + 10099 %>
   store_id: <%= rand(20) + 1 %>

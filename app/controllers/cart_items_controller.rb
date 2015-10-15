@@ -11,7 +11,6 @@ class CartItemsController < ApplicationController
       flash[:warning] = "The photo '#{photo.title}' is already in your cart."
     end
     session[:cart] = cart.data
-    flash[:success] = "Successfully added #{photo.title} to your cart."
     redirect_to :back
   end
 
