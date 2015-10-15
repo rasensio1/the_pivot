@@ -12,8 +12,6 @@ RSpec.describe "a guest", type: :feature do
 
     visit "/alonstore/photos"
 
-    save_and_open_page
-
     expect(page).to have_content("AlonPhoto")
     expect(page).to_not have_content("Example Title")
   end
