@@ -3,14 +3,18 @@
     <h1>New Store</h1>
 
     <%= form_for @store do |f| %>
-      <%= f.label :name %>
-      <%= f.text_field :name %>
+      <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: "form-control", placeholder: "Store Name" %>
+      </div>
 
-      <%= f.label :tagline %>
-      <%= f.text_field :tagline %>
+      <div class="form-group">
+        <%= f.label :tagline %>
+        <%= f.text_field :tagline, class: "form-control", placeholder: "Your fancy tagline here." %>
+      </div>
       <%= f.hidden_field :user_id, value: current_user.id %>
 
-      <%= f.submit %>
+      <%= f.submit class: "btn btn-primary" %>
     <% end %>
 
   </div>
