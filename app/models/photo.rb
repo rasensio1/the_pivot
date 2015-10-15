@@ -1,4 +1,5 @@
 class Photo < ActiveRecord::Base
+  belongs_to :store
 
   def standard_price_dollars
     dollars(standard_price)
