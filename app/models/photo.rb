@@ -15,6 +15,10 @@ class Photo < ActiveRecord::Base
     description.length > 60 ? (description[0..60] + "...") : description
   end
 
+  def file_location
+    file_url ? file_url : image_url
+  end
+
   private
     def dollars(price)
       price.to_f / 100
