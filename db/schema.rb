@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20151014220056) do
     t.datetime "updated_at",                                       null: false
     t.string   "image_url"
     t.integer  "category_id"
-    t.integer  "status",                               default: 0
+    t.integer  "status",      default: 0
   end
 
   create_table "order_items", force: :cascade do |t|
