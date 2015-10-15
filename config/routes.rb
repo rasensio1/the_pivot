@@ -28,5 +28,5 @@ Rails.application.routes.draw do
 
   resources :photos, only: [:index, :show]
   resources :orders, only: [:create, :index, :show]
-  resources :stores, only: [:new, :create]
+  resources :stores, only: [:new, :create, :show]
 end

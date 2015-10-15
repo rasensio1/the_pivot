@@ -16,6 +16,11 @@ class StoresController < ApplicationController
     end
   end
 
+  def show
+    @store = Store.find(params[:id])
+    @photos = @store.photos.paginate(page: params[:page])
+  end
+
   private
     def store_params
       params.require(:store).permit(:name, :tagline, :user_id)

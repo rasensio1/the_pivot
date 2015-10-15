@@ -8,7 +8,9 @@
     </div>
 
     <div class="col-md-9">
-      <%= render partial: "layouts/photos" %>
+      <div class="row item-info item-list">
+        <%= render partial: "layouts/photo", collection: @photos %>
+      </div>
       <div class="row text-center">
         <%= will_paginate %>
       </div>
