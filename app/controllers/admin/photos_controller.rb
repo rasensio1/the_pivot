@@ -12,7 +12,7 @@ class Admin::PhotosController < Admin::BaseController
 
     if photo.save
       flash[:notice] = "#{photo.title} photo has been added!"
-      redirect_to edit_admin_store_path(current_user.store)
+      redirect_to edit_admin_store_path(photo.store_id)
     else
       render :new
     end
