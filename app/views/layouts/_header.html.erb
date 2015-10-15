@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
   <div class="navbar-header">
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
       <span class="sr-only">Toggle navigation</span>
@@ -7,7 +7,7 @@
       <span class="icon-bar"></span>
     </button>
     <div>
-      <a class="navbar-brand" href=<%= root_path %>>PR</a>
+      <a class="navbar-brand" href="/">PR</a>
     </div>
   </div>
 
@@ -25,13 +25,13 @@
         <% end %>
       <% end %>
       </li>
-      <li>
         <% if current_user %>
-          <%= link_to "Sign Out", logout_path, method: :delete %>
+          <li><%= link_to "Sign Out", logout_path, method: :delete %></li>
         <% else %>
-          <%= link_to "Sign In", login_path %>
+          <li><%= link_to "Sign Up", sign_up_path %></li>
+          <li><%= link_to "Sign In", login_path %></li>
         <% end %>
-      </li>
     </ul>
   </div>
+
 </nav>
