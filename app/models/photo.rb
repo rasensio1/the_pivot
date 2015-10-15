@@ -1,6 +1,8 @@
 class Photo < ActiveRecord::Base
   belongs_to :store
 
+  mount_uploader :file, PhotoUploader
+
   def standard_price_dollars
     dollars(standard_price)
   end
