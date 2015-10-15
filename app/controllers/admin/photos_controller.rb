@@ -12,7 +12,7 @@ class Admin::PhotosController < Admin::BaseController
     photo = Photo.new(photo_params)
 
     if photo.save
-      flash[:notice] = "#{photo.title} photo has been added!"
+      flash[:success] = "#{photo.title} photo has been added!"
       redirect_to edit_admin_store_path(photo.store_id)
     else
       render :new
@@ -24,12 +24,15 @@ class Admin::PhotosController < Admin::BaseController
   end
 
   def update
-    Photo.find(params[:id]).update(photo_params)
+    photo = Photo.find(params[:id])
+    photo.update(photo_params)
+    flash[:success] = "#{photo.title} photo has been updated!"
     redirect_to edit_admin_store_path(current_user.store)
   end
 
   def destroy
     my_photo.update(status: 1)
+      flash[:info] = "#{my_photo.title} photo has been removed"
     redirect_to edit_admin_store_path(current_user.store)
   end
 
