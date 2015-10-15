@@ -9,10 +9,12 @@ class Photo < ActiveRecord::Base
     dollars(commercial_price)
   end
 
-  private
+  def shortened_description
+    description.length > 60 ? (description[0..60] + "...") : description
+  end
 
+  private
     def dollars(price)
       price.to_f / 100
     end
-
 end

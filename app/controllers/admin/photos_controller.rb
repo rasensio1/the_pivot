@@ -19,17 +19,24 @@ class Admin::PhotosController < Admin::BaseController
   end
 
   def edit
-    @photo = Photo.find(params[:id])
+    @photo = my_photo 
   end
 
   def update
-    @photo = Photo.find(params[:id])
-    @photo.update(photo_params)
+    Photo.find(params[:id]).update(photo_params)
+    redirect_to edit_admin_store_path(current_user.store)
+  end
 
-    redirect_to admin_photos_path
+  def destroy
+    my_photo.delete
+    redirect_to edit_admin_store_path(current_user.store)
   end
 
   private
+
+  def my_photo
+    Photo.find(params[:photo_id])
+  end
 
   def photo_params
     params.require(:photo).permit(
