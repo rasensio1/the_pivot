@@ -4,11 +4,15 @@ class Seed
     @store_count = 20
     @user_count = 99
     @photo_count = 512
+    @order_count = 500
+    @order_items_count = 2500
     create_categories
     create_users
     create_stores
     create_photos
     create_statuses
+    create_orders
+    create_order_items
   end
 
   def create_categories
@@ -68,8 +72,7 @@ class Seed
                     standard_price: (rand(5) * 100) + 99,
                     commercial_price: ((rand(20) + 89) * 100) + 99,
                     image_url: image_root + (index + 1).to_s.rjust(3, "0") + ".jpg",
-                    store_id: (index % 20) + 1
-                    )
+                    store_id: Store.all.sample.id)
     end
   end
 
@@ -77,6 +80,21 @@ class Seed
     statuses = %w(Ordered Paid Cancelled Completed)
     statuses.each do |status|
       Status.create(name: status)
+    end
+  end
+
+  def create_orders
+    @order_count.times do
+      Order.create(user_id: User.all.sample.id,
+                    status_id: Status.find_by(name: "Completed").id)
+    end
+  end
+
+  def create_order_items
+    @order_items_count.times do
+      OrderItem.create(order_id: Order.all.sample.id,
+                        photo_id: Photo.all.sample.id,
+                        quantity: 1)
     end
   end
 
