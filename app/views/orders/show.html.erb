@@ -2,7 +2,7 @@
   <%= render partial: "layouts/page_title", locals: { page_title: "Order Number: #{@order.id}" } %>
 
   <div class="row">
-    <div class="col-md-3"><h4>Details:</h4></div>
+    <div class="col-md-3"></div>
     <div class="col-md-6"></div>
     <div class="col-md-3 status pull-right">
       <div>
@@ -13,9 +13,9 @@
             <%= f.submit "Update Order Status" %>
           <% end %>
         <% else %>
-          <strong>Status:</strong>
-          <%= @order.status %> <br/>
-          <%= link_to "Your Orders", orders_path(current_user) %>
+          <strong>Date:</strong> <%= @order.created_at.strftime("%m/%d/%Y") %>
+          <br>
+          <strong>Status:</strong> <%= @order.status %>
         <% end %>
       </div>
     </div>
@@ -26,39 +26,28 @@
 
       <tr>
         <th></th>
-        <th>Name</th>
+        <th>Title</th>
         <th>Price</th>
-        <th>Quantity</th>
-        <th>Subtotal</th>
         <th>Status</th>
-        <th>Last Updated</th>
-        <th></th>
       </tr>
 
       <% @order.order_items.each do |order_item| %>
         <tr>
           <td><%= link_to image_tag(
                             order_item.image_url,
-                            height: 80,
-                            width:  80,
-                            class:  "img-circle"
-                          ),
+                            height: "80",
+                            width: "80",
+                            class:  "img-circle"),
                           photo_path(id: order_item.photo_id) %></td>
           <td><%= link_to order_item.name, photo_path(order_item) %></td>
           <td><%= dollars(order_item.price) %></td>
-          <td><%= order_item.quantity %></td>
-          <div class="subtotal">
-            <td><%= dollars(order_item.subtotal) %></td>
-          </div>
           <td><%= @order.status %></td>
-          <td><%= order_item.updated_at %></td>
-          <td><%= link_to "View", photo_path(id: order_item.id) %></td>
         </tr>
       <% end %>
     </table>
 
-    <div class="total">
-      <h3>Total: $<%= @order.total %></h3>
+    <div class="total text-right">
+      <h3>Total: <%= dollars(@order.total) %></h3>
     </div>
 
   </div>
