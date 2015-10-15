@@ -8,11 +8,11 @@ class Admin::PhotosController < Admin::BaseController
   end
 
   def create
-    @photo = Photo.new(photo_params)
-    @photo.category_id = params[:photo][:category].to_i
-    if @photo.save
-      redirect_to meal_path(@photo)
-      flash.now[:notice] = "#{@photo.name} created"
+    photo = Photo.new(photo_params)
+
+    if photo.save
+      flash[:notice] = "#{photo.title} photo has been added!"
+      redirect_to edit_admin_store_path(photo.store_id)
     else
       render :new
     end
@@ -32,10 +32,15 @@ class Admin::PhotosController < Admin::BaseController
   private
 
   def photo_params
-    params.require(:photo).permit(:name,
-                                 :description,
-                                 :price,
-                                 :image_url,
-                                 :status)
+    params.require(:photo).permit(
+      :title,
+      :description,
+      :standard_price,
+      :commercial_price,
+      :image_url,
+      :created_at,
+      :updated_at,
+      :store_id
+    )
   end
 end
