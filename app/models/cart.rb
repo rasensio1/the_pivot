@@ -4,7 +4,7 @@ class Cart
     @data = data || Hash.new
   end
 
-  def photos 
+  def photos
     data.map do |photo_id, quantity|
       photo = Photo.find(photo_id)
       CartItem.new(photo, quantity)
@@ -12,13 +12,7 @@ class Cart
   end
 
   def add_item(item)
-    data[item.id.to_s] ||= 0
-    data[item.id.to_s] += 1
-  end
-
-  def update_quantity(id, quantity)
-    hash = { "increase" => 1, "decrease" => -1 }
-    data[id] += hash[quantity]
+    data[item.id.to_s] = 1 if data[item.id.to_s].nil?
   end
 
   def remove_from_cart(item)
@@ -26,8 +20,10 @@ class Cart
   end
 
   def total
-    data.reduce(0) { |total, (id, quantity)|
-      total += Photo.find(id).standard_price * quantity }
+    total_cents = data.reduce(0) do |total, (id, quantity)|
+      total += Photo.find(id).standard_price * 1
+    end
+    total_cents.to_f / 100
   end
 
   def empty

@@ -5,15 +5,13 @@ class CartItemsController < ApplicationController
 
   def create
     photo = Photo.find(params[:photo_id])
-    cart.add_item(photo)
+    if cart.add_item(photo)
+      flash[:success] = "Successfully added '#{photo.title}' to your cart."
+    else
+      flash[:warning] = "The photo '#{photo.title}' is already in your cart."
+    end
     session[:cart] = cart.data
     flash[:success] = "Successfully added #{photo.title} to your cart."
-    redirect_to :back
-  end
-
-  def update
-    cart.update_quantity(params[:id], params[:quantity])
-    remove_and_render_flash(params[:id]) if cart.data[params[:id]] == 0
     redirect_to :back
   end
 
@@ -21,7 +19,6 @@ class CartItemsController < ApplicationController
     remove_and_render_flash(params[:id])
     redirect_to :back
   end
-
 
   private
 
