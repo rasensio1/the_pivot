@@ -15,4 +15,9 @@ class User < ActiveRecord::Base
     BCrypt::Password.create(string, cost: cost)
   end
 
+  def photos
+    photo_ids = OrderItem.where(order: orders).pluck(:photo_id)
+    Photo.where(id: photo_ids)
+  end
+
 end
