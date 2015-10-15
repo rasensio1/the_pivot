@@ -1,18 +1,14 @@
 class Photo < ActiveRecord::Base
   belongs_to :store
 
-  def standard_price_dollars
-    dollars(standard_price)
+  mount_uploader :file, PhotoUploader
+
+  def shortened_description
+    description.length > 60 ? (description[0..60] + "...") : description
   end
 
-  def commercial_price_dollars
-    dollars(commercial_price)
+  def file_location
+    file_url ? file_url : image_url
   end
-
-  private
-
-    def dollars(price)
-      price.to_f / 100
-    end
 
 end

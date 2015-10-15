@@ -9,6 +9,6 @@ class CartItem < SimpleDelegator
   end
 
   def subtotal
-    (@photo.standard_price * quantity).to_f / 100
+    @photo.standard_price * quantity
   end
 end

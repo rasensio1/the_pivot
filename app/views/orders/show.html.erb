@@ -45,10 +45,10 @@
                           ),
                           photo_path(id: order_item.photo_id) %></td>
           <td><%= link_to order_item.name, photo_path(order_item) %></td>
-          <td><%= number_to_currency(order_item.price) %></td>
+          <td><%= dollars(order_item.price) %></td>
           <td><%= order_item.quantity %></td>
           <div class="subtotal">
-            <td><%= number_to_currency(order_item.subtotal) %></td>
+            <td><%= dollars(order_item.subtotal) %></td>
           </div>
           <td><%= @order.status %></td>
           <td><%= order_item.updated_at %></td>
