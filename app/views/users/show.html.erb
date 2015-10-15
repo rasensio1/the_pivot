@@ -64,8 +64,11 @@
     </div>
     <div class="row">
       <div class="col-md-12">
-
-
+        <div>
+          <% @photos.each do |photo| %>
+            <%= link_to image_tag(photo.image_url, size: "100"), photo %>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>

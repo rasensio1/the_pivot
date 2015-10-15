@@ -17,6 +17,7 @@ class UsersController < ApplicationController
   def show
     redirect_to "/404" unless current_user
     @orders = current_user.orders
+    @photos = current_user.photos
   end
 
   def edit
