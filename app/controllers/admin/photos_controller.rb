@@ -1,4 +1,5 @@
 class Admin::PhotosController < Admin::BaseController
+
   def index
     @photos = Photo.all
   end
@@ -9,8 +10,6 @@ class Admin::PhotosController < Admin::BaseController
 
   def create
     photo = Photo.new(photo_params)
-
-    byebug
 
     if photo.save
       flash[:notice] = "#{photo.title} photo has been added!"
