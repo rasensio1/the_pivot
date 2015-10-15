@@ -23,8 +23,7 @@ class Admin::PhotosController < Admin::BaseController
   end
 
   def update
-    my_photo.update(photo_params)
-
+    Photo.find(params[:id]).update(photo_params)
     redirect_to edit_admin_store_path(current_user.store)
   end
 
@@ -36,7 +35,7 @@ class Admin::PhotosController < Admin::BaseController
   private
 
   def my_photo
-    Photo.find(params[:id])
+    Photo.find(params[:photo_id])
   end
 
   def photo_params
