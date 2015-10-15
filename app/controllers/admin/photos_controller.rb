@@ -10,6 +10,8 @@ class Admin::PhotosController < Admin::BaseController
   def create
     photo = Photo.new(photo_params)
 
+    byebug
+
     if photo.save
       flash[:notice] = "#{photo.title} photo has been added!"
       redirect_to edit_admin_store_path(photo.store_id)
@@ -44,7 +46,7 @@ class Admin::PhotosController < Admin::BaseController
       :description,
       :standard_price,
       :commercial_price,
-      :image_url,
+      :file,
       :created_at,
       :updated_at,
       :store_id
