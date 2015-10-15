@@ -14,10 +14,26 @@
     </div>
   </div>
 
+  <div class="container">
+    <div class="row well">
+      <table class="table profile">
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th></th>
+        </tr>
+          <tr class="user-info">
+            <td><%=current_user.name%></td>
+            <td><%=current_user.email%></td>
+            <td><%= link_to "Edit Profile", profile_edit_path(id: current_user.id), class: 'btn btn-primary' %></td>
+          </tr>
+      </table>
+    </div>
+  </div>
+
   <div class="container well transparent"</div>
     <div class="row">
-      <div class="col-md-4"><h3>Order History</h3></div>
-      <div class="col-md-9"></div>
+      <div class="col-md-4"><h2>Order History</h2></div>
     </div>
     <div class="row">
       <div class="col-md-12">
@@ -42,21 +58,16 @@
     </div>
   </div>
 
-  <div class="container">
-    <div class="row well">
-      <table class="table profile">
+  <div class="container well transparent"</div>
+    <div class="row">
+      <div class="col-md-4"><h2>Download Center</h2></div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
 
-        <tr>
-          <th>Name</th>
-          <th>Email</th>
-          <th></th>
-        </tr>
-          <tr class="user-info">
-            <td><%=current_user.name%></td>
-            <td><%=current_user.email%></td>
-            <td><%= link_to "Edit Profile", profile_edit_path(id: current_user.id), class: 'btn btn-primary' %></td>
-          </tr>
-      </table>
+
+      </div>
     </div>
   </div>
+
 </div>
