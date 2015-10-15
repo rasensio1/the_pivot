@@ -1,4 +1,5 @@
 class Admin::PhotosController < Admin::BaseController
+
   def index
     @photos = Photo.all
   end
@@ -44,7 +45,7 @@ class Admin::PhotosController < Admin::BaseController
       :description,
       :standard_price,
       :commercial_price,
-      :image_url,
+      :file,
       :created_at,
       :updated_at,
       :store_id
