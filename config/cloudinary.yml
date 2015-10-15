@@ -1,0 +1,38 @@
+---
+#development:
+#  cloud_name: noobjey
+#  api_key: '334826822286374'
+#  api_secret: qoNP1-GrGTAYs2O_6LlCYZrVTNg
+#  enhance_image_tag: true
+#  static_image_support: false
+#production:
+#  cloud_name: noobjey
+#  api_key: '334826822286374'
+#  api_secret: qoNP1-GrGTAYs2O_6LlCYZrVTNg
+#  enhance_image_tag: true
+#  static_image_support: true
+#test:
+#  cloud_name: noobjey
+#  api_key: '334826822286374'
+#  api_secret: qoNP1-GrGTAYs2O_6LlCYZrVTNg
+#  enhance_image_tag: true
+#  static_image_support: false
+
+development:
+  cloud_name: <%=ENV["cloud_name"]%>
+  api_key: <%= ENV["api_key"]%>
+  api_secret: <%= ENV["api_secret"]%>
+  enhance_image_tag: "true"
+  static_image_support: "false"
+production:
+  cloud_name: <%=ENV["cloud_name"]%>
+  api_key: <%= ENV["api_key"]%>
+  api_secret: <%= ENV["api_secret"]%>
+  enhance_image_tag: "true"
+  static_image_support: "false"
+test:
+  cloud_name: <%=ENV["cloud_name"]%>
+  api_key: <%= ENV["api_key"]%>
+  api_secret: <%= ENV["api_secret"]%>
+  enhance_image_tag: "true"
+  static_image_support: "false"
