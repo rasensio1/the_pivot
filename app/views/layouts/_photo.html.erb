@@ -2,7 +2,7 @@
   <div class="thumbnail">
     <%= link_to image_tag(photo.image_url, alt: "A picture", class: "item-image"), photo_path(photo) %>
     <div class="caption">
-      <h4 class="pull-right"><%= number_to_currency(photo.standard_price_dollars) %></h4>
+      <h4 class="pull-right"><%= dollars(photo.standard_price) %></h4>
       <h4><%= link_to photo.title, photo_path(photo) %></h4>
       <p><%= photo.description %></p>
     </div>

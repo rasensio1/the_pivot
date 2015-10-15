@@ -6,7 +6,7 @@
         <p>
           <%= @photo.description %>
         </p>
-        <h4><%= number_to_currency(@photo.standard_price_dollars) %></h4>
+        <h4><%= dollars(@photo.standard_price) %></h4>
         <%= button_to "Add to Cart", cart_items_path(photo_id: @photo.id), class: "btn btn-primary" %>
     </div>
 
