@@ -1,5 +1,14 @@
 <div class = "container">
-  <%= @store.name %>
-  <%= @store.tagline %>
-  
+  <div class = "row">
+    <div class = "col-md-4">
+      <h1><%= @store.name %></h1>
+      <h3><%= @store.tagline %></h3>
+    </div>
+    <div class = "col-md-offset-4 col-md-4">
+      <%= link_to "Add a photo", new_admin_photo_path, class: "btn btn-primary" %>
+    </div>
+  </div>
+  <div class = "row">
+    <%= render partial: "layouts/photo", collection: @photos %>
+  </div>
 </div>

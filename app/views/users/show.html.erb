@@ -3,8 +3,12 @@
     <div class="col-md-3">
       <h1><%= current_user.name.capitalize %>'s Profile</h1>
     </div>
-    <div>
-      <%= link_to "Create Store", new_store_path, class: "btn btn-primary" %>
+    <div class = "col-md-3">
+      <% if !current_user.store %> 
+        <%= link_to "Create Store", new_store_path, class: "btn btn-primary" %>
+      <% else %>  
+        <%= link_to "My Store", edit_admin_store_path(current_user.store), class: "btn btn-primary" %>
+      <% end %> 
     </div>
   </div>
 
