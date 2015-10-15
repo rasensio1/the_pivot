@@ -20,7 +20,6 @@ RSpec.describe "photos" do
       fill_in("photo[description]", with: photo.description)
       fill_in("photo[standard_price]", with: photo.standard_price)
       fill_in("photo[commercial_price]", with: photo.commercial_price)
-      fill_in("photo[image_url]", with: photo.image_url)
 
       click_button("Create Photo")
 

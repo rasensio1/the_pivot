@@ -29,7 +29,7 @@ class Admin::PhotosController < Admin::BaseController
   end
 
   def destroy
-    my_photo.delete
+    my_photo.update(status: 1)
     redirect_to edit_admin_store_path(current_user.store)
   end
 
