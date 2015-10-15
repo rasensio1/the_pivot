@@ -1,18 +1,21 @@
-<%= render partial: "layouts/page_title", locals: { page_title: "All Photos" } %>
+<div class = "container">
+  <%= render partial: "layouts/page_title", locals: { page_title: @store.name } %>
+        <h3><%= @store.tagline %></h3>
+</div>
 
-<div class="items-list">
-  <div class="row">
-    <div class="col-md-3">
-      <%= render partial: "layouts/sidebar" %>
-    </div>
-
-    <div class="col-md-9">
-      <div class="row item-info item-list">
-        <%= render partial: "layouts/photo", collection: @photos %>
+  <div class="items-list">
+    <div class="row">
+      <div class="col-md-3">
+        <%= render partial: "layouts/sidebar" %>
       </div>
-      <div class="row text-center">
-        <%= will_paginate %>
+
+      <div class="col-md-9">
+        <div class="row item-info item-list">
+          <%= render partial: "layouts/photo", collection: @photos %>
+        </div>
+        <div class="row text-center">
+          <%= will_paginate %>
+        </div>
       </div>
     </div>
   </div>
-</div>
