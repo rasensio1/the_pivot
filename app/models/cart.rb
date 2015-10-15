@@ -21,7 +21,7 @@ class Cart
 
   def total
     total_cents = data.reduce(0) do |total, (id, quantity)|
-      total += Photo.find(id).standard_price * 1
+      total += Photo.find(id).standard_price
     end
     total_cents.to_f / 100
   end
