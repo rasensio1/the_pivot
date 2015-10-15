@@ -17,7 +17,9 @@ RSpec.describe "photos" do
       commercial_price = 5
       image_url = "the image url"
 
-      visit new_admin_photo_path
+      click_on "My Store"
+
+      click_on "Add a photo"
 
       fill_in("photo[title]", with: title)
       fill_in("photo[description]", with: description)
@@ -28,12 +30,9 @@ RSpec.describe "photos" do
       click_button("Create Photo")
 
       expect(current_path).to eq(edit_admin_store_path(store))
-
       expect(page).to have_content("#{title} photo has been added!")
-    end
-
-    xit "add expects for the photo showing up on the store admin page when its done" do
-      expect(true)
+      expect(page).to have_content(title)
+      expect(page).to have_content(description)
     end
 
   end
