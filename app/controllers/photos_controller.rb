@@ -1,6 +1,6 @@
 class PhotosController < ApplicationController
   def index
-    @photos = Photo.paginate(page: params[:page])
+    @photos = Photo.where(status: 0).paginate(page: params[:page])
   end
 
   def show
