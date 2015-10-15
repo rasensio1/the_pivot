@@ -18,6 +18,7 @@ gem "bootstrap-will_paginate", "0.0.10"
 
 gem "carrierwave"
 gem "cloudinary"
+gem "figaro"
 
 group :development, :test do
   gem 'byebug'
