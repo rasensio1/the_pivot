@@ -30,8 +30,11 @@ RSpec.describe "photos" do
       click_button("Create Photo")
 
       expect(current_path).to eq(edit_admin_store_path(store))
-
       expect(page).to have_content("#{title} photo has been added!")
+      expect(page).to have_content(title)
+      expect(page).to have_content(description)
+      expect(page).to have_content(standard_price.to_s)
+      expect(page).to have_content(commercial_price.to_s)
     end
 
     xit "add expects for the photo showing up on the store admin page when its done" do

@@ -8,5 +8,7 @@
       <%= link_to "Add a photo", new_admin_photo_path, class: "btn btn-primary" %>
     </div>
   </div>
-  
+  <div class = "row">
+    <%= render partial: "layouts/photo", collection: @photos %>
+  </div>
 </div>
