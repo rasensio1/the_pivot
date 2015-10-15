@@ -32,7 +32,7 @@
         <td><%= image_tag(cart_item.image_url, height: 80, width: 80, class: "img-circle") %></td>
         <td><%= cart_item.title %></td>
         <td><%= cart_item.description %></td>
-        <td><%= number_to_currency(cart_item.standard_price_dollars) %></td>
+        <td><%= dollars(cart_item.standard_price) %></td>
 
         <td><%= link_to "Remove", cart_items_path(id: cart_item), method: :delete %></td>
         </tr>
@@ -40,7 +40,7 @@
       </table>
 
     <div class="total">
-      <h3>Total: <%= number_to_currency(cart.total) %></h3>
+      <h3>Total: <%= dollars(cart.total) %></h3>
     </div>
 
   </div>

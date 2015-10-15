@@ -9,7 +9,7 @@ class Order < ActiveRecord::Base
 
   def total
     order_items.inject(0) do |total, order_item|
-      total += order_item.quantity * Photo.find(order_item.photo_id).standard_price
+      total += Photo.find(order_item.photo_id).standard_price
     end
   end
 
