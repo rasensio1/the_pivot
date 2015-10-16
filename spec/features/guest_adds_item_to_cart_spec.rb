@@ -1,7 +1,6 @@
 require "rails_helper"
 
 RSpec.describe "the cart", type: :feature do
-  fixtures :users
   fixtures :stores
   fixtures :photos
 
