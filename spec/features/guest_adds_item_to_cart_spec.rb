@@ -1,8 +1,12 @@
 require "rails_helper"
 
 RSpec.describe "the cart", type: :feature do
+  fixtures :users
   fixtures :stores
   fixtures :photos
+  fixtures :statuses
+  fixtures :orders
+  fixtures :order_items
 
   let!(:user) {User.first}
 
@@ -37,7 +41,7 @@ RSpec.describe "the cart", type: :feature do
         first(:button, "Add to Cart").click
       end
       sign_in(user)
-
+      visit root_path
       click_link "Cart"
 
       expect(page).to have_content "Example Title"
