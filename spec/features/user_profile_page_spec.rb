@@ -13,10 +13,6 @@ RSpec.describe "the user profile page", type: :feature do
       expect(page).to have_content "#{user.name}'s Profile"
     end
 
-    it "has a header" do
-      expect(page).to have_content "Account Information"
-    end
-
     it "has titles" do
       within(".profile") do
         expect(page).to have_content "Name"

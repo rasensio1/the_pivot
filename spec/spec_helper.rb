@@ -17,16 +17,11 @@ RSpec.configure do |config|
 
   Kernel.srand config.seed
 
-  def test_image_url
-    "http://i.livescience.com/images/i/000/048/850/i02/capybara-02.jpg?1324347800"
-  end
-
   def sign_in(user)
     visit root_path
-
     click_link "Sign In"
     fill_in "Email", with: user.email
-    fill_in "Password", with: user.password
+    fill_in "Password", with: "password"
     click_button "Sign In"
   end
 
