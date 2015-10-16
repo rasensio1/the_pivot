@@ -4,10 +4,6 @@ class Admin::PhotosController < Admin::BaseController
     @photos = Photo.all
   end
 
-  def new
-    @photo = Photo.new
-  end
-
   def create
     photo = Photo.new(photo_params)
 

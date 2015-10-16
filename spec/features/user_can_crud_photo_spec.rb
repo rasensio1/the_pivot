@@ -34,7 +34,7 @@ RSpec.describe "photos" do
 
       click_on "Edit"
 
-      expect(current_path).to eq(edit_store_photo_path(photo.store, photo))
+      expect(current_path).to eq(edit_store_photo_path(photo.store.slug, photo))
 
       fill_in("photo[title]", with: "Another title")
       fill_in("photo[description]", with: "Woohoo")
