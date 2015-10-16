@@ -19,10 +19,6 @@ class Admin::PhotosController < Admin::BaseController
     end
   end
 
-  def edit
-    @photo = my_photo 
-  end
-
   def update
     photo = Photo.find(params[:id])
     photo.update(photo_params)

@@ -34,7 +34,7 @@ RSpec.describe "photos" do
 
       click_on "Edit"
 
-      expect(current_path).to eq(edit_admin_photo_path(photo))
+      expect(current_path).to eq(edit_store_photo_path(photo.store, photo))
 
       fill_in("photo[title]", with: "Another title")
       fill_in("photo[description]", with: "Woohoo")
@@ -52,6 +52,7 @@ RSpec.describe "photos" do
 
       expect(current_path).to eq(edit_admin_store_path(photo))
 
+      visit current_path
       expect(page).to_not have_content(photo.title)
       expect(page).to_not have_content(photo.description)
     end

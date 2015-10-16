@@ -4,7 +4,7 @@
   <td><%= admin_photo.shortened_description %></td>
   <td><%= dollars(admin_photo.standard_price) %></td>
   <td><%= dollars(admin_photo.commercial_price) %></td>
-  <td><%= link_to "Edit", edit_admin_photo_path(photo_id: admin_photo.id), method: :get, class: "btn btn-primary btn-sm inline" %>
+  <td><%= link_to "Edit", edit_store_photo_path(@store, admin_photo), method: :get, class: "btn btn-primary btn-sm inline" %>
   <%= link_to "Delete", admin_photo_path(photo_id: admin_photo.id), method: :delete, class: "btn btn-primary btn-sm inline" %>
   </td>
 </tr>

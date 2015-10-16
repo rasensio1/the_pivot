@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   end
 
   scope ":store_name", as: "store" do
-    resources :photos, only: [:show, :index]
+    resources :photos, only: [:show, :index, :new, :edit]
   end
 
   get "/cart", to: "cart_items#index"
