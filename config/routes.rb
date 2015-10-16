@@ -12,14 +12,14 @@ Rails.application.routes.draw do
   delete "/logout", to: "sessions#destroy"
 
   namespace "admin" do
-    resources :photos, except: [:show]
+    resources :photos, except: [:show, :index, :new, :edit]
     resources :orders, only: [:show, :update]
     resource :dashboard, only: [:show]
     resources :stores, only: [:edit, :update]
   end
 
   scope ":store_name", as: "store" do
-    resources :photos, only: [:show, :index]
+    resources :photos, only: [:show, :index, :new, :edit]
   end
 
   get "/cart", to: "cart_items#index"
