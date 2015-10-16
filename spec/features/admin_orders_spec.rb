@@ -1,12 +1,26 @@
 require "rails_helper"
 
 RSpec.describe "an admin" do
-  fixtures :users
-  fixtures :stores
 
-  let!(:store_admin) { User.find_by(name: "admin") }
-  let!(:store) { store_admin.store = Store.first }
-  let!(:photo) { store.photos << Photo.first }
+  let!(:store_admin) { User.create(name: "admin", email: "admin@admin.com", password: "password", role: 1) }
+  let!(:store) {
+    Store.create(
+      name:    "#{store_admin.name} store",
+      tagline: "#{store_admin.name} store tagline",
+      user_id: store_admin.id
+    )
+  }
+
+  let!(:photo) {
+    Photo.create(
+      title:            "#{store_admin.name} photo title",
+      description:      "A not very long descrioptoin",
+      standard_price:   333,
+      commercial_price: 4444,
+      store_id:         store_admin.id,
+      file:             File.open(File.join(Rails.root, '/spec/fixtures/test_photo_1.jpg'))
+    )
+  }
 
 
   # let!(:ordered_status) { Status.create(name: "Ordered") }
@@ -17,18 +31,20 @@ RSpec.describe "an admin" do
   let!(:order) {
     Order.create(user_id: store_admin.id, status_id: completed_status.id)
   }
+
+
   let!(:order_item) {
-    OrderItem.create(order_id: order.id, quantity: 1, item_id: photo.id)
+    OrderItem.create(order_id: order.id, quantity: 1, photo_id: photo.id)
   }
-
-
 
   context "visits admin dashboard" do
     before(:each) do
       sign_in(store_admin)
-      visit admin_dashboard_path
+
+      visit edit_admin_store_path(store)
       click_link "View All Orders"
     end
+
 
     it "can see all orders" do
       expect(page).to have_content("Ordered")
@@ -128,12 +144,14 @@ RSpec.describe "an admin" do
       expect(page).to have_content(paid_status.name)
     end
 
+
     xit "updating the status changes the status attribute in the database" do
       order.update_attributes(status_id: ordered_status.id)
       click_link "View"
 
       select "Paid", from: "order[status]"
       click_button "Update Order Status"
+
 
       expect(current_path).to eq(admin_orders_path)
       expect(page).to have_content "Paid Total: 1"
