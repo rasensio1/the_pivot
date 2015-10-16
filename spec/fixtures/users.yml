@@ -1,5 +1,6 @@
 <% 30.times do |n| %>
 user_<%= n + 1 %>:
+  id: <%= n + 1 %>
   name:  <%= "User #{n + 1}" %>
   email: <%= "user-#{n + 1}@example.com" %>
   password_digest: <%= User.digest('password') %>
@@ -13,7 +14,7 @@ alon:
 jason:
   name: Jason Example
   email: jason@example.ninja
-  password_digest: <%= User.digest('password') %>
+  password_digest: <%= User.digest("password") %>
 
 ryan:
   name: Ryan Example

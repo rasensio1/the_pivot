@@ -1,0 +1,10 @@
+<% photo_count = 50 %>
+<% order_count = 150 %>
+
+<% 500.times do |n| %>
+order_item_<%= n + 1 %>:
+  id: <%= n + 1 %>
+  order_id: <%= rand(order_count) + 1 %>
+  photo_id: <%= rand(photo_count) + 1 %>
+  quantity: 1
+<% end %>

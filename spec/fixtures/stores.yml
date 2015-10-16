@@ -1,8 +1,16 @@
 <% user_ids = [*1..30].sample(20) %>
 
 <% 20.times do |n| %>
-store_<%= n + 1%>:
+store_<%= n + 1 %>:
+  id: <%= n + 1 %>
   name:  <%= "Store #{n + 1}" %>
   tagline: <%= "Tagline #{n + 1}" %>
   user_id: <%= user_ids[n] %>
+  slug: <%= "Store #{n + 1}".parameterize %>
 <% end %>
+
+sample_store:
+  name: Alons Store
+  tagline: Only the best
+  user_id: <%= User.find_by(email: "alon@example.ninja") %>
+  slug: <%= "Only the best".parameterize %>
