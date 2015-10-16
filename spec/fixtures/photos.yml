@@ -6,4 +6,5 @@ photo_<%= n + 1 %>:
   standard_price: <%= n*100 + 99 %>
   commercial_price: <%= n*100 + 10099 %>
   store_id: <%= rand(20) + 1 %>
+  status: 0
 <% end %>
