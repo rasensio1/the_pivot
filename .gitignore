@@ -19,3 +19,6 @@ coverage/
 
 # Ignore application configuration
 /config/application.yml
+
+# Ignore carrierwave image upload temp directory
+/public/uploads/tmp/
