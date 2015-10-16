@@ -62,16 +62,18 @@
 </div>
 </div>
 
-<div class="container well transparent"</div>
-<div class="row">
-  <div class="col-md-4"><h2>Download Center</h2></div>
-</div>
-<div class="row">
-  <div class="col-md-12">
-    <div>
-      <% @photos.each do |photo| %>
-        <%= link_to image_tag(photo.file_location, size: "100"), store_photos_path(photo.store.slug) %>
-      <% end %>
+  <div class="container well transparent"</div>
+    <div class="row">
+      <div class="col-md-4"><h2>Download Center</h2></div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div>
+          <% @photos.each do |photo| %>
+            <%= link_to image_tag(photo.image_url, size: "100"), store_photo_path(photo.store.slug, photo) %>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
