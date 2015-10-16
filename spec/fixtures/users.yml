@@ -20,3 +20,9 @@ ryan:
   name: Ryan Example
   email: ryan@example.ninja
   password_digest: <%= User.digest("password") %>
+
+admin:
+  name: admin
+  email: admin@example.ninja
+  password_digest: <%= User.digest("password") %>
+  role: 1

@@ -15,21 +15,21 @@
     <ul class="nav navbar-nav navbar-right">
       <li> <%= link_to "Photos", photos_path %> </li>
       <li> <%= link_to "Cart", cart_path %> </li>
-      <li>
-        <% if current_user %>
-          <% if current_user && current_user.admin? %>
-          <li><%= link_to "Dashboard", admin_dashboard_path %></li>
+
+      <% if current_user %>
+        <% if current_admin? %>
+          <li><%= link_to "Dashboard", edit_admin_store_path(current_user.store.id) %></li>
         <% else %>
           <li><%= link_to "Profile", profile_path %></li>
         <% end %>
+
+        <li><%= link_to "Sign Out", logout_path, method: :delete %></li>
+
+      <% else %>
+        <li><%= link_to "Sign Up", sign_up_path %></li>
+        <li><%= link_to "Sign In", login_path %></li>
       <% end %>
-      </li>
-        <% if current_user %>
-          <li><%= link_to "Sign Out", logout_path, method: :delete %></li>
-        <% else %>
-          <li><%= link_to "Sign Up", sign_up_path %></li>
-          <li><%= link_to "Sign In", login_path %></li>
-        <% end %>
+
     </ul>
   </div>
 
