@@ -10,7 +10,8 @@ RSpec.describe "an admin on their dashboards" do
 
     visit edit_admin_store_path(store)
 
-    fill_in("store[add_admin]", with: "ryan@yeah.com")
+    fill_in("user[name]", with: "Regular Ryan")
+    fill_in("user[email]", with: "ryan@yeah.com")
     click_on "Add Admin"
 
     expect(page).to have_content("Regular Ryan")

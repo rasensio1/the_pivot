@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources :orders, only: [:show, :update]
     resource :dashboard, only: [:show]
     resources :stores, only: [:edit, :update]
+    resources :store_admins, only: [:create]
   end
 
   scope ":store_name", as: "store" do
