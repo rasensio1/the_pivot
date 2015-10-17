@@ -37,7 +37,7 @@ class Admin::PhotosController < Admin::BaseController
   def set_flash(object)
     object.errors.messages.each do |attr, msg|
       flash[:danger] ||= ""
-      flash[:danger] += "| #{attr.to_s.humanize} - #{msg.first.humanize} "
+      flash[:danger] += "#{attr.to_s.humanize} - #{msg.first.humanize} <br>"
     end
   end
 
