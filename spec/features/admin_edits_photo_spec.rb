@@ -13,7 +13,7 @@ RSpec.describe "a store admin" do
   context "visits photo management page" do
     before do
       sign_in(admin)
-      click_link_or_button("My Store")
+      visit admin_store_path(store.slug)
     end
 
     context "clicks the Edit link" do
@@ -75,6 +75,24 @@ RSpec.describe "a store admin" do
         end
       end
 
+    context "with invalid input params" do
+      it "is redirected to the form with error messages" do
+        fill_in "Standard price", with: "Hello" 
+        click_button "Submit"
+
+        expect(current_path).to eq(edit_store_photo_path(store.slug, photo))
+        expect(page).to have_content("Standard price - Must contain")
+      end
+    end
+
+
+    end
+
+    it "can go to the show paage" do
+      click_link photo.title
+
+      expect(page).to have_content(photo.title)
+      expect(current_path).to eq(store_photo_path(store.slug, photo))
     end
   end
 end
