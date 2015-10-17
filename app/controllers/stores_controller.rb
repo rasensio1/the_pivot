@@ -8,8 +8,9 @@ class StoresController < ApplicationController
     store = Store.new(store_params)
 
     if store.save
+      StoreAdmin.create(user_id: current_user.id, store_id: store.id)
       flash[:success] = "Store successfully created!"
-      redirect_to edit_admin_store_path(store)
+      redirect_to admin_store_path(store.slug)
     else
       flash[:warning] = "Failed"
       redirect_to new_store_path
