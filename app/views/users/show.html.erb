@@ -16,31 +16,29 @@
 
   <div class="container">
     <div class="row well">
-      <table class="table profile">
-        <tr>
-          <th>Name</th>
-          <th>Email</th>
-          <th></th>
-        </tr>
-          <tr class="user-info">
-            <td><%=current_user.name%></td>
-            <td><%=current_user.email%></td>
-            <td><%= link_to "Edit Profile", profile_edit_path(id: current_user.id), class: 'btn btn-primary' %></td>
+      <div class = "col-md-5">
+        <table class="table profile">
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th></th>
           </tr>
-      </table>
+            <tr class="user-info">
+              <td><%=current_user.name%></td>
+              <td><%=current_user.email%></td>
+              <td><%= link_to "Edit Profile", profile_edit_path(id: current_user.id), class: 'btn btn-primary' %></td>
+            </tr>
+        </table>
+      </div>
+      <div class = "col-md-7">
+        <% if current_user.stores %>
+            <h3 class = "text-center">Admin for</h3>
+            <ul> <%= render partial: "layouts/admin_store", collection: @admin_stores %></ul>
+        <% end %>
+      </div>
     </div>
   </div>
 
-  <% if current_user.stores %>
-    <div class = "container well">
-      <div class="row">
-        <div class="col-md-4">
-          <h3>Admin for</h3>
-          <ul> <%= render partial: "layouts/admin_store", collection: @admin_stores %></ul>
-        </div>
-      </div>
-    </div>
-  <% end %>
 
   <div class="container well transparent"</div>
     <div class="row">
