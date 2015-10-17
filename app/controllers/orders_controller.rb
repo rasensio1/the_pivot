@@ -4,10 +4,10 @@ class OrdersController < ApplicationController
     if current_user
       create_order
       empty_cart
-      flash[:success] = "Order placed! Dinners on the way!"
-      redirect_to orders_path
+      flash[:success] = "Your order is complete. You can download full resolution versions of any photograph you've purchased by logging into your account and using the Download Center below."
+      redirect_to profile_path
     else
-      flash[:warning] = "Sign In to complete your order, Dinners almost ready!"
+      flash[:warning] = "Please sign in to complete your order."
       redirect_to login_path
     end
   end
