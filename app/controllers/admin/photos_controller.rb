@@ -9,29 +9,28 @@ class Admin::PhotosController < Admin::BaseController
 
     if photo.save
       flash[:success] = "#{photo.title} photo has been added!"
-      redirect_to edit_admin_store_path(photo.store_id)
+      redirect_to admin_store_path(photo.store.slug)
     else
       render :new
     end
   end
 
   def update
-    photo = Photo.find(params[:id])
-    photo.update(photo_params)
-    flash[:success] = "#{photo.title} photo has been updated!"
-    redirect_to edit_admin_store_path(current_user.store)
+    my_photo.update(photo_params)
+    flash[:success] = "#{my_photo.title} photo has been updated!"
+    redirect_to admin_store_path(current_user.store.slug)
   end
 
   def destroy
     my_photo.update(status: 1)
       flash[:info] = "#{my_photo.title} photo has been removed"
-    redirect_to edit_admin_store_path(current_user.store)
+    redirect_to admin_store_path(current_user.store.slug)
   end
 
   private
 
   def my_photo
-    Photo.find(params[:photo_id])
+    Photo.find(params[:id])
   end
 
   def photo_params

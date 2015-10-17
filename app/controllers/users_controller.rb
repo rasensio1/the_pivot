@@ -15,12 +15,10 @@ class UsersController < ApplicationController
   end
 
   def show
-    if current_user
-      @orders = current_user.orders
-      @photos = current_user.photos
-    else
-      redirect_to "/404"
-    end
+    redirect_to "/404" unless current_user
+    @orders = current_user.orders
+    @photos = current_user.photos
+    @admin_stores = current_user.stores
   end
 
   def edit

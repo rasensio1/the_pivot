@@ -28,7 +28,7 @@
           <%= f.hidden_field :store_id, value: current_user.store.id %>
 
           <%= f.submit "Submit", class: "btn btn-primary" %>
-          <%= link_to "Cancel", edit_admin_store_path(@photo.store), class: "btn btn-primary" %>
+          <%= link_to "Cancel", admin_store_path(@photo.store.slug), class: "btn btn-primary" %>
         <% end %>
       </div>
     </div>

@@ -8,7 +8,7 @@
         <% if !current_user.store %>
           <%= link_to "Create Store", new_store_path, class: "btn btn-primary btn-lg" %>
         <% else %>
-          <%= link_to "My Store", edit_admin_store_path(current_user.store), class: "btn btn-primary" %>
+          <%= link_to "My Store", admin_store_path(current_user.store.slug), class: "btn btn-primary" %>
         <% end %>
       </div>
     </div>
@@ -16,20 +16,29 @@
 
   <div class="container">
     <div class="row well">
-      <table class="table profile">
-        <tr>
-          <th>Name</th>
-          <th>Email</th>
-          <th></th>
-        </tr>
-        <tr class="user-info">
-          <td><%= current_user.name %></td>
-          <td><%= current_user.email %></td>
-          <td><%= link_to "Edit Profile", profile_edit_path(id: current_user.id), class: 'btn btn-primary' %></td>
-        </tr>
-      </table>
+      <div class = "col-md-5">
+        <table class="table profile">
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th></th>
+          </tr>
+            <tr class="user-info">
+              <td><%=current_user.name%></td>
+              <td><%=current_user.email%></td>
+              <td><%= link_to "Edit Profile", profile_edit_path(id: current_user.id), class: 'btn btn-primary' %></td>
+            </tr>
+        </table>
+      </div>
+      <div class = "col-md-7">
+        <% if current_user.stores %>
+            <h3 class = "text-center">Admin for</h3>
+            <ul> <%= render partial: "layouts/admin_store", collection: @admin_stores %></ul>
+        <% end %>
+      </div>
     </div>
   </div>
+
 
   <div class="container well transparent"
 </div>
@@ -62,16 +71,18 @@
 </div>
 </div>
 
-<div class="container well transparent"</div>
-<div class="row">
-  <div class="col-md-4"><h2>Download Center</h2></div>
-</div>
-<div class="row">
-  <div class="col-md-12">
-    <div>
-      <% @photos.each do |photo| %>
-        <%= link_to image_tag(photo.file_location, size: "100"), store_photos_path(photo.store.slug) %>
-      <% end %>
+  <div class="container well transparent"</div>
+    <div class="row">
+      <div class="col-md-4"><h2>Download Center</h2></div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div>
+          <% @photos.each do |photo| %>
+            <%= link_to image_tag(photo.image_url, size: "100"), store_photo_path(photo.store.slug, photo) %>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
