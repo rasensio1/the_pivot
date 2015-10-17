@@ -1,23 +1,33 @@
 require 'rails_helper'
 
 RSpec.describe Order, type: :model do
-  let!(:user) { Fabricate(:user) }
-  let!(:photo) { Fabricate(:photo) }
-  let!(:status) { Status.create(name: "ordered") }
-  let!(:order) { Order.create(user_id: user.id, status_id: status.id) }
-  let!(:order_item) { OrderItem.create(order_id: order.id, photo_id: photo.id, quantity: 3) }
+  fixtures :users
+  fixtures :stores
+  fixtures :photos
+  fixtures :statuses
+  fixtures :orders
+  fixtures :order_items
+
+  let!(:order) {Order.first}
+  # let!(:user)  {order.user}
+  # let!(:photo) {order.order_items.first.photo}
 
   context "a valid order" do
-    it "has associated order items" do
-      expect(order.customer_name).to eq "Jason"
+    it "has associated order_items" do
+      expect(order.order_items.count).to eq(2)
+      expect(order.order_items.first).to be_a_kind_of OrderItem
+    end
+
+    it "has a customer_name" do
+      expect(order.customer_name).to eq("User 1")
     end
 
     it "has a status" do
-      expect(order.status).to eq "Ordered"
+      expect(order.status).to eq("Completed")
     end
 
     it "has a total" do
-      expect(order.total).to eq(photo.standard_price * 3)
+      expect(order.total).to be_a_kind_of Integer
     end
   end
 end
