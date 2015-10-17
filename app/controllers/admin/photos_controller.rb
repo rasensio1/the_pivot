@@ -16,9 +16,8 @@ class Admin::PhotosController < Admin::BaseController
   end
 
   def update
-    photo = Photo.find(params[:id])
-    photo.update(photo_params)
-    flash[:success] = "#{photo.title} photo has been updated!"
+    my_photo.update(photo_params)
+    flash[:success] = "#{my_photo.title} photo has been updated!"
     redirect_to admin_store_path(current_user.store.slug)
   end
 
@@ -31,7 +30,7 @@ class Admin::PhotosController < Admin::BaseController
   private
 
   def my_photo
-    Photo.find(params[:photo_id])
+    Photo.find(params[:id])
   end
 
   def photo_params
