@@ -1,8 +1,10 @@
 require "rails_helper"
 
 RSpec.describe "a user", type: :feature do
+  fixtures :users
+
   context "who is unregistered" do
-    let(:user) { Fabricate(:user) }
+    let(:user) {User.first}
 
     it "is logged in when they create an account" do
       visit root_path
@@ -10,11 +12,13 @@ RSpec.describe "a user", type: :feature do
       click_link "Sign In"
       expect(current_path).to eq login_path
 
-      click_link "Sign Up"
+      within("#sign-up-button") do
+        click_link "Sign Up"
+      end
       expect(current_path).to eq sign_up_path
 
       sign_in(user)
-      expect(current_path).to eq profile_path 
+      expect(current_path).to eq profile_path
 
       within(".navbar-nav") do
         expect(page).to have_content "Sign Out"
@@ -38,7 +42,7 @@ RSpec.describe "a user", type: :feature do
   end
 
   context "a registered user" do
-    let!(:user) { Fabricate(:user) }
+    let(:user) {User.first}
 
     it "can log in" do
       sign_in(user)
@@ -54,11 +58,11 @@ RSpec.describe "a user", type: :feature do
 
       click_link "Sign Out"
       click_link "Sign In"
-      expect(page).to_not have_content "YeeHaw! Jason is signed in!"
+      expect(page).to_not have_content "YeeHaw! #{user.name} is signed in!"
 
       sign_in(user)
 
-      expect(page).to have_content "YeeHaw! Jason is signed in!"
+      expect(page).to have_content "YeeHaw! #{user.name} is signed in!"
       expect(page).to have_content "Sign Out"
     end
 
@@ -76,7 +80,7 @@ RSpec.describe "a user", type: :feature do
   end
 
   context "an admin" do
-    let!(:user) { Fabricate(:user, role: 1) }
+    let(:user) {User.find_by(name: "admin")}
 
     it "is an admin" do
       expect(user.admin?).to eq true
