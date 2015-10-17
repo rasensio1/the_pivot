@@ -13,7 +13,7 @@ RSpec.describe "a store admin" do
   context "visits photo management page" do
     before do
       sign_in(admin)
-      click_link_or_button("My Store")
+      visit admin_store_path(store.slug)
     end
 
     context "clicks the Edit link" do

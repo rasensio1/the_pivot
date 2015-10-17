@@ -13,7 +13,6 @@ RSpec.describe "photos" do
 
     it "can add a photo" do
       click_on "My Store"
-
       click_on "Add a photo"
 
       fill_in("photo[title]", with: photo.title)
@@ -25,6 +24,23 @@ RSpec.describe "photos" do
 
       expect(current_path).to eq(admin_store_path(store.slug))
       expect(page).to have_content("#{photo.title} photo has been added!")
+      expect(page).to have_content(photo.title)
+      expect(page).to have_content(photo.description)
+    end
+
+    it "renders messages when creating with invaid params" do
+      visit new_store_photo_path(store.slug)
+
+      fill_in("photo[title]", with: "")
+      fill_in("photo[description]", with: "")
+      fill_in("photo[standard_price]", with: "hi")
+
+      click_button("Create Photo")
+
+      expect(current_path).to eq(new_store_photo_path(store.slug))
+      expect(page).to have_content("Title can't be blank")
+      expect(page).to have_content("Description can't be blank")
+      expect(page).to have_content("Standard price - Must be")
       expect(page).to have_content(photo.title)
       expect(page).to have_content(photo.description)
     end

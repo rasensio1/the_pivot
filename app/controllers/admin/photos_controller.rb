@@ -11,7 +11,7 @@ class Admin::PhotosController < Admin::BaseController
       flash[:success] = "#{photo.title} photo has been added!"
       redirect_to admin_store_path(photo.store.slug)
     else
-      render :new
+      redirect_to new_store_photo_path(photo.store.slug)
     end
   end
 
@@ -20,10 +20,7 @@ class Admin::PhotosController < Admin::BaseController
       flash[:success] = "#{my_photo.title} photo has been updated!"
       redirect_to admin_store_path(current_user.store.slug)
     else
-      photo = Photo.update(my_photo.id, photo_params)
-      photo.errors.messages.each do |attr, msg|
-        flash[:danger] = "#{attr.to_s.humanize} - #{msg.first.humanize}"
-      end
+      set_flash(Photo.update(my_photo.id, photo_params))
       redirect_to :back
     end
   end
@@ -35,6 +32,12 @@ class Admin::PhotosController < Admin::BaseController
   end
 
   private
+
+  def set_flash(object)
+    object.errors.messages.each do |attr, msg|
+      flash[:danger] = "#{attr.to_s.humanize} - #{msg.first.humanize}"
+    end
+  end
 
   def convert_currency_fields(photo_params)
     photo_params[:standard_price] = cents(photo_params[:standard_price])
