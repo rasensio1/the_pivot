@@ -23,13 +23,12 @@ RSpec.describe "the photos view", type: :feature do
 
   context "a photo is set to inactive" do
     before do
-      photo2.update(title: "Inactive Photo", status: 1)
+      photo2.update(title: "Inactive Photo", active: false)
       visit root_path
       click_link "All Photos"
     end
 
     it "doesn't display inactive photos" do
-      expect(photo2.status).to eq("inactive")
       expect(photo2.title).to eq("Inactive Photo")
       expect(page).to have_content photo1.title
       expect(page).to_not have_content photo2.title

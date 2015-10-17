@@ -1,27 +1,24 @@
 require "rails_helper"
 
 RSpec.describe OrderItem, type: :model do
-  let(:order_item) { Fabricate(:item) }
+  fixtures(:order_items)
+  fixtures(:photos)
+
+  let(:order_item) { OrderItem.first}
 
   context "a valid order item" do
-    it "has an image url" do
-      expect(order_item.image_url).to eq "hello.lpg"
-    end
 
-    it "has a name" do
-      expect(order_item.name).to eq "Hamburger"
+    it "has a title" do
+      expect(order_item.title).to eq  order_item.photo.title
     end
 
     it "has a description" do
-      expect(order_item.description).to eq "Nice and juicy."
+      expect(order_item.description).to eq order_item.photo.description
     end
 
     it "has a price" do
-      expect(order_item.price).to eq 12
+      expect(order_item.price).to eq order_item.photo.standard_price
     end
 
-    it "has a category" do
-      expect(order_item.category_id).to eq 1
-    end
   end
 end

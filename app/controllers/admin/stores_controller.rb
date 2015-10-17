@@ -3,8 +3,8 @@ class Admin::StoresController < Admin::BaseController
 
   def edit
     @user = User.new
-    @store =  current_store
-    @photos = current_store.photos.where(status: 0)
+    @store = current_store
+    @photos = current_store.photos.where(active: true)
     @store_admins = current_store.users
   end
 

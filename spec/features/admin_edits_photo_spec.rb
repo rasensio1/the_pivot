@@ -75,18 +75,20 @@ RSpec.describe "a store admin" do
         end
       end
 
-      context "with invalid input params" do
-        it "is redirected to the form with error messages" do
-          fill_in "Standard price", with: "Hello"
-          click_button "Submit"
+    context "with invalid input params" do
+      it "is redirected to the form with error messages" do
+        fill_in "Standard price", with: "Hello" 
+        click_button "Submit"
 
-          expect(current_path).to eq(edit_store_photo_path(store.slug, photo))
-          expect(page).to have_content("Standard price - Must contain")
-        end
+        expect(current_path).to eq(edit_store_photo_path(store.slug, photo))
+        expect(page).to have_content("Standard price - Must contain")
       end
     end
 
-    it "can go to the show page" do
+
+    end
+
+    it "can go to the show paage" do
       click_link photo.title
 
       expect(page).to have_content(photo.title)
