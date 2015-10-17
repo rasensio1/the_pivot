@@ -37,5 +37,7 @@ RSpec.describe "an admin on their dashboards" do
 
     expect(current_path).to eq(admin_store_path(store.slug))
     expect(page).to have_content("For everyone")
+    expect(page).to_not have_content("Add an Admin")
+
   end
 end
