@@ -14,10 +14,6 @@ class OrderItem < ActiveRecord::Base
     photo.standard_price
   end
 
-  def category_id
-    photo.category_id
-  end
-
   def subtotal
     photo.standard_price * quantity
   end
