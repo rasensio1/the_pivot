@@ -13,6 +13,6 @@ admin_store_photo:
   id: 101
   title: Admin Store Photo
   description: I belong to the admin store
-  standard_price: 20000
-  commercial_price: 3000000
+  standard_price: 2300
+  commercial_price: 3500
   store_id: 101

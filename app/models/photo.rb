@@ -1,5 +1,6 @@
 class Photo < ActiveRecord::Base
   belongs_to :store
+
   mount_uploader :file, PhotoUploader
   enum status: %w(active inactive)
 

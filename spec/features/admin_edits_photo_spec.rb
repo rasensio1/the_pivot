@@ -9,58 +9,72 @@ RSpec.describe "a store admin" do
   let!(:store) { admin.store }
   let!(:photo) { admin.store.photos.first }
 
+
   context "visits photo management page" do
     before do
       sign_in(admin)
-      visit admin_store_path(store.slug)
       click_link_or_button("My Store")
     end
 
     context "clicks the Edit link" do
       before do
-        save_and_open_page
         click_link "Edit"
       end
 
-      it "shows the edit page for that item" do
-        expect(current_path).to eq(edit_store_photo(store.slug, photo))
+      it "sees the edit form for that photo" do
+        expect(current_path).to eq(edit_store_photo_path(store.slug, photo))
+
+        expect(page).to have_content("Edit Photo")
+        expect(page).to have_selector("input[value='#{photo.title}']")
+        expect(page).to have_selector("input[value='#{photo.title}']")
+        expect(page).to have_selector("input[value='#{photo.description}']")
+        expect(page).to have_selector("input[value='$23.00']")
+        expect(page).to have_selector("input[value='$35.00']")
       end
 
-      xit "updates the name" do
-        fill_in "Name", with: "New Name"
-        click_button "Update Meal"
+      it "shows store admin page after submit" do
+        fill_in "Title", with: "New Title"
+        click_button "Submit"
 
-        expect(current_path).to eq(admin_items_path)
-        expect(page).to have_content("New Name")
+        expect(current_path).to eq(admin_store_path(store.slug))
       end
 
-      xit "updates the description" do
+      it "updates the title" do
+        fill_in "Title", with: "New Title"
+        click_button "Submit"
+
+        within("table") do
+          expect(page).to have_content("New Title")
+        end
+      end
+
+      it "updates the description" do
         fill_in "Description", with: "New Description"
-        click_button "Update Meal"
+        click_button "Submit"
 
-        expect(page).to have_content("New Description")
+        within("table") do
+          expect(page).to have_content("New Description")
+        end
       end
 
-      xit "updates the price " do
-        fill_in "Price", with: 5
-        click_button "Update Meal"
+      it "updates the standard price" do
+        fill_in "Standard price", with: 51
+        click_button "Submit"
 
-        expect(page).to have_content(5)
+        within("table") do
+          expect(page).to have_content("$51.00")
+        end
       end
 
-      xit "updates the image_url" do
-        fill_in "Image url", with: "new_image_url"
-        click_button "Update Meal"
+      it "updates the commercial price" do
+        fill_in "Commercial price", with: "$1,287.33"
+        click_button "Submit"
 
-        expect(page).to have_css("img[src*='images/new_image_url']")
+        within("table") do
+          expect(page).to have_content("$1,287.33")
+        end
       end
 
-      xit "updates the status" do
-        select "Retired", from: "item[status]"
-        click_button "Update Meal"
-
-        expect(page).to have_content("retired")
-      end
     end
   end
 end
