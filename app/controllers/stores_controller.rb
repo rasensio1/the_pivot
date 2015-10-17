@@ -1,4 +1,5 @@
 class StoresController < ApplicationController
+  before_action :require_user, only: [:new, :create]
 
   def new
     @store = Store.new

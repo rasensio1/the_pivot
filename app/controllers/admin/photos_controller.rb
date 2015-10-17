@@ -1,4 +1,5 @@
 class Admin::PhotosController < Admin::BaseController
+  before_action :store_admin?
 
   def index
     @photos = Photo.all
