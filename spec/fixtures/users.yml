@@ -21,8 +21,9 @@ ryan:
   email: ryan@example.ninja
   password_digest: <%= User.digest("password") %>
 
-admin:
+store_admin:
+  id: 101
   name: admin
-  email: admin@example.ninja
+  email: admin@admin.com
   password_digest: <%= User.digest("password") %>
   role: 1

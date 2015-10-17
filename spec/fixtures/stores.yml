@@ -14,3 +14,10 @@ sample_store:
   tagline: Only the best
   user_id: <%= User.find_by(email: "alon@example.ninja") %>
   slug: <%= "Only the best".parameterize %>
+
+admin_store:
+  id: 101
+  name: Admin Store
+  tagline: My store loves tests
+  user_id: 101
+  slug: <%= "Admin Store".parameterize %>

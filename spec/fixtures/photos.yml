@@ -8,3 +8,11 @@ photo_<%= n + 1 %>:
   store_id: <%= rand(20) + 1 %>
   status: 0
 <% end %>
+
+admin_store_photo:
+  id: 101
+  title: Admin Store Photo
+  description: I belong to the admin store
+  standard_price: 20000
+  commercial_price: 3000000
+  store_id: 101
