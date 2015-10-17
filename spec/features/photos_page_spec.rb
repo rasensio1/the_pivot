@@ -23,7 +23,7 @@ RSpec.describe "the photos view", type: :feature do
 
   context "a photo is set to inactive" do
     before do
-      photo2.update(title: "Inactive Photo", status: 1)
+      photo2.update(title: "Inactive Photo", active: false)
       visit root_path
       click_link "All Photos"
     end
