@@ -16,7 +16,7 @@ class Admin::PhotosController < Admin::BaseController
   end
 
   def update
-    my_photo.update(convert_currency_fields(photo_params))
+    my_photo.update(photo_params)
     flash[:success] = "#{my_photo.title} photo has been updated!"
     redirect_to admin_store_path(current_user.store.slug)
   end
@@ -46,6 +46,7 @@ class Admin::PhotosController < Admin::BaseController
   end
 
   def photo_params
+    convert_currency_fields(
     params.require(:photo).permit(
       :title,
       :description,
@@ -54,7 +55,7 @@ class Admin::PhotosController < Admin::BaseController
       :file,
       :created_at,
       :updated_at,
-      :store_id
+      :store_id)
     )
   end
 end
