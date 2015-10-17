@@ -21,14 +21,19 @@ Rails.application.routes.draw do
   end
 
   scope ":store_name", as: "store" do
-    resources :photos, only: [:show, :index, :new, :edit]
+    resources :photos, only: [:show,:new, :edit]
   end
+  
+  namespace "stores", as: "store", path: ":store_name" do
+    resources :photos, only: [:index]
+  end
+
+  resources :photos, only: [:index]
 
   get "/cart", to: "cart_items#index"
   post "/cart_items", to: "cart_items#create"
   delete "/cart_items", to: "cart_items#destroy"
 
-  get "/photos", to: "photos#all"
   resources :orders, only: [:create, :index, :show]
   resources :stores, only: [:new, :create, :show]
 end

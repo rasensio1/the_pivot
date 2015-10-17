@@ -1,4 +1,4 @@
-class PhotosController < ApplicationController
+class Stores::PhotosController < ApplicationController
 
   def index
     @store =  Store.find_by(slug: params[:store_name])

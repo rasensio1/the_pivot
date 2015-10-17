@@ -6,6 +6,10 @@ class OrderItem < ActiveRecord::Base
     photo.title
   end
 
+  def image_url
+    photo.file_location
+  end
+
   def description
     photo.description
   end
