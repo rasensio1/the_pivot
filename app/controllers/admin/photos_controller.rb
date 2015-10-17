@@ -16,9 +16,16 @@ class Admin::PhotosController < Admin::BaseController
   end
 
   def update
-    my_photo.update(photo_params)
-    flash[:success] = "#{my_photo.title} photo has been updated!"
-    redirect_to admin_store_path(current_user.store.slug)
+    if my_photo.update_attributes(photo_params)
+      flash[:success] = "#{my_photo.title} photo has been updated!"
+      redirect_to admin_store_path(current_user.store.slug)
+    else
+      photo = Photo.update(my_photo.id, photo_params)
+      photo.errors.messages.each do |attr, msg|
+        flash[:danger] = "#{attr.to_s.humanize} - #{msg.first.humanize}"
+      end
+      redirect_to :back
+    end
   end
 
   def destroy

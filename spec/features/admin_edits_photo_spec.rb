@@ -81,7 +81,7 @@ RSpec.describe "a store admin" do
         click_button "Submit"
 
         expect(current_path).to eq(edit_store_photo_path(store.slug, photo))
-        expect(page).to have_content("Standard Price must be an integer")
+        expect(page).to have_content("Standard price - Must contain")
       end
     end
 

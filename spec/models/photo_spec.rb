@@ -27,7 +27,8 @@ RSpec.describe Photo, type: :model do
   end
 
   it "is only takes integers for price valies" do
-    photo.update(standard_price: "hi")
-    expect(photo).to_not be_valid
+    new = Photo.new(title: "photo", description: "ohyeah", standard_price: "hi", store_id: 1)
+
+    expect(new).to_not be_valid
   end
 end
