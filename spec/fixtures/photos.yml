@@ -5,6 +5,7 @@ photo_<%= n + 1 %>:
   description: <%= "Example Description #{n + 1}" %>
   standard_price: <%= n*100 + 99 %>
   commercial_price: <%= n*100 + 10099 %>
+  image_url: image_<%= n + 1 %>.jpg
   store_id: <%= rand(20) + 1 %>
 <% end %>
 
