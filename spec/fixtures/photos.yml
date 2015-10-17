@@ -9,10 +9,20 @@ photo_<%= n + 1 %>:
   status: 0
 <% end %>
 
-admin_store_photo:
+admin_store_photo_1:
   id: 101
-  title: Admin Store Photo
+  title: Admin Store Photo 1
   description: I belong to the admin store
   standard_price: 2300
   commercial_price: 3500
   store_id: 101
+  file: 'fake_carrierwave_object'
+
+admin_store_photo_2:
+  id: 102
+  title: Admin Store Photo 2
+  description: I belong to the admin store
+  standard_price: 8734
+  commercial_price: 35034
+  store_id: 101
+  file: 'fake_carrierwave_object'
