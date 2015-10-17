@@ -39,3 +39,9 @@ admin_order_item_2:
   order_id: 1020
   photo_id: 102
   quantity: 1
+
+admin_order_item_3:
+  id: 1021
+  order_id: 1020
+  photo_id: 103
+  quantity: 1
