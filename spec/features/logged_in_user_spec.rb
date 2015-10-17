@@ -1,14 +1,15 @@
 require "rails_helper"
 
 RSpec.describe "the profile view", type: :feature do
-  let!(:user) { Fabricate(:user) }
+  fixtures :users
+  let!(:user) {User.first}
 
   context "a logged in user" do
     before do
       sign_in(user)
     end
 
-    it "views profile info in navbar" do
+    it "can visit the profile page" do
       expect(page).to have_content "YeeHaw! #{user.name} is signed in!"
       expect(page).to have_link "Profile"
 
@@ -21,23 +22,14 @@ RSpec.describe "the profile view", type: :feature do
     end
   end
 
-  context "user that's not logged in" do
+  context "user who's not logged in" do
     it "can't visit the profile page" do
-      visit menu_path
+      visit root_path
       expect(page).to_not have_link "Profile"
 
-      visit "/profile"
+      visit profile_path
       expect(current_path).to eq "/404"
     end
   end
 
-  context "a registered user that's not logged in" do
-    it "can't visit the profile page" do
-      visit menu_path
-      expect(page).to_not have_link "Profile"
-
-      visit "/profile"
-      expect(current_path).to eq "/404"
-    end
-  end
 end

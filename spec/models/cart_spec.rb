@@ -1,46 +1,58 @@
 require "rails_helper"
 
 RSpec.describe "the cart", type: :model do
+  fixtures :photos
+
   it "exists" do
     expect(Cart).to be
   end
 
-  context "method items" do
-    let(:item) { Fabricate(:item) }
+  context "photos method" do
+    let(:photo1) {Photo.first}
+    let(:photo2) {Photo.second}
 
     it "returns an array of cart items" do
-      data = Hash.new(0)
-      data[item.id] = 2
-      cart = Cart.new(data)
+      cart_items = {photo1.id => 1, photo2.id => 1}
+      cart = Cart.new(cart_items)
 
-      expect(cart.items.first).to be_a_kind_of CartItem
+      expect(cart.photos).to be_a_kind_of Array
+      expect(cart.photos.first).to be_a_kind_of CartItem
+      expect(cart.photos.second).to be_a_kind_of CartItem
     end
   end
 
-  context "method data" do
-    let(:item) { Fabricate(:item) }
+  context "data method" do
+    let(:photo) {Photo.first}
+    let(:id) {photo.id.to_s}
 
-    it "returns a hash with the item id and quantity" do
-      id = item.id.to_s
-      input_data = {}
-      input_data[id] = 2
+    it "returns a hash with the photo id and a quantity of 1" do
+      input_data = {id => 1}
       cart = Cart.new(input_data)
-      expect(cart.data).to eq({ id => 2 })
+      expect(cart.data).to eq({id => 1})
     end
   end
 
-  context "method add item" do
-    let(:item) { Fabricate(:item) }
+  context "add_item method" do
+    let(:photo) {Photo.first}
+    let(:id) {photo.id.to_s}
+    let(:cart) {Cart.new(nil)}
 
-    it "updates the data when an item is added" do
-      id = item.id.to_s
-      cart = Cart.new(nil)
-
-      cart.add_item(item)
-      expect(cart.data).to eq({ id => 1 })
-
-      cart.add_item(item)
-      expect(cart.data).to eq({ id => 2 })
+    context "when cart is empty" do
+      it "updates the cart data" do
+        expect(cart.data).to eq({})
+        cart.add_item(photo)
+        expect(cart.data).to eq({id => 1})
+      end
     end
+
+    context "when the photo being added is already in the cart" do
+      it "does not update the cart" do
+        cart.add_item(photo)
+        expect(cart.data).to eq({id => 1})
+        cart.add_item(photo)
+        expect(cart.data).to eq({id => 1})
+      end
+    end
+
   end
 end

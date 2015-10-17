@@ -24,12 +24,12 @@ RSpec.describe "the category view", type: :feature do
       )
     }
 
-    it "displays the correct path in the address bar" do
+    xit "displays the correct path in the address bar" do
       visit "menu/#{category.name}"
       expect(current_path).to eq("/menu/Breakfast")
     end
 
-    it "views the items in the category" do
+    xit "views the items in the category" do
       visit "menu/#{category.name}"
 
       within(".page-title") do
@@ -44,7 +44,7 @@ RSpec.describe "the category view", type: :feature do
       end
     end
 
-    it "cannot view items in other categories" do
+    xit "cannot view items in other categories" do
       visit "menu/#{other_category.name}"
 
       within(".item-box") do
@@ -54,7 +54,7 @@ RSpec.describe "the category view", type: :feature do
       end
     end
 
-    it "redirects to an items show page when item name is clicked" do
+    xit "redirects to an items show page when item name is clicked" do
       visit "menu/#{category.name}"
 
       within(".item-box") do

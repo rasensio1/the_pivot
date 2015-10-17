@@ -1,10 +1,29 @@
 <% photo_count = 50 %>
 <% order_count = 150 %>
 
-<% 500.times do |n| %>
-order_item_<%= n + 1 %>:
-  id: <%= n + 1 %>
-  order_id: <%= rand(order_count) + 1 %>
+order_item_1:
+  id: 1
+  order_id: 1
+  photo_id: <%= rand(photo_count) + 1 %>
+  quantity: 1
+
+order_item_2:
+  id: 2
+  order_id: 1
+  photo_id: <%= rand(photo_count) + 1 %>
+  quantity: 1
+
+order_item_3:
+  id: 3
+  order_id: 2
+  photo_id: <%= rand(photo_count) + 1 %>
+  quantity: 1
+
+
+<% 4.upto(500) do |n| %>
+order_item_<%= n %>:
+  id: <%= n %>
+  order_id: <%= rand(order_count - 2) + 3 %>
   photo_id: <%= rand(photo_count) + 1 %>
   quantity: 1
 <% end %>
