@@ -20,8 +20,12 @@ Rails.application.routes.draw do
     resources :store_admins, only: [:create]
   end
 
+  scope ":store_name", as: "store", module: "admin" do
+    resources :photos, only: [:new, :edit]
+  end
+
   scope ":store_name", as: "store" do
-    resources :photos, only: [:show,:new, :edit]
+    resources :photos, only: [:show]
   end
   
   namespace "stores", as: "store", path: ":store_name" do

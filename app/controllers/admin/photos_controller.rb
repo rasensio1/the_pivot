@@ -4,6 +4,14 @@ class Admin::PhotosController < Admin::BaseController
     @photos = Photo.all
   end
 
+  def new
+    @photo = Photo.new
+  end
+
+  def edit
+    @photo = Photo.find(params[:id])
+  end
+
   def create
     photo = Photo.new(photo_params)
 
