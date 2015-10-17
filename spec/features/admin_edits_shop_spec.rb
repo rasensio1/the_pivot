@@ -19,7 +19,7 @@ RSpec.describe "photos" do
 
       click_button("Update Info")
 
-      expect(current_path).to eq(edit_admin_store_path(store))
+      expect(current_path).to eq(admin_store_path(store.slug))
       expect(page).to have_content("Different shop")
       expect(page).to have_content("Pretty Good")
     end

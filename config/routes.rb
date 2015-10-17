@@ -14,7 +14,9 @@ Rails.application.routes.draw do
   namespace "admin" do
     resources :photos, except: [:show, :index, :new, :edit]
     resources :orders, only: [:show, :update]
-    resources :stores, only: [:edit, :update]
+    resource :dashboard, only: [:show]
+    get ":store_name/edit", as: :store, to: "stores#edit"
+    resources :stores, path: ":store_name", only: [:update]
     resources :store_admins, only: [:create]
   end
 

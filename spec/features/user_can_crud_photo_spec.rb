@@ -23,14 +23,14 @@ RSpec.describe "photos" do
 
       click_button("Create Photo")
 
-      expect(current_path).to eq(edit_admin_store_path(store))
+      expect(current_path).to eq(admin_store_path(store.slug))
       expect(page).to have_content("#{photo.title} photo has been added!")
       expect(page).to have_content(photo.title)
       expect(page).to have_content(photo.description)
     end
 
     it "can edit a photo" do
-      visit edit_admin_store_path(store_admin.store.id)
+      visit admin_store_path(store_admin.store.slug)
 
       click_on "Edit"
 
@@ -40,17 +40,17 @@ RSpec.describe "photos" do
       fill_in("photo[description]", with: "Woohoo")
 
       click_on "Submit"
-      expect(current_path).to eq(edit_admin_store_path(photo))
+      expect(current_path).to eq(admin_store_path(photo.store.slug))
       expect(page).to have_content("Another title")
       expect(page).to have_content("Woohoo")
     end
     
     it "can delete a photo" do
-      visit edit_admin_store_path(store_admin.store.id)
+      visit admin_store_path(store_admin.store.slug)
 
       click_on "Delete"
 
-      expect(current_path).to eq(edit_admin_store_path(photo))
+      expect(current_path).to eq(admin_store_path(photo.store.slug))
 
       visit current_path
       expect(page).to_not have_content(photo.title)
