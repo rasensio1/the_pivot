@@ -76,5 +76,12 @@ RSpec.describe "a store admin" do
       end
 
     end
+
+    it "can go to the show paage" do
+      click_link photo.title
+
+      expect(page).to have_content(photo.title)
+      expect(current_path).to eq(store_photo_path(store.slug, photo))
+    end
   end
 end
