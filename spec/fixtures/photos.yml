@@ -26,3 +26,12 @@ admin_store_photo_2:
   commercial_price: 35034
   store_id: 101
   file: 'fake_carrierwave_object'
+
+other_store_photo_3:
+  id: 103
+  title: Other Store Photo
+  description: I belong to the admin store
+  standard_price: 8341
+  commercial_price: 9087
+  store_id: 102
+  file: 'fake_carrierwave_object'
