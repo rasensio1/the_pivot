@@ -11,7 +11,7 @@ class Admin::PhotosController < Admin::BaseController
       flash[:success] = "#{photo.title} photo has been added!"
       redirect_to admin_store_path(photo.store.slug)
     else
-      set_flash(photo)
+      set_flash_errors(photo)
       redirect_to new_store_photo_path(photo.store.slug)
     end
   end
@@ -21,7 +21,7 @@ class Admin::PhotosController < Admin::BaseController
       flash[:success] = "#{my_photo.title} photo has been updated!"
       redirect_to admin_store_path(current_user.store.slug)
     else
-      set_flash(Photo.update(my_photo.id, photo_params))
+      set_flash_errors(Photo.update(my_photo.id, photo_params))
       redirect_to :back
     end
   end
@@ -34,7 +34,7 @@ class Admin::PhotosController < Admin::BaseController
 
   private
 
-  def set_flash(object)
+  def set_flash_errors(object)
     object.errors.messages.each do |attr, msg|
       flash[:danger] ||= ""
       flash[:danger] += "#{attr.to_s.humanize} - #{msg.first.humanize} <br>"
