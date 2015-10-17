@@ -36,7 +36,7 @@
                               class:  "img-circle"),
                             store_photo_path(order_item.photo.store, order_item.photo) %></td>
             <td>
-              <%= link_to order_item.name, store_photo_path(order_item.photo.store, order_item.photo) %><br>
+              <%= link_to order_item.title, store_photo_path(order_item.photo.store, order_item.photo) %><br>
               <%= order_item.photo.shortened_description %>
             </td>
             <td><%= dollars(order_item.price) %></td>

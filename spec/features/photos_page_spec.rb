@@ -29,7 +29,6 @@ RSpec.describe "the photos view", type: :feature do
     end
 
     it "doesn't display inactive photos" do
-      expect(photo2.status).to eq("inactive")
       expect(photo2.title).to eq("Inactive Photo")
       expect(page).to have_content photo1.title
       expect(page).to_not have_content photo2.title
