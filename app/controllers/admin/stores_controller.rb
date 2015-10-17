@@ -1,9 +1,8 @@
 class Admin::StoresController < Admin::BaseController
   before_filter :require_shop_admin, only: [:edit]
   def edit
-    byebug
     @user = User.new
-    @store =  store
+    @store =  current_store 
     @photos = current_store.photos.where(status: 0)
     @store_admins = current_store.users
   end
