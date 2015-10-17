@@ -15,7 +15,8 @@ Rails.application.routes.draw do
     resources :photos, except: [:show, :index, :new, :edit]
     resources :orders, only: [:show, :update]
     resource :dashboard, only: [:show]
-    resources :stores, only: [:edit, :update]
+    get ":store_name/edit", as: :store, to: "stores#edit"
+    resources :stores, path: ":store_name", only: [:update]
     resources :store_admins, only: [:create]
   end
 
