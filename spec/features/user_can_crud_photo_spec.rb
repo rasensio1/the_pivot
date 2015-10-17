@@ -9,6 +9,7 @@ RSpec.describe "photos" do
 
     before do
       sign_in(store_admin)
+
     end
 
     it "can add a photo" do
@@ -38,11 +39,9 @@ RSpec.describe "photos" do
       click_button("Create Photo")
 
       expect(current_path).to eq(new_store_photo_path(store.slug))
-      expect(page).to have_content("Title can't be blank")
-      expect(page).to have_content("Description can't be blank")
-      expect(page).to have_content("Standard price - Must be")
-      expect(page).to have_content(photo.title)
-      expect(page).to have_content(photo.description)
+      expect(page).to have_content("Title - Can't be blank")
+      expect(page).to have_content("Description - Can't be blank")
+      expect(page).to have_content("Standard price - Must contain")
     end
 
     it "can edit a photo" do
