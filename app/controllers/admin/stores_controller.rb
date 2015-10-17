@@ -4,6 +4,7 @@ class Admin::StoresController < Admin::BaseController
     @user = User.new
     @store = current_user.store
     @photos = current_user.store.photos.where(status: 0)
+    @store_admins = current_user.store.users
   end
 
   def update
