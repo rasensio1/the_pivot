@@ -1,60 +1,45 @@
 require "rails_helper"
 
+
+
+# An admin user should have a profile link and a dashboard link, make them go rght places and test
+# Hardcoded fixture values for money in tests, think of something better maybe
+# Add a view button to orders table on profile page
+
+
 RSpec.describe "an admin" do
+  fixtures :users
+  fixtures :stores
+  fixtures :photos
+  fixtures :orders
+  fixtures :order_items
 
-  let!(:store_admin) { User.create(name: "admin", email: "admin@admin.com", password: "password", role: 1) }
-  let!(:store) {
-    Store.create(
-      name:    "#{store_admin.name} store",
-      tagline: "#{store_admin.name} store tagline",
-      user_id: store_admin.id
-    )
-  }
+  let!(:store_admin) { User.find_by(name: "admin") }
+  let!(:order1) { store_admin.orders.first }
+  let!(:order2) { store_admin.orders.last }
 
-  let!(:photo) {
-    Photo.create(
-      title:            "#{store_admin.name} photo title",
-      description:      "A not very long descrioptoin",
-      standard_price:   333,
-      commercial_price: 4444,
-      store_id:         store_admin.id,
-      file:             File.open(File.join(Rails.root, '/spec/fixtures/test_photo_1.jpg'))
-    )
-  }
-
-
-  # let!(:ordered_status) { Status.create(name: "Ordered") }
-  # let!(:paid_status) { Status.create(name: "Paid") }
-  # let!(:cancelled_status) { Status.create(name: "Cancelled") }
-  let!(:completed_status) { Status.create(name: "Completed") }
-
-  let!(:order) {
-    Order.create(user_id: store_admin.id, status_id: completed_status.id)
-  }
-
-
-  let!(:order_item) {
-    OrderItem.create(order_id: order.id, quantity: 1, photo_id: photo.id)
-  }
-
-  context "visits admin dashboard" do
+  context "visits profile" do
     before(:each) do
       sign_in(store_admin)
-
-      visit edit_admin_store_path(store)
-      click_link "View All Orders"
     end
 
-
     it "can see all orders" do
-      expect(page).to have_content("Ordered")
-      expect(page).to have_content("Paid")
-      expect(page).to have_content("Cancelled")
-      expect(page).to have_content("Completed")
+      find("h2", :text => "Order History")
 
-      expect(page).to have_content(order.id)
-      expect(page).to have_content(order.total)
-      expect(page).to have_content(order.status)
+      within("#order-history") do
+        find("th", text: "Date")
+        find("th", text: "Order #")
+        find("th", text: "Images Ordered")
+        find("th", text: "Total")
+
+        find("td", text: order1.id)
+        find("td", text: "$23.00")
+        first("td", text: order1.order_items.count)
+
+        find("td", text: order2.id)
+        find("td", text: "$87.34")
+      end
+
     end
 
     xit "can click a link to view an order" do
