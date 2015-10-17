@@ -12,6 +12,7 @@ RSpec.describe "a store admin" do
 
   context "visits photo management page" do
     before do
+      store.photos.last.delete
       sign_in(admin)
       visit admin_store_path(store.slug)
     end
@@ -88,7 +89,7 @@ RSpec.describe "a store admin" do
 
     end
 
-    it "can go to the show paage" do
+    it "can go to the show page" do
       click_link photo.title
 
       expect(page).to have_content(photo.title)
