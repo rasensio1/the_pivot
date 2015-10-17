@@ -1,7 +1,7 @@
 class Admin::PhotosController < Admin::BaseController
 
-  def index
-    @photos = Photo.all
+  def new
+    @photo = Photo.new
   end
 
   def create
@@ -13,6 +13,10 @@ class Admin::PhotosController < Admin::BaseController
     else
       render :new
     end
+  end
+
+  def edit
+    @photo = Photo.find(params[:id])
   end
 
   def update

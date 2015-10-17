@@ -1,10 +1,10 @@
 <tr>
-  <td><%= link_to image_tag(admin_photo.file_location, alt: "A picture", class: "admin_image"), store_photo_path(admin_photo.store,admin_photo) %>
-  <td><%= link_to admin_photo.title, admin_photo_path(admin_photo) %></td>
+  <td><%= link_to image_tag(admin_photo.file_location, alt: "A picture", class: "admin_image"), store_photo_path(admin_photo.store, admin_photo) %>
+  <td><%= link_to admin_photo.title, store_photo_path(admin_photo.store, admin_photo) %></td>
   <td><%= admin_photo.shortened_description %></td>
   <td><%= dollars(admin_photo.standard_price) %></td>
   <td><%= dollars(admin_photo.commercial_price) %></td>
   <td><%= link_to "Edit", edit_store_photo_path(@store.slug, admin_photo), method: :get, class: "btn btn-primary btn-sm inline" %>
-  <%= link_to "Delete", admin_photo_path(id: admin_photo.id), method: :delete, class: "btn btn-primary btn-sm inline" %>
+  <%= link_to "Delete", store_photo_path(@store.slug, admin_photo), method: :delete, class: "btn btn-danger btn-sm inline" %>
   </td>
 </tr>
