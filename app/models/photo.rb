@@ -2,9 +2,8 @@ class Photo < ActiveRecord::Base
   belongs_to :store
 
   mount_uploader :file, PhotoUploader
-  enum status: %w(active inactive)
 
-  validates :title, :description, :standard_price, :store_id,  presence: true 
+  validates :title, :description, :standard_price, :store_id,  presence: true
 
   def shortened_description
     description.length > 60 ? (description[0..60] + "...") : description
@@ -15,7 +14,7 @@ class Photo < ActiveRecord::Base
   end
 
   def self.active
-    Photo.where(status: 0)
+    Photo.where(active: true)
   end
 
 end

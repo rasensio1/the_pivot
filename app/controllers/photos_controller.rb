@@ -1,15 +1,11 @@
 class PhotosController < ApplicationController
-  def index
-    @store =  Store.find_by(slug: params[:store_name])
-    @photos = @store.photos.where(status: 0).paginate(page: params[:page])
-  end
 
   def show
     @photo = Photo.find(params[:id])
   end
-  
-  def all
-    @photos = Photo.where(status: 0).paginate(page: params[:page])
+
+  def index
+    @photos = Photo.where(active: true).paginate(page: params[:page])
   end
 
   def new
