@@ -21,7 +21,7 @@
       <tbody>
       <% @order.order_items.each do |order_item| %>
         <tr id="photo-<%= order_item.photo.id %>">
-          <td width="1" id="photo-<%= %>">
+          <td width="1">
             <%= link_to image_tag(
                           order_item.image_url,
                           height: "80",
@@ -30,7 +30,7 @@
                         store_photo_path(order_item.photo.store.slug, order_item.photo) %>
           </td>
           <td>
-            <%= link_to order_item.name, store_photo_path(order_item.photo.store.slug, order_item.photo) %><br>
+            <%= link_to order_item.photo.title, store_photo_path(order_item.photo.store.slug, order_item.photo) %><br>
             <%= order_item.photo.shortened_description %>
           </td>
           <td><%= dollars(order_item.price) %></td>
