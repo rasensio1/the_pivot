@@ -6,17 +6,9 @@
     <div class="col-md-6"></div>
     <div class="col-md-3 status pull-right">
       <div id="order_summary">
-        <% if current_user.role.eql?("admin") && @order.status == "Ordered" || @order.status == "Paid" %>
-          Change Status:
-          <%= form_for [:admin, @order] do |f| %>
-            <%= f.collection_select(:status, Status.all, :id, :name, { selected: @order.status_id }) %>
-            <%= f.submit "Update Order Status" %>
-          <% end %>
-        <% else %>
-          <strong>Date:</strong> <%= @order.created_at.strftime("%m/%d/%Y") %>
-          <br>
-          <strong>Status:</strong> <%= @order.status %>
-        <% end %>
+        <strong>Date:</strong> <%= @order.created_at.strftime("%m/%d/%Y") %>
+        <br>
+        <strong>Status:</strong> <%= @order.status %>
       </div>
     </div>
   </div>
@@ -24,27 +16,31 @@
   <div class="table-responsive">
     <table class="table table-striped order">
       <thead>
-        <th></th><th>Title</th><th>Price</th>
+      <th></th>
+      <th>Title</th>
+      <th>Price</th>
       </thead>
       <tbody>
-        <% @order.order_items.each do |order_item| %>
-          <tr id="photo-<%= order_item.photo.id %>">
-            <td width="1"><%= link_to image_tag(
-                              order_item.image_url,
-                              height: "80",
-                              width: "80",
-                              class:  "img-circle"),
-                            store_photo_path(order_item.photo.store, order_item.photo) %></td>
-            <td>
-              <%= link_to order_item.title, store_photo_path(order_item.photo.store, order_item.photo) %><br>
-              <%= order_item.photo.shortened_description %>
-            </td>
-            <td><%= dollars(order_item.price) %></td>
-          </tr>
-        <% end %>
+      <% @order.order_items.each do |order_item| %>
+        <tr id="photo-<%= order_item.photo.id %>">
+          <td width="1"><%= link_to image_tag(
+                                      order_item.image_url,
+                                      height: "80",
+                                      width:  "80",
+                                      class:  "img-circle"),
+                                    store_photo_path(order_item.photo.store, order_item.photo) %></td>
+          <td>
+            <%= link_to order_item.name, store_photo_path(order_item.photo.store, order_item.photo) %><br>
+            <%= order_item.photo.shortened_description %>
+          </td>
+          <td><%= dollars(order_item.price) %></td>
+        </tr>
+      <% end %>
       </tbody>
       <tfoot>
-        <td></td><td></td><td id="total"><h3>Total: <%= dollars(@order.total) %></h3></td>
+      <td></td>
+      <td></td>
+      <td id="total"><h3>Total: <%= dollars(@order.total) %></h3></td>
       </tfoot>
     </table>
 
