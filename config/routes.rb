@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   end
 
   scope ":store_name", as: "store", module: "admin" do
-    resources :photos, only: [:new, :edit]
+    resources :photos, only: [:new, :edit, :update]
   end
 
   scope ":store_name", as: "store" do
