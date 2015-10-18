@@ -21,7 +21,7 @@ RSpec.describe "photos" do
       fill_in("photo[description]", with: photo.description)
       fill_in("photo[standard_price]", with: photo.standard_price)
       fill_in("photo[commercial_price]", with: photo.commercial_price)
-      select("Landscape", :from => 'idea[category_id]')
+      select("Landscape", :from => 'photo[category_id]')
 
       click_button("Create Photo")
 
