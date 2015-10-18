@@ -5,8 +5,8 @@ class PhotosController < ApplicationController
   end
 
   def index
-    @photos = Photo.where(active: true).paginate(page: params[:page])
-    @categories = Category.sample(5)
+    @photos = Photo.active.cat_filter(params[:filter]).paginate(page: params[:page])
+    @categories = Category.all.sample(5)
   end
 
 end
