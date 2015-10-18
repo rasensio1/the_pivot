@@ -34,6 +34,10 @@
             <%= f.hidden_field :file_cache %>
           </div>
 
+          <div class = "form-group">
+            <%= collection_select(:idea, :category_id, Category.all,:id, :name) %>
+          </div>
+
           <%= f.hidden_field :store_id, value: current_user.store.id %>
 
           <%= f.submit "Create Photo", class: "btn btn-primary" %>
