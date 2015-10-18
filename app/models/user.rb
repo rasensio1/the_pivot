@@ -9,8 +9,6 @@ class User < ActiveRecord::Base
   validates :name, presence: true
   validates :password, presence: true
 
-  enum role: %w(default admin)
-
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
                                                   BCrypt::Engine.cost
