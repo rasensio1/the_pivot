@@ -37,16 +37,17 @@ RSpec.describe "the photos view", type: :feature do
   end
 
   context "a user views categories" do
+      let!(:cat) { Category.create(name: "Landscape") }
+
     before do
       visit root_path
-      click_link "Landscape"
     end
 
     it "displays all Landscape photo" do
-      cat = Category.create(name: "Lanscape")
-
       photo1.update(category_id: cat.id)
       photo2.update(category_id: cat.id)
+
+      click_link "Landscape"
 
       expect(page).to have_content("Category: Landscape") 
       expect(page).to have_content photo1.title
