@@ -1,5 +1,5 @@
 require "rails_helper"
-RSpec.describe "a store admin" do
+RSpec.describe "Authorization: " do
   fixtures :users
   fixtures :stores
   fixtures :photos
@@ -20,12 +20,12 @@ RSpec.describe "a store admin" do
       expect(page).to have_content("Not Authorized")
     end
 
-    it "cant add shop photo" do
+    xit "cant add shop photo" do
       visit new_store_photo_path(store)
       expect(page).to have_content("Not Authorized")
     end
 
-    it "cant edit shop photo" do
+    xit "cant edit shop photo" do
       visit edit_store_photo_path(store)
       expect(page).to have_content("Not Authorized")
     end

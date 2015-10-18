@@ -7,6 +7,6 @@ class Admin::BaseController < ApplicationController
   private
 
   def store_admin?
-    current_user.stores.pluck(:slug).include?(params[:store_name]) 
+    current_user && current_user.stores.pluck(:slug).include?(params[:store_name]) 
   end
 end
