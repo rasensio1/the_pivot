@@ -57,10 +57,9 @@ RSpec.describe "User profile page: ", type: :feature do
           end
         end
 
-        it "sees a summary with date and status" do
+        it "sees a summary with date" do
           within("#order_summary") do
             expect(page).to have_content("Date: #{order.created_at.strftime("%m/%d/%Y")}")
-            expect(page).to have_content("Status: #{order.status}")
           end
         end
 
@@ -80,7 +79,7 @@ RSpec.describe "User profile page: ", type: :feature do
 
         it "can go to a photo's detail page" do
           within("#photo-#{photo.id}"){click_link("#{photo.title}")}
-          expect(current_path).to eq(store_photo_path(photo.store, photo))
+          expect(current_path).to eq(store_photo_path(photo.store.slug, photo))
         end
 
       end
