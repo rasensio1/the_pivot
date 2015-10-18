@@ -10,9 +10,4 @@ class PhotosController < ApplicationController
     @categories = Category.all.sample(5)
   end
 
-  private
-    def filter_id 
-      params[:filter]
-    end
-
 end
