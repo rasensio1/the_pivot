@@ -77,7 +77,8 @@ class Admin::PhotosController < Admin::BaseController
       :file,
       :created_at,
       :updated_at,
-      :store_id)
+      :store_id,
+      :category_id)
     )
   end
 end

@@ -3,9 +3,10 @@ require "rails_helper"
 RSpec.describe "photos" do
 
   context "store admin" do
+    let!(:category) { Category.create(name: "Landscape")}
     let!(:store_admin) { Fabricate(:user) }
     let!(:store) { Fabricate(:store, user_id: store_admin.id) }
-    let!(:photo) { Fabricate(:photo, store_id: store.id) }
+    let!(:photo) { Fabricate(:photo, store_id: store.id, category_id: category.id ) }
 
     before do
       sign_in(store_admin)
@@ -20,6 +21,7 @@ RSpec.describe "photos" do
       fill_in("photo[description]", with: photo.description)
       fill_in("photo[standard_price]", with: photo.standard_price)
       fill_in("photo[commercial_price]", with: photo.commercial_price)
+      select("Landscape", :from => 'photo[category_id]')
 
       click_button("Create Photo")
 
@@ -27,6 +29,7 @@ RSpec.describe "photos" do
       expect(page).to have_content("#{photo.title} photo has been added!")
       expect(page).to have_content(photo.title)
       expect(page).to have_content(photo.description)
+      expect(page).to have_content(photo.category.name)
     end
 
     it "renders messages when creating with invaid params" do

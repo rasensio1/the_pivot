@@ -25,4 +25,8 @@ class ApplicationController < ActionController::Base
     authorization_error unless current_user
   end
 
+  def filter_id 
+    params[:filter] || "0"
+  end
+
 end
