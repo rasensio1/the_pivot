@@ -29,8 +29,4 @@ class ApplicationController < ActionController::Base
     params[:filter] || "0"
   end
 
-  def current_path
-  end
-
-
 end
