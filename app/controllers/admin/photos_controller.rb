@@ -1,7 +1,16 @@
 class Admin::PhotosController < Admin::BaseController
+  before_action :store_admin?
 
   def index
     @photos = Photo.all
+  end
+
+  def new
+    @photo = Photo.new
+  end
+
+  def edit
+    @photo = Photo.find(params[:id])
   end
 
   def create
