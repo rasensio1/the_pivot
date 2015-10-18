@@ -20,13 +20,13 @@ RSpec.describe "Authorization: " do
       expect(page).to have_content("Not Authorized")
     end
 
-    xit "cant add shop photo" do
-      visit new_store_photo_path(store)
+    it "cant add shop photo" do
+      visit new_store_photo_path(store.slug)
       expect(page).to have_content("Not Authorized")
     end
 
-    xit "cant edit shop photo" do
-      visit edit_store_photo_path(store)
+    it "cant edit shop photo" do
+      visit edit_store_photo_path(store.slug, photo)
       expect(page).to have_content("Not Authorized")
     end
   end
