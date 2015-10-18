@@ -9,6 +9,7 @@ RSpec.describe "a guest", type: :feature do
   context "can visit a store" do
     before do
       category = Category.first
+      Category.create(name: "hi")
       alon = User.find_by(name: "Alon Example")
       store = Store.create(name: "alonstore", tagline: "my store", user_id: alon.id)
       photo = Photo.update(Photo.first.id, title: "AlonPhoto", description: "yeah", standard_price: 100, store_id: store.id, category_id: category.id)
