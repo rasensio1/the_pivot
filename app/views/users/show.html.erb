@@ -62,9 +62,9 @@
               <td id="order-image-count-<%= order.id %>"><%= order.order_items.count %></td>
               <td id="order-total-<%= order.id %>"><%= dollars(order.total) %></td>
               <td id="order-show-<%= order.id %>"><%= link_to "View",
-                              order_path(order),
-                              method: :get,
-                              class:  "btn btn-primary btn-sm inline" %>
+                                                              order_path(order),
+                                                              method: :get,
+                                                              class:  "btn btn-primary btn-sm inline" %>
               </td>
             </tr>
           <% end %>
@@ -74,11 +74,11 @@
     </div>
   </div>
 
-  <div class="container well transparent"
+  <div class="container well transparent">
 </div>
 <div class="row">
   <div class="col-md-4"><h2>Download Center</h2></div>
-</div>c
+</div>
 <div class="row">
   <div class="col-md-12">
     <div>
