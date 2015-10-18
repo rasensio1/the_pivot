@@ -6,6 +6,7 @@ class Admin::PhotosController < Admin::BaseController
   end
 
   def new
+    @store = Store.find_by(slug: params[:store_name])
     @photo = Photo.new
   end
 
