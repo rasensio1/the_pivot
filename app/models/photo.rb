@@ -19,7 +19,7 @@ class Photo < ActiveRecord::Base
   end
 
   def category
-    Category.find(category_id)
+    Category.find(category_id) rescue Category.new(name: "")
   end
 
 end
