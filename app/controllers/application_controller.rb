@@ -21,8 +21,4 @@ class ApplicationController < ActionController::Base
     render file: "/public/404_authorization.html", layout: false, status: 404
   end
 
-  def require_user
-    authorization_error unless current_user
-  end
-
 end
