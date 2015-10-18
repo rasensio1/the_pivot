@@ -4,13 +4,13 @@
 order_item_1:
   id: 1
   order_id: 1
-  photo_id: <%= rand(photo_count) + 1 %>
+  photo_id: 1
   quantity: 1
 
 order_item_2:
   id: 2
   order_id: 1
-  photo_id: <%= rand(photo_count) + 1 %>
+  photo_id: 2
   quantity: 1
 
 order_item_3:
