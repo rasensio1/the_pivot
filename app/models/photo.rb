@@ -15,11 +15,18 @@ class Photo < ActiveRecord::Base
   end
 
   def self.active
-    Photo.where(active: true)
+    where(active: true)
+  end
+
+  def self.cat_filter(id)
+    id == "0" ? all : where(category_id: id)
   end
 
   def category
     Category.find(category_id) rescue Category.new(name: "")
+  end
+
+  def filter(id)
   end
 
 end
