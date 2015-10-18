@@ -45,11 +45,6 @@ RSpec.configure do |config|
 
 end
 
-puts "***************************************************************************************"
-puts "ENV = #{ENV['RAILS_ENV']}"
-puts "***************************************************************************************"
-
-
 if ENV['RAILS_ENV'] == 'test'
   CarrierWave.configure do |config|
     config.storage = :file
