@@ -44,3 +44,11 @@ RSpec.configure do |config|
   end
 
 end
+
+if ENV['RAILS_ENV'] == 'test'
+  CarrierWave.configure do |config|
+    config.storage = :file
+    config.enable_processing = false
+  end
+end
+
