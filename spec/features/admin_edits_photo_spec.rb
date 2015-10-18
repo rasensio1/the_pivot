@@ -12,6 +12,7 @@ RSpec.describe "a store admin" do
 
   context "visits photo management page" do
     before do
+      StoreAdmin.create(user_id: admin.id, store_id: store.id)
       sign_in(admin)
       visit admin_store_path(store.slug)
     end

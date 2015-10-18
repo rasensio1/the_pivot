@@ -7,7 +7,7 @@
 
       <div class="admin-item-form">
 
-        <%= form_for [:admin, @photo] do |f| %>
+        <%= form_for [:admin, @photo], url: store_photos_path(@store.slug) do |f| %>
           <div class="form-group">
             <%= f.label :title %>
             <%= f.text_field :title, class: "form-control" %>
