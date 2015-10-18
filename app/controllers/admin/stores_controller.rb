@@ -9,10 +9,11 @@ class Admin::StoresController < Admin::BaseController
   end
 
   def update
-    store = Store.find(params[:id])
+    store = Store.find(params[:store][:id])
     store.update(store_params)
     flash[:success] = "#{store.name} has been updated!"
-    redirect_to admin_store_path(current_user.store)
+
+    redirect_to admin_store_path(store.slug)
   end
 
   private

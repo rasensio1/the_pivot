@@ -17,19 +17,17 @@
       <li> <%= link_to "Cart", cart_path %> </li>
 
       <% if current_user %>
-        <% if current_admin? %>
+        <% if current_user.store_owner? %>
           <li><%= link_to "Dashboard", admin_store_path(current_user.store.slug) %></li>
-        <% else %>
-          <li><%= link_to "Profile", profile_path %></li>
         <% end %>
 
+        <li><%= link_to "Profile", profile_path %></li>
         <li><%= link_to "Sign Out", logout_path, method: :delete %></li>
 
       <% else %>
         <li><%= link_to "Sign Up", sign_up_path %></li>
         <li><%= link_to "Sign In", login_path %></li>
       <% end %>
-
     </ul>
   </div>
 

@@ -13,14 +13,15 @@ RSpec.describe "photos" do
 
     it "can edit store name and tagline" do
       click_on "My Store"
+      new_name = "Different shop"
 
-      fill_in("store[name]", with: "Different shop")
+      fill_in("store[name]", with: new_name)
       fill_in("store[tagline]", with: "Pretty Good")
 
       click_button("Update Info")
 
-      expect(current_path).to eq(admin_store_path(store.slug))
-      expect(page).to have_content("Different shop")
+      expect(current_path).to eq(admin_store_path(new_name.parameterize))
+      expect(page).to have_content(new_name)
       expect(page).to have_content("Pretty Good")
     end
 

@@ -27,3 +27,21 @@ order_item_<%= n %>:
   photo_id: <%= rand(photo_count) + 1 %>
   quantity: 1
 <% end %>
+
+admin_order_item_1:
+  id: 1010
+  order_id: 1010
+  photo_id: 101
+  quantity: 1
+
+admin_order_item_2:
+  id: 1020
+  order_id: 1020
+  photo_id: 102
+  quantity: 1
+
+admin_order_item_3:
+  id: 1021
+  order_id: 1020
+  photo_id: 103
+  quantity: 1

@@ -3,16 +3,17 @@ require "rails_helper"
 RSpec.describe "a store admin" do
   fixtures :users
   fixtures :stores
+  fixtures :store_admin
   fixtures :photos
 
   let!(:admin) { User.find_by(name: "admin") }
-  let!(:store) { admin.store }
-  let!(:photo) { admin.store.photos.first }
+  let!(:store) { admin.stores.first }
+  let!(:photo) { store.photos.first }
 
 
   context "visits photo management page" do
     before do
-      StoreAdmin.create(user_id: admin.id, store_id: store.id)
+      store.photos.last.delete
       sign_in(admin)
       visit admin_store_path(store.slug)
     end
@@ -76,17 +77,15 @@ RSpec.describe "a store admin" do
         end
       end
 
-    context "with invalid input params" do
-      it "is redirected to the form with error messages" do
-        fill_in "Standard price", with: "Hello" 
-        click_button "Submit"
+      context "with invalid input params" do
+        it "is redirected to the form with error messages" do
+          fill_in "Standard price", with: "Hello"
+          click_button "Submit"
 
-        expect(current_path).to eq(edit_store_photo_path(store.slug, photo))
-        expect(page).to have_content("Standard price - Must contain")
+          expect(current_path).to eq(edit_store_photo_path(store.slug, photo))
+          expect(page).to have_content("Standard price - Must contain")
+        end
       end
-    end
-
-
     end
 
     it "can go to the show paage" do

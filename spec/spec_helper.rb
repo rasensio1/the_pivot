@@ -17,6 +17,9 @@ RSpec.configure do |config|
 
   Kernel.srand config.seed
 
+  require "simplecov"
+  SimpleCov.start
+
   def sign_in(user)
     visit root_path
     click_link "Sign In"
@@ -24,7 +27,4 @@ RSpec.configure do |config|
     fill_in "Password", with: "password"
     click_button "Sign In"
   end
-
-    require "simplecov"
-    SimpleCov.start
 end

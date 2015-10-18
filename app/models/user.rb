@@ -22,4 +22,8 @@ class User < ActiveRecord::Base
     Photo.where(id: photo_ids)
   end
 
+  def store_owner?
+    !self.store.nil?
+  end
+
 end
