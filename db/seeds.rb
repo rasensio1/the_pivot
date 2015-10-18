@@ -77,7 +77,8 @@ class Seed
                    standard_price:   (rand(5) * 100) + 99,
                    commercial_price: ((rand(20) + 89) * 100) + 99,
                    image_url:        image_root + (index + 1).to_s.rjust(3, "0") + ".jpg",
-                   store_id:         Store.all.sample.id)
+                   store_id:         Store.all.sample.id
+                   category_id:      Category.all.sample.id)
     end
 
     Photo.create(title:            "Andrew's One Photo",
