@@ -20,17 +20,6 @@ ActiveRecord::Schema.define(version: 20151018211704) do
     t.string "name"
   end
 
-  create_table "items", force: :cascade do |t|
-    t.string   "name"
-    t.string   "description"
-    t.decimal  "price",       precision: 10, scale: 2
-    t.datetime "created_at",                                       null: false
-    t.datetime "updated_at",                                       null: false
-    t.string   "image_url"
-    t.integer  "category_id"
-    t.integer  "status",                               default: 0
-  end
-
   create_table "order_items", force: :cascade do |t|
     t.integer  "order_id"
     t.integer  "quantity"
@@ -62,17 +51,11 @@ ActiveRecord::Schema.define(version: 20151018211704) do
     t.integer  "store_id"
     t.string   "file"
     t.boolean  "active",           default: true
+    t.integer  "category_id"
   end
 
+  add_index "photos", ["category_id"], name: "index_photos_on_category_id", using: :btree
   add_index "photos", ["store_id"], name: "index_photos_on_store_id", using: :btree
-
-  create_table "pics", force: :cascade do |t|
-    t.string   "name"
-    t.string   "url"
-    t.string   "file"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "statuses", force: :cascade do |t|
     t.string   "name"
@@ -109,6 +92,7 @@ ActiveRecord::Schema.define(version: 20151018211704) do
 
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "photos"
+  add_foreign_key "photos", "categories"
   add_foreign_key "photos", "stores"
   add_foreign_key "store_admins", "stores"
   add_foreign_key "store_admins", "users"

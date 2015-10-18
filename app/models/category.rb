@@ -5,6 +5,10 @@ class Category < ActiveRecord::Base
 
   before_save :capitalize_name
 
+  def self.label(id)
+    id == "0" ? "All Photos" : "Category: " + find(id).name
+  end
+
   def to_param
     name
   end
