@@ -2,6 +2,7 @@
     <div class="form-group">
       <%= f.label :name %>
       <%= f.text_field :name, class: "form-control", placeholder: @store.name %>
+      <%= f.hidden_field :id, value: @store.id %>
     </div>
 
     <div class="form-group">
