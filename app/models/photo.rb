@@ -18,4 +18,8 @@ class Photo < ActiveRecord::Base
     Photo.where(active: true)
   end
 
+  def category
+    Category.find(category_id)
+  end
+
 end
