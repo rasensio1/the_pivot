@@ -46,7 +46,7 @@ RSpec.describe "Authorization: " do
     end
 
     it "cant edit photo for another shop" do
-      visit edit_store_photo_path(other_store.slug, other_store.photos.first)
+      visit edit_store_photo_path(other_store.slug, other_store.photos.first.id)
       expect(page).to have_content("Not Authorized")
     end
   end
