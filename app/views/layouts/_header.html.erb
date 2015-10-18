@@ -17,7 +17,7 @@
       <li> <%= link_to "Cart", cart_path %> </li>
 
       <% if current_user %>
-        <% if store_owner? %>
+        <% if current_user.store_owner? %>
           <li><%= link_to "Dashboard", admin_store_path(current_user.store.slug) %></li>
         <% end %>
 
