@@ -1,12 +1,9 @@
 <div id="list-group">
   <div class="well">
     <ul>
-      <li><%= link_to "All Photos", photos_path, class: "side-nav-element"%></li>
-      <li><%= link_to "Landscape", "/menu/Breakfast", class: "side-nav-element" %></li>
-      <li><%= link_to "Urban", "/menu/Lunch", class: "side-nav-element" %></li>
-      <li><%= link_to "Portrait", "/menu/Dinner", class: "side-nav-element" %></li>
-      <li><%= link_to "Pets", "/menu/Dinner", class: "side-nav-element" %></li>
-      <li><%= link_to "Food", "/menu/Dinner", class: "side-nav-element" %></li>
+      <li><%= link_to "All Photos", photos_path(filter: 0), class: "side-nav-element"%></li>
+        <%= render partial: "layouts/category", collection: @categories %>
+    </ul>
   </div>
     <div class = "well" >
       <h4> Want your own shop? </h4>

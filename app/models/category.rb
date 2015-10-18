@@ -5,6 +5,9 @@ class Category < ActiveRecord::Base
 
   before_save :capitalize_name
 
+  def self.filter
+  end
+
   def to_param
     name
   end

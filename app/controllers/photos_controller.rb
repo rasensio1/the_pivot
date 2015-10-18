@@ -6,6 +6,7 @@ class PhotosController < ApplicationController
 
   def index
     @photos = Photo.where(active: true).paginate(page: params[:page])
+    @categories = Category.sample(5)
   end
 
 end
