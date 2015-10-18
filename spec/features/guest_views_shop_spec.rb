@@ -10,8 +10,8 @@ RSpec.describe "a guest", type: :feature do
     before do
       category = Category.first
       Category.create(name: "hi")
-      alon = User.find_by(name: "Alon Example")
-      store = Store.create(name: "alonstore", tagline: "my store", user_id: alon.id)
+      user1 = User.find_by(name: "User 1")
+      store = Store.create(name: "alonstore", tagline: "my store", user_id: user1.id)
       photo = Photo.update(Photo.first.id, title: "AlonPhoto", description: "yeah", standard_price: 100, store_id: store.id, category_id: category.id)
       Photo.update(Photo.second.id, title: "Not here", description: "yeah", standard_price: 100, store_id: store.id, category_id: Category.last.id)
     end
