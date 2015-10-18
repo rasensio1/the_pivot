@@ -51,7 +51,7 @@ RSpec.describe "the cart", type: :feature do
 
   context "a logged in user" do
 
-    it "can add items to the cart" do
+    it "can add photots to the cart" do
       visit cart_path
       expect(page).to_not have_content "Example Title"
 

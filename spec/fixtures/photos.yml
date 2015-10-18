@@ -10,8 +10,8 @@ photo_<%= n + 1 %>:
 
 admin_store_photo_1:
   id: 101
-  title: Admin Store Photo 1
-  description: I belong to the admin store
+  title: Example Title - Admin Store Photo 1
+  description: Example Description - I belong to the admin store
   standard_price: 2300
   commercial_price: 3500
   store_id: 101
@@ -19,8 +19,8 @@ admin_store_photo_1:
 
 admin_store_photo_2:
   id: 102
-  title: Admin Store Photo 2
-  description: I belong to the admin store
+  title: Example Title - Admin Store Photo 2
+  description: Example Description - I belong to the admin store
   standard_price: 8734
   commercial_price: 35034
   store_id: 101
@@ -28,8 +28,8 @@ admin_store_photo_2:
 
 other_store_photo_3:
   id: 103
-  title: Other Store Photo
-  description: I belong to the admin store
+  title: Example Title - Other Store Photo
+  description: Example Description - I belong to the admin store
   standard_price: 8341
   commercial_price: 9087
   store_id: 102
