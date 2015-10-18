@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   delete "/logout", to: "sessions#destroy"
 
   namespace "admin" do
-    resources :photos, except: [:show, :index, :new, :edit]
+    resources :photos, except: [:show, :index, :new, :edit, :destroy]
     resources :orders, only: [:show, :update]
     resource :dashboard, only: [:show]
     get ":store_name/edit", as: :store, to: "stores#edit"
@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   end
 
   scope ":store_name", as: "store", module: "admin" do
-    resources :photos, only: [:new, :edit, :update, :create]
+    resources :photos, only: [:new, :edit, :update, :create, :destroy]
   end
 
   scope ":store_name", as: "store" do

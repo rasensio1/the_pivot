@@ -62,10 +62,9 @@ RSpec.describe "photos" do
     
     it "can delete a photo" do
       visit admin_store_path(store_admin.store.slug)
-
       click_on "Delete"
 
-      expect(current_path).to eq(admin_store_path(photo.store.slug))
+      expect(current_path).to eq(admin_store_path(store_admin.store.slug))
 
       visit current_path
       expect(page).to_not have_content(photo.title)
