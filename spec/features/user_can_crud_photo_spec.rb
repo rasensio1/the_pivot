@@ -20,6 +20,7 @@ RSpec.describe "photos" do
       fill_in("photo[description]", with: photo.description)
       fill_in("photo[standard_price]", with: photo.standard_price)
       fill_in("photo[commercial_price]", with: photo.commercial_price)
+      select("Landscape", :from => 'idea[category_id]')
 
       click_button("Create Photo")
 
@@ -27,6 +28,7 @@ RSpec.describe "photos" do
       expect(page).to have_content("#{photo.title} photo has been added!")
       expect(page).to have_content(photo.title)
       expect(page).to have_content(photo.description)
+      expect(page).to have_content(photo.category)
     end
 
     it "renders messages when creating with invaid params" do
