@@ -16,3 +16,14 @@ order_<%= n %>:
   user_id: <%= rand(user_count) + 1 %>
   status_id: 1
 <% end %>
+
+
+admin_order_1:
+  id: 1010
+  user_id: 101
+  status_id: 1
+
+admin_order_2:
+  id: 1020
+  user_id: 101
+  status_id: 1
