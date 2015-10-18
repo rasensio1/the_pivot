@@ -46,8 +46,7 @@ class Seed
     User.create!(name:                  "Andrew",
                  email:                 "andrew@turing.io",
                  password:              "password",
-                 password_confirmation: "password",
-                 role:                  1)
+                 password_confirmation: "password")
 
     User.create!(name:                  "Jorge",
                  email:                 "jorge@turing.io",

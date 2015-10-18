@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe "photos" do
 
   context "store admin" do
-    let!(:store_admin) { Fabricate(:user, role: 1) }
+    let!(:store_admin) { Fabricate(:user) }
     let!(:store) { Fabricate(:store, user_id: store_admin.id) }
     let!(:photo) { Fabricate(:photo, store_id: store.id) }
 
