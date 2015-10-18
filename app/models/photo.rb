@@ -26,7 +26,4 @@ class Photo < ActiveRecord::Base
     Category.find(category_id) rescue Category.new(name: "")
   end
 
-  def filter(id)
-  end
-
 end
