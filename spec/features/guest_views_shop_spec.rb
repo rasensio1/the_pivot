@@ -6,9 +6,9 @@ RSpec.describe "a guest", type: :feature do
   fixtures :photos
 
   it "can visit a store from the correct url" do
-    alon = User.find_by(name: "Alon Example")
+    alon = User.find_by(email: "alon@example.ninja")
     store = Store.create(name: "alonstore", tagline: "my store", user_id: alon.id)
-    photo = Photo.update(Photo.first.id, title: "AlonPhoto", description: "yeah", standard_price: 100, store_id: store.id)
+    Photo.update(Photo.first.id, title: "AlonPhoto", description: "yeah", standard_price: 100, store_id: store.id)
 
     visit store_photos_path(store.slug) 
 
