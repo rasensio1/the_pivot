@@ -2,7 +2,8 @@ class Stores::PhotosController < ApplicationController
 
   def index
     @store =  Store.find_by(slug: params[:store_name])
-    @photos = @store.photos.where(active: true).paginate(page: params[:page])
+    @photos = @store.photos.active.cat_filter(filter_id).paginate(page: params[:page])
+    @categories = @photos.map(&:category).uniq
   end
 
 end

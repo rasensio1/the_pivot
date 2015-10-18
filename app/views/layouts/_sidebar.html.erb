@@ -1,7 +1,7 @@
 <div id="list-group">
   <div class="well">
     <ul>
-      <li><%= link_to "All Photos", photos_path(filter: 0), class: "side-nav-element"%></li>
+      <li><%= link_to "All Photos", (request.path + "?filter=0"), class: "side-nav-element"%></li>
         <%= render partial: "layouts/category", collection: @categories %>
     </ul>
   </div>
