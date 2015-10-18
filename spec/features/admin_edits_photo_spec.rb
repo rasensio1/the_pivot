@@ -88,7 +88,8 @@ RSpec.describe "a store admin" do
       end
     end
 
-    it "can go to the show paage" do
+    it "can go to the show page" do
+      save_and_open_page
       click_link photo.title
 
       expect(page).to have_content(photo.title)
