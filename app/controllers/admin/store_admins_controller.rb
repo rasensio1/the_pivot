@@ -1,4 +1,5 @@
 class Admin::StoreAdminsController < Admin::BaseController 
+
   def create
     new_admin = User.find_by(email: params[:user][:email])
     StoreAdmin.create(user_id: new_admin.id, store_id: current_user.store.id)

@@ -7,6 +7,7 @@ RSpec.describe "Authorization: " do
   let!(:admin) { User.find_by(name: "admin") }
   let!(:store) { admin.store }
   let!(:photo) { admin.store.photos.first }
+  let!(:other_store) { Store.second }
 
   context "not logged in" do
 
@@ -27,6 +28,25 @@ RSpec.describe "Authorization: " do
 
     it "cant edit shop photo" do
       visit edit_store_photo_path(store.slug, photo)
+      expect(page).to have_content("Not Authorized")
+    end
+  end
+
+  context "after logging in" do
+    it "cant edit someone elses shop" do
+      sign_in(admin)
+
+      visit admin_store_path(other_store.slug)
+      expect(page).to have_content("Not Authorized")
+    end
+
+    it "cant add photo for another shop" do
+      visit new_store_photo_path(other_store.slug)
+      expect(page).to have_content("Not Authorized")
+    end
+
+    it "cant edit photo for another shop" do
+      visit edit_store_photo_path(other_store.slug, other_store.photos.first)
       expect(page).to have_content("Not Authorized")
     end
   end
