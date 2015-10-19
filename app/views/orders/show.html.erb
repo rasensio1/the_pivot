@@ -23,7 +23,7 @@
         <tr id="photo-<%= order_item.photo.id %>">
           <td width="1">
             <%= link_to image_tag(
-                          order_item.image_url,
+                          order_item.image_url(:thumbnail),
                           height: "80",
                           width:  "80",
                           class:  "img-circle"),

@@ -3,23 +3,27 @@ require "rails_helper"
 RSpec.describe "photos" do
 
   context "store admin" do
-    let!(:store_admin) { Fabricate(:user, role: 1) }
-    let!(:store) { Fabricate(:store, user_id: store_admin.id) }
-    let!(:photo) { Fabricate(:photo, store_id: store.id) }
+    fixtures :users
+    fixtures :store_admin
+    fixtures :stores
+    fixtures :photos
+
+    let!(:store_admin) {User.find_by(name: "admin")}
+    let!(:store) {store_admin.store}
+    let!(:photo) {store.photos.first}
 
     before do
       sign_in(store_admin)
-
+      click_link "Dashboard"
     end
 
     it "can add a photo" do
-      click_on "My Store"
       click_on "Add a photo"
-
       fill_in("photo[title]", with: photo.title)
       fill_in("photo[description]", with: photo.description)
       fill_in("photo[standard_price]", with: photo.standard_price)
       fill_in("photo[commercial_price]", with: photo.commercial_price)
+      page.attach_file("photo[file]", Rails.root + "spec/fixtures/test_photo_1.jpg")
 
       click_button("Create Photo")
 
@@ -29,7 +33,7 @@ RSpec.describe "photos" do
       expect(page).to have_content(photo.description)
     end
 
-    it "renders messages when creating with invaid params" do
+    it "gets error messages when using invalid params" do
       visit new_store_photo_path(store.slug)
 
       fill_in("photo[title]", with: "")
@@ -47,7 +51,7 @@ RSpec.describe "photos" do
     it "can edit a photo" do
       visit admin_store_path(store_admin.store.slug)
 
-      click_on "Edit"
+      first(:link, "Edit").click
 
       expect(current_path).to eq(edit_store_photo_path(photo.store.slug, photo))
 
@@ -59,16 +63,19 @@ RSpec.describe "photos" do
       expect(page).to have_content("Another title")
       expect(page).to have_content("Woohoo")
     end
-    
+
     it "can delete a photo" do
       visit admin_store_path(store_admin.store.slug)
-      click_on "Delete"
+      starting_photo_count = store.photos.active.count
+      first(:link, "Delete").click
 
       expect(current_path).to eq(admin_store_path(store_admin.store.slug))
-
-      visit current_path
-      expect(page).to_not have_content(photo.title)
-      expect(page).to_not have_content(photo.description)
+      expect(store.photos.active.count).to eq(starting_photo_count - 1)
+      expect(page).to have_content(photo.title + " photo has been removed")
+      within("#active-photos") do
+        expect(page).to_not have_content(photo.title)
+        expect(page).to_not have_content(photo.description)
+      end
     end
 
   end

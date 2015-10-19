@@ -11,6 +11,7 @@ class Photo < ActiveRecord::Base
   end
 
   def file_location(type = :preview)
+    # byebug if self.store.id == 101
     file_url ? file_url : seed_url(type)
   end
 
