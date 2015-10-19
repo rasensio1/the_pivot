@@ -16,6 +16,7 @@
       <thead>
       <th></th>
       <th>Title</th>
+      <th>Download</th>
       <th>Price</th>
       </thead>
       <tbody>
@@ -33,11 +34,17 @@
             <%= link_to order_item.photo.title, store_photo_path(order_item.photo.store.slug, order_item.photo) %><br>
             <%= order_item.photo.shortened_description %>
           </td>
+          <td>
+            <%= link_to order_item.photo.file_location(:full), class: "btn btn-success btn-xs" do %>
+              <i class="glyphicon glyphicon-cloud-download"></i>
+            <% end %>
+          </td>
           <td><%= dollars(order_item.price) %></td>
         </tr>
       <% end %>
       </tbody>
       <tfoot>
+      <td></td>
       <td></td>
       <td></td>
       <td id="total"><h3>Total: <%= dollars(@order.total) %></h3></td>
