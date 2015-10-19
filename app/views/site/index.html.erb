@@ -1,33 +1,35 @@
-<div class="jumbotron text-center">
-  <h1> Photo's Ready! </h1>
-</div>
-
-<div class="items-list">
-  <div class="row">
-
-    <div class="col-md-3">
-      <%= render partial: "layouts/sidebar" %>
-    </div>
-
-    <div class="col-md-9 text-center">
-      <div class="well">
-        <h2> Popular Photographs </h2>
-      </div>
-      <div class="row item-info item-list popular-photographs">
-        <%= render partial: "layouts/photo", collection: @photos %>
-      </div>
-    </div>
+<div class="container">
+  <div class="jumbotron text-center">
+    <h1> Photo's Ready! </h1>
   </div>
 
-  <div class="row">
-    <div class="col-md-offset-3 col-md-9 text-center">
-      <div class="well">
-        <h2> Popular Photographers</h2>
+  <div class="items-list">
+    <div class="row">
+
+      <div class="col-md-3">
+        <%= render partial: "layouts/sidebar" %>
       </div>
-      <div class="row item-info item-list">
-        <%= render partial: "layouts/stores" %>
+
+      <div class="col-md-9 text-center">
+        <div class="well">
+          <h2> Popular Photographs </h2>
+        </div>
+        <div class="row item-info item-list popular-photographs">
+          <%= render partial: "layouts/photo", collection: @photos %>
+        </div>
       </div>
     </div>
-  </div>
 
+    <div class="row">
+      <div class="col-md-offset-3 col-md-9 text-center">
+        <div class="well">
+          <h2> Popular Photographers</h2>
+        </div>
+        <div class="row item-info item-list">
+          <%= render partial: "layouts/store", collection: @stores %>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </div>
