@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151018211704) do
+ActiveRecord::Schema.define(version: 20151019043519) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,26 @@ ActiveRecord::Schema.define(version: 20151018211704) do
 
   add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
+  create_table "photo_categories", force: :cascade do |t|
+    t.integer  "photo_id"
+    t.integer  "category_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "photo_categories", ["category_id"], name: "index_photo_categories_on_category_id", using: :btree
+  add_index "photo_categories", ["photo_id"], name: "index_photo_categories_on_photo_id", using: :btree
+
+  create_table "photo_cateogries", force: :cascade do |t|
+    t.integer  "photo_id"
+    t.integer  "category_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "photo_cateogries", ["category_id"], name: "index_photo_cateogries_on_category_id", using: :btree
+  add_index "photo_cateogries", ["photo_id"], name: "index_photo_cateogries_on_photo_id", using: :btree
+
   create_table "photos", force: :cascade do |t|
     t.string   "title"
     t.string   "description"
@@ -51,10 +71,8 @@ ActiveRecord::Schema.define(version: 20151018211704) do
     t.integer  "store_id"
     t.string   "file"
     t.boolean  "active",           default: true
-    t.integer  "category_id"
   end
 
-  add_index "photos", ["category_id"], name: "index_photos_on_category_id", using: :btree
   add_index "photos", ["store_id"], name: "index_photos_on_store_id", using: :btree
 
   create_table "statuses", force: :cascade do |t|
@@ -92,7 +110,10 @@ ActiveRecord::Schema.define(version: 20151018211704) do
 
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "photos"
-  add_foreign_key "photos", "categories"
+  add_foreign_key "photo_categories", "categories"
+  add_foreign_key "photo_categories", "photos"
+  add_foreign_key "photo_cateogries", "categories"
+  add_foreign_key "photo_cateogries", "photos"
   add_foreign_key "photos", "stores"
   add_foreign_key "store_admins", "stores"
   add_foreign_key "store_admins", "users"

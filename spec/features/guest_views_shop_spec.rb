@@ -12,8 +12,9 @@ RSpec.describe "a guest", type: :feature do
       Category.create(name: "hi")
       user1 = User.find_by(name: "User 1")
       store = Store.create(name: "alonstore", tagline: "my store", user_id: user1.id)
-      photo = Photo.update(Photo.first.id, title: "AlonPhoto", description: "yeah", standard_price: 100, store_id: store.id, category_id: category.id)
-      Photo.update(Photo.second.id, title: "Not here", description: "yeah", standard_price: 100, store_id: store.id, category_id: Category.last.id)
+      photo = Photo.update(Photo.first.id, title: "AlonPhoto", description: "yeah", standard_price: 100, store_id: store.id)
+      Photo.update(Photo.second.id, title: "Not here", description: "yeah", standard_price: 100, store_id: store.id)
+      PhotoCategory.create(photo_id: photo.id, category_id: category.id)
     end
 
     let(:store) { Store.find_by(name: "alonstore") }

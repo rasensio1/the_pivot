@@ -15,9 +15,10 @@ class Admin::PhotosController < Admin::BaseController
   end
 
   def create
-    photo = Photo.new(photo_params)
+    photo = PhotoCreator.photo(photo_params)
 
     if photo.save
+      PhotoCreator.create_relations(photo, params)
       flash[:success] = "#{photo.title} photo has been added!"
       redirect_to admin_store_path(photo.store.slug)
     else
@@ -59,7 +60,6 @@ class Admin::PhotosController < Admin::BaseController
 
   def cents(dollars)
     number = dollars.gsub(/[$,.]/, '').to_i
-
     dollars.include?('.') ? number : number * 100
   end
 

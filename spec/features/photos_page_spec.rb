@@ -44,8 +44,8 @@ RSpec.describe "the photos view", type: :feature do
     end
 
     it "displays all Landscape photo" do
-      photo1.update(category_id: cat.id)
-      photo2.update(category_id: cat.id)
+      PhotoCategory.create(photo_id: photo1.id, category_id: cat.id)
+      PhotoCategory.create(photo_id: photo2.id, category_id: cat.id)
 
       click_link "Landscape"
 
