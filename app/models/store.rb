@@ -8,6 +8,14 @@ class Store < ActiveRecord::Base
 
   has_many :photos
 
+  def category_photos(cat_id)
+    if cat_id == "0"
+      photos.active.all
+    else
+      photos.active.joins(:categories).where(photo_categories: {category_id: cat_id}).all
+    end
+  end
+
   private
     def set_slug
       self.slug = name.parameterize
@@ -16,4 +24,5 @@ class Store < ActiveRecord::Base
     def create_store_admin
       StoreAdmin.create(user_id: user.id, store_id: id)
     end
+
 end

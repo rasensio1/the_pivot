@@ -1,5 +1,7 @@
 class Photo < ActiveRecord::Base
   belongs_to :store
+  has_many :categories, through: :photo_categories
+  has_many :photo_categories
 
   mount_uploader :file, PhotoUploader
 
@@ -11,24 +13,19 @@ class Photo < ActiveRecord::Base
   end
 
   def file_location(type = :preview)
-    # byebug if self.store.id == 101
     file_url ? file_url : seed_url(type)
   end
-
 
   def self.active
     where(active: true)
   end
 
-  def self.cat_filter(id)
-    id == "0" ? all : where(category_id: id)
-  end
-
-  def category
-    Category.find(category_id) rescue Category.new(name: "")
-  end
-
-  def filter(id)
+  def self.category_photos(cat_id)
+    if cat_id == "0"
+      active.all
+    else
+      active.joins(:categories).where(photo_categories: {category_id: cat_id}).all
+    end
   end
 
   private
