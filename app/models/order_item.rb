@@ -2,12 +2,12 @@ class OrderItem < ActiveRecord::Base
   belongs_to :order
   belongs_to :photo
 
-  def title 
+  def title
     photo.title
   end
 
-  def image_url
-    photo.file_location
+  def image_url(type = :preview)
+    photo.file_location(type)
   end
 
   def description

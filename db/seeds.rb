@@ -70,13 +70,12 @@ class Seed
   end
 
   def create_photos
-    image_root = "http://mowalon.com/images/photos_ready/"
     @photo_count.times do |index|
       Photo.create(title:            "Example Title #{index + 1}",
                    description:      "Fairly long and very expressive title that makes you really think about your place in life #{index + 1}",
                    standard_price:   (rand(5) * 100) + 99,
                    commercial_price: ((rand(20) + 89) * 100) + 99,
-                   image_url:        image_root + (index + 1).to_s.rjust(3, "0") + ".jpg",
+                   seed_name:        (index + 1).to_s.rjust(3, "0"),
                    store_id:         Store.all.sample.id,
                    category_id:      Category.all.sample.id)
     end

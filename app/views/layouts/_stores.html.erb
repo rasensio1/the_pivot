@@ -4,8 +4,7 @@
       <div class="thumbnail">
         <%#= link_to image_tag(photo.file_location, alt: "A picture", class: "item-image"), photo_path(photo) %>
         <div class="caption">
-          <h4><%= store.name %></h4>
-          <h4><%#= link_to store.name, store_path(store) %></h4>
+          <h4><%= link_to store.name, store_photos_path(store.slug) %></h4>
           <p><%= store.tagline %></p>
         </div>
       </div>

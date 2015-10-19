@@ -5,32 +5,36 @@ photo_<%= n + 1 %>:
   description: <%= "Example Description #{n + 1}" %>
   standard_price: <%= n*100 + 99 %>
   commercial_price: <%= n*100 + 10099 %>
+  seed_name: <%= n + 1 %>
   store_id: <%= rand(20) + 1 %>
 <% end %>
 
 admin_store_photo_1:
   id: 101
-  title: Admin Store Photo 1
-  description: I belong to the admin store
+  title: Example Title - Admin Store Photo 1
+  description: Example Description - Admin 1
   standard_price: 2300
   commercial_price: 3500
   store_id: 101
+  seed_name: "101"
   file: 'fake_carrierwave_object'
 
 admin_store_photo_2:
   id: 102
-  title: Admin Store Photo 2
-  description: I belong to the admin store
+  title: Example Title - Admin Store Photo 2
+  description: Example Description - Admin 2
   standard_price: 8734
   commercial_price: 35034
   store_id: 101
+  seed_name: "102"
   file: 'fake_carrierwave_object'
 
 other_store_photo_3:
   id: 103
-  title: Other Store Photo
-  description: I belong to the admin store
+  title: Example Title - Admin Store Photo 3
+  description: Example Description - Admin 3
   standard_price: 8341
   commercial_price: 9087
   store_id: 102
+  seed_name: "103"
   file: 'fake_carrierwave_object'

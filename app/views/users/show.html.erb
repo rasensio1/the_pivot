@@ -82,7 +82,7 @@
       <div class="col-md-12">
         <div>
           <% @photos.each do |photo| %>
-            <%= link_to image_tag(photo.file_location, size: "100"), store_photo_path(photo.store.slug, photo) %>
+            <%= link_to image_tag(photo.file_location(:thumbnail), size: "80"), store_photo_path(photo.store.slug, photo) %>
           <% end %>
         </div>
       </div>

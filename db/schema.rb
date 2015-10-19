@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 20151018211704) do
     t.string   "description"
     t.integer  "standard_price"
     t.integer  "commercial_price"
-    t.string   "image_url"
+    t.string   "seed_name"
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
     t.integer  "store_id"
