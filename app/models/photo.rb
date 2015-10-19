@@ -20,6 +20,14 @@ class Photo < ActiveRecord::Base
     where(active: true)
   end
 
+  def self.category_photos(cat_id)
+    if cat_id == "0"
+      active.all
+    else
+      active.joins(:categories).where(photo_categories: {category_id: cat_id}).all
+    end
+  end
+
   private
 
     def seed_url(type)
