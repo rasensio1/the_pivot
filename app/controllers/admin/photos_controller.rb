@@ -15,10 +15,10 @@ class Admin::PhotosController < Admin::BaseController
   end
 
   def create
-    byebug
-    photo = PhotoCreator.new(photo_params)
+    photo = PhotoCreator.photo(photo_params)
 
     if photo.save
+      PhotoCreator.create_relations(photo, params)
       flash[:success] = "#{photo.title} photo has been added!"
       redirect_to admin_store_path(photo.store.slug)
     else

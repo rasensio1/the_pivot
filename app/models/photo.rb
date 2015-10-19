@@ -16,7 +16,6 @@ class Photo < ActiveRecord::Base
     file_url ? file_url : seed_url(type)
   end
 
-
   def self.active
     where(active: true)
   end

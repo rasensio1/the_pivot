@@ -21,8 +21,7 @@ RSpec.configure do |config|
   SimpleCov.start
 
   def sign_in(user)
-    visit root_path
-    click_link "Sign In"
+    visit login_path 
     fill_in "Email", with: user.email
     fill_in "Password", with: "password"
     click_button "Sign In"

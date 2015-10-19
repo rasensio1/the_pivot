@@ -29,17 +29,9 @@ RSpec.describe "photos" do
       fill_in("photo[commercial_price]", with: photo.commercial_price)
       page.attach_file("photo[file]", Rails.root + "spec/fixtures/test_photo_1.jpg")
 
-      within(:css , "div.category1") do
-        select(category1.name, :from => 'photo[category_id]')
-      end
-
-      within(:css , "div.category2") do
-        select(category2.name, :from => 'photo[category_id]')
-      end
-
-      within(:css , "div.category3") do
-        select(category3.name, :from => 'photo[category_id]')
-      end
+      check "Lifestyle"
+      check "Architecture"
+      check "Landscape"
 
       click_button("Create Photo")
 

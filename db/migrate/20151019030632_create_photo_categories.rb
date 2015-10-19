@@ -1,6 +1,6 @@
-class CreatePhotoCateogries < ActiveRecord::Migration
+class CreatePhotoCategories < ActiveRecord::Migration
   def change
-    create_table :photo_cateogries do |t|
+    create_table :photo_categories do |t|
       t.references :photo, index: true, foreign_key: true
       t.references :category, index: true, foreign_key: true
 
