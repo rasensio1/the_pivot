@@ -7,10 +7,10 @@ class Stores::PhotosController < ApplicationController
   end
 
   def categories(store)
-    if store.photos.map(&:categories).select{ |collection| !collection.empty? }.empty?
+    if store.photos.joins(:categories).empty?
       nil
     else
-      store.photos.map(&:categories).map(&:to_a).flatten
+      store.photos.map(&:categories).map(&:to_a).flatten.uniq
     end
   end
 end

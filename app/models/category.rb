@@ -9,10 +9,6 @@ class Category < ActiveRecord::Base
     id == "0" ? "All Photos" : "Category: " + find(id).name
   end
 
-  def self.cat_filter(id)
-    id == '0' ? all : find(id: id)
-  end
-
   def to_param
     name
   end
