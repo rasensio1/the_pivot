@@ -9,7 +9,7 @@ RSpec.describe "Adding photos to cart: ", type: :feature do
     visit photos_path
 
     2.times do
-      first(:button, "Add to Cart").click
+      first(:link, "Add to Cart").click
     end
 
     expect(current_path).to eq photos_path

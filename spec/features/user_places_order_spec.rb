@@ -10,7 +10,7 @@ RSpec.describe "User with a filled cart", type: :feature do
 
   before do
     visit photos_path
-    first(:button, "Add to Cart").click
+    first(:link, "Add to Cart").click
   end
 
   context "who has an account" do

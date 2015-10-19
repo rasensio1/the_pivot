@@ -19,7 +19,7 @@ RSpec.describe "the cart", type: :feature do
       visit root_path
 
       within(".popular-photographs") do
-        first(:button, "Add to Cart").click
+        first(:link, "Add to Cart").click
       end
 
       expect(current_path).to eq root_path
@@ -38,7 +38,7 @@ RSpec.describe "the cart", type: :feature do
 
       visit root_path
       within(".popular-photographs") do
-        first(:button, "Add to Cart").click
+        first(:link, "Add to Cart").click
       end
       sign_in(user)
       visit root_path
@@ -59,7 +59,7 @@ RSpec.describe "the cart", type: :feature do
       visit root_path
 
       within(".popular-photographs") do
-        first(:button, "Add to Cart").click
+        first(:link, "Add to Cart").click
       end
 
       click_link "Cart"
