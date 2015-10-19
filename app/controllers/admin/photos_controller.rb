@@ -15,6 +15,7 @@ class Admin::PhotosController < Admin::BaseController
   end
 
   def create
+    byebug
     photo = Photo.new(photo_params)
 
     if photo.save
