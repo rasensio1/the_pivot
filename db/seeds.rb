@@ -6,6 +6,7 @@ class Seed
     @photo_count       = 512
     @order_count       = 500
     @order_items_count = 2500
+    @photo_category_count = 500
     create_categories
     create_users
     create_stores
@@ -13,6 +14,13 @@ class Seed
     create_statuses
     create_orders
     create_order_items
+    create_photo_categories
+  end
+
+  def create_photo_categories
+    @photo_category_count.times do 
+      PhotoCategory.create(photo_id: Photo.all.sample.id, category_id: Category.all.sample.id)
+    end
   end
 
   def create_categories
@@ -76,8 +84,7 @@ class Seed
                    standard_price:   (rand(5) * 100) + 99,
                    commercial_price: ((rand(20) + 89) * 100) + 99,
                    seed_name:        (index + 1).to_s.rjust(3, "0"),
-                   store_id:         Store.all.sample.id,
-                   category_id:      seed_photo_categories[(index + 1) % 40])
+                   store_id:         Store.all.sample.id)
     end
 
     Photo.create(title:            "Andrew's One Photo",
