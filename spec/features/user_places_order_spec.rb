@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "User with a filled cart",:order => :defined, type: :feature do
+RSpec.describe "User with a filled cart", type: :feature do
   fixtures :users
   fixtures :stores
   fixtures :photos
