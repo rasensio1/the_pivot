@@ -37,13 +37,13 @@
           <div class = "form-group">
             <%= f.label :categories %>
             <div class = 'category1'>
-              <%= collection_select(:photo, :photo_category1, Category.all,:id, :name, include_blank: "Not Selected") %>
+              <%= collection_select(:photo, :category1, Category.all,:id, :name, include_blank: "Not Selected") %>
             </div>
             <div class = 'category2'>
-              <%= collection_select(:photo, :photo_category2, Category.all,:id, :name, include_blank: "Not Selected") %>
+              <%= collection_select(:photo, :category2, Category.all,:id, :name, include_blank: "Not Selected") %>
             </div>
             <div class = 'category3'>
-              <%= collection_select(:photo, :photocategory3, Category.all,:id, :name, include_blank: "Not Selected") %>
+              <%= collection_select(:photo, :category3, Category.all,:id, :name, include_blank: "Not Selected") %>
             </div>
           </div>
 

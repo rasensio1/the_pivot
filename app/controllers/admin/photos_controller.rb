@@ -15,6 +15,7 @@ class Admin::PhotosController < Admin::BaseController
   end
 
   def create
+    byebug
     photo = PhotoCreator.new(photo_params)
 
     if photo.save
@@ -59,7 +60,6 @@ class Admin::PhotosController < Admin::BaseController
 
   def cents(dollars)
     number = dollars.gsub(/[$,.]/, '').to_i
-
     dollars.include?('.') ? number : number * 100
   end
 
