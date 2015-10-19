@@ -7,17 +7,18 @@ user_<%= n + 1 %>:
 <% end %>
 
 alon:
-  name: Alon Example
+  name: Alon
   email: alon@example.ninja
   password_digest: <%= User.digest("password") %>
 
 jason:
-  name: Jason Example
+  id: 102
+  name: Jason
   email: jason@example.ninja
   password_digest: <%= User.digest("password") %>
 
 ryan:
-  name: Ryan Example
+  name: Ryan
   email: ryan@example.ninja
   password_digest: <%= User.digest("password") %>
 
@@ -26,4 +27,3 @@ store_admin:
   name: admin
   email: admin@admin.com
   password_digest: <%= User.digest("password") %>
-  role: 1

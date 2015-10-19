@@ -19,6 +19,10 @@ Rails.application.routes.draw do
     resources :store_admins, only: [:create]
   end
 
+  namespace "stores", as: "store", path: ":store_name" do
+    resources :photos, only: [:index]
+  end
+
   scope ":store_name", as: "store", module: "admin" do
     resources :photos, only: [:new, :edit, :update, :create, :destroy]
   end
@@ -27,10 +31,6 @@ Rails.application.routes.draw do
     resources :photos, only: [:show]
   end
   
-  namespace "stores", as: "store", path: ":store_name" do
-    resources :photos, only: [:index]
-  end
-
   resources :photos, only: [:index]
 
   get "/cart", to: "cart_items#index"

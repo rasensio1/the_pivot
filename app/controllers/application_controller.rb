@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_admin?
-    current_user && current_user.admin?
+    current_user && !current_user.stores.nil?
   end
 
   def authorization_error
@@ -24,5 +24,13 @@ class ApplicationController < ActionController::Base
   def require_user
     authorization_error unless current_user
   end
+
+  def filter_id 
+    params[:filter] || "0"
+  end
+
+  def current_path
+  end
+
 
 end

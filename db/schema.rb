@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151018205706) do
+ActiveRecord::Schema.define(version: 20151018211704) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,8 +51,10 @@ ActiveRecord::Schema.define(version: 20151018205706) do
     t.integer  "store_id"
     t.string   "file"
     t.boolean  "active",           default: true
+    t.integer  "category_id"
   end
 
+  add_index "photos", ["category_id"], name: "index_photos_on_category_id", using: :btree
   add_index "photos", ["store_id"], name: "index_photos_on_store_id", using: :btree
 
   create_table "statuses", force: :cascade do |t|
@@ -83,14 +85,14 @@ ActiveRecord::Schema.define(version: 20151018205706) do
   add_index "stores", ["user_id"], name: "index_stores_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string  "password_digest"
-    t.integer "role",            default: 0
-    t.string  "name"
-    t.string  "email"
+    t.string "password_digest"
+    t.string "name"
+    t.string "email"
   end
 
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "photos"
+  add_foreign_key "photos", "categories"
   add_foreign_key "photos", "stores"
   add_foreign_key "store_admins", "stores"
   add_foreign_key "store_admins", "users"

@@ -46,8 +46,7 @@ class Seed
     User.create!(name:                  "Andrew",
                  email:                 "andrew@turing.io",
                  password:              "password",
-                 password_confirmation: "password",
-                 role:                  1)
+                 password_confirmation: "password")
 
     User.create!(name:                  "Jorge",
                  email:                 "jorge@turing.io",
@@ -77,7 +76,8 @@ class Seed
                    standard_price:   (rand(5) * 100) + 99,
                    commercial_price: ((rand(20) + 89) * 100) + 99,
                    seed_name:        (index + 1).to_s.rjust(3, "0"),
-                   store_id:         Store.all.sample.id)
+                   store_id:         Store.all.sample.id,
+                   category_id:      Category.all.sample.id)
     end
 
     Photo.create(title:            "Andrew's One Photo",
