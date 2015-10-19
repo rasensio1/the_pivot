@@ -16,6 +16,7 @@ RSpec.describe "user with an empty cart", type: :feature do
 
     context "and is not logged in" do
       it "does not see checkout button" do
+        expect(page).to have_link("Keep Shopping")
         expect(page).to_not have_link("Checkout")
       end
     end
@@ -27,6 +28,7 @@ RSpec.describe "user with an empty cart", type: :feature do
       end
 
       it "does not see checkout button" do
+        expect(page).to have_link("Keep Shopping")
         expect(page).to_not have_link("Checkout")
       end
     end
