@@ -1,0 +1,13 @@
+<div class="col-sm-4 col-lg-4 col-md-4 item-box">
+  <div class="thumbnail store-collage-container">
+    <div class="caption">
+      <h4><%= link_to store.name, store_photos_path(store.slug) %></h4>
+        <% store.photos.sample(4).each do |photo| %>
+          <div class="store-collage">
+            <%= link_to image_tag(photo.file_location(:thumbnail)), store_photos_path(store.slug) %>
+          </div>
+        <% end %>
+      <p><strong><%= store.tagline %></strong></p>
+    </div>
+  </div>
+</div>
