@@ -36,9 +36,15 @@
 
           <div class = "form-group">
             <%= f.label :categories %>
-            <%= collection_select(:photo, :category_id, Category.all,:id, :name, include_blank: "Not Selected") %>
-            <%= collection_select(:photo, :category_id, Category.all,:id, :name, include_blank: "Not Selected") %>
-            <%= collection_select(:photo, :category_id, Category.all,:id, :name, include_blank: "Not Selected") %>
+            <div class = 'category1'>
+              <%= collection_select(:photo, :category_id, Category.all,:id, :name, include_blank: "Not Selected") %>
+            </div>
+            <div class = 'category2'>
+              <%= collection_select(:photo, :category_id, Category.all,:id, :name, include_blank: "Not Selected") %>
+            </div>
+            <div class = 'category3'>
+              <%= collection_select(:photo, :category_id, Category.all,:id, :name, include_blank: "Not Selected") %>
+            </div>
           </div>
 
           <%= f.hidden_field :store_id, value: current_user.store.id %>

@@ -12,6 +12,9 @@ RSpec.describe "photos" do
     let!(:store_admin) {User.find_by(name: "admin")}
     let!(:store) {store_admin.store}
     let!(:photo) {store.photos.first}
+    let!(:category1) {Category.first}
+    let!(:category2) {Category.second}
+    let!(:category3) {Category.third}
 
     before do
       sign_in(store_admin)
@@ -25,9 +28,18 @@ RSpec.describe "photos" do
       fill_in("photo[standard_price]", with: photo.standard_price)
       fill_in("photo[commercial_price]", with: photo.commercial_price)
       page.attach_file("photo[file]", Rails.root + "spec/fixtures/test_photo_1.jpg")
-      select("Lifestyle", :from => 'photo[category_id]')
-      select("Landscape", :from => 'photo[category_id]')
-      select("Landscape", :from => 'photo[category_id]')
+
+      within(:css , "div.category1") do
+        select(category1.name, :from => 'photo[category_id]')
+      end
+
+      within(:css , "div.category2") do
+        select(category2.name, :from => 'photo[category_id]')
+      end
+
+      within(:css , "div.category3") do
+        select(category3.name, :from => 'photo[category_id]')
+      end
 
       click_button("Create Photo")
 
@@ -35,7 +47,9 @@ RSpec.describe "photos" do
       expect(page).to have_content("#{photo.title} photo has been added!")
       expect(page).to have_content(photo.title)
       expect(page).to have_content(photo.description)
-      expect(page).to have_content(photo.category.name)
+      expect(page).to have_content(category1.name)
+      expect(page).to have_content(category2.name)
+      expect(page).to have_content(category3.name)
     end
 
     it "gets error messages when using invalid params" do
