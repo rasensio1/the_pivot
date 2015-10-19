@@ -20,10 +20,6 @@ class Photo < ActiveRecord::Base
     where(active: true)
   end
 
-  def self.cat_filter(id)
-    id == "0" ? all : where(category_id: id)
-  end
-
   private
 
     def seed_url(type)
