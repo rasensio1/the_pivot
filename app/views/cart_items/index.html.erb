@@ -12,7 +12,9 @@
     <div class="col-md-3">
       <div class="btn-group" role="group" aria-label="...">
         <%= link_to "Keep Shopping", photos_path, class: "btn btn-warning" %>
-        <%= link_to "Check Out", orders_path, method: :post, class: "btn btn-primary" %>
+        <% unless @cart_items.empty? %>
+          <%= link_to "Checkout", orders_path, method: :post, class: "btn btn-primary" %>
+        <% end %>
       </div>
     </div>
   </div>
@@ -20,24 +22,24 @@
   <div class="table-responsive">
     <table class="table table-striped">
 
-    <tr>
-      <th></th>
-      <th>Item</th>
-      <th>Description</th>
-      <th>Price</th>
-      <th></th>
-    </tr>
-    <tr>
-      <% @cart_items.each do |cart_item| %>
-        <td><%= image_tag(cart_item.file_location(:thumbnail), height: 80, width: 80, class: "img-circle") %></td>
-        <td><%= cart_item.title %></td>
-        <td><%= cart_item.description %></td>
-        <td><%= dollars(cart_item.standard_price) %></td>
+      <tr>
+        <th></th>
+        <th>Item</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th></th>
+      </tr>
+      <tr>
+        <% @cart_items.each do |cart_item| %>
+          <td><%= image_tag(cart_item.file_location(:thumbnail), height: 80, width: 80, class: "img-circle") %></td>
+          <td><%= cart_item.title %></td>
+          <td><%= cart_item.description %></td>
+          <td><%= dollars(cart_item.standard_price) %></td>
 
-        <td><%= link_to "Remove", cart_items_path(id: cart_item), method: :delete %></td>
-        </tr>
-      <% end %>
-      </table>
+          <td><%= link_to "Remove", cart_items_path(id: cart_item), method: :delete %></td>
+          </tr>
+        <% end %>
+        </table>
 
     <div id="total">
       <h3>Total: <%= dollars(cart.total) %></h3>

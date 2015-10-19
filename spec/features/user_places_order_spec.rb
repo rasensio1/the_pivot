@@ -5,15 +5,12 @@ RSpec.describe "User with a filled cart", type: :feature do
   fixtures :stores
   fixtures :photos
 
-  let!(:user) {User.first}
-  let!(:photo) {Photo.first}
+  let!(:user) { User.first }
+  let!(:photo) { Photo.first }
 
   before do
-    visit root_path
-
-    within(".popular-photographs") do
-      first(:button, "Add to Cart").click
-    end
+    visit photos_path
+    first(:button, "Add to Cart").click
   end
 
   context "who has an account" do
@@ -22,13 +19,13 @@ RSpec.describe "User with a filled cart", type: :feature do
 
         before do
           visit cart_path
-          click_link "Check Out"
+          click_link "Checkout"
         end
 
         it "is required to login" do
           expect(current_path).to eq login_path
           expect(page).to have_content(
-            "Please sign in to complete your order.")
+                            "Please sign in to complete your order.")
 
           within(".login-form") do
             expect(page).to have_button "Sign In"
@@ -46,7 +43,7 @@ RSpec.describe "User with a filled cart", type: :feature do
         before do
           visit cart_path
           @previous_order_count = user.orders.count
-          click_link "Check Out"
+          click_link "Checkout"
         end
 
         it "goes to the user profile page" do
