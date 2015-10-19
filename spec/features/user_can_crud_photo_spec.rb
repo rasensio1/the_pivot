@@ -7,6 +7,7 @@ RSpec.describe "photos" do
     fixtures :store_admin
     fixtures :stores
     fixtures :photos
+    fixtures :categories
 
     let!(:store_admin) {User.find_by(name: "admin")}
     let!(:store) {store_admin.store}
@@ -24,7 +25,7 @@ RSpec.describe "photos" do
       fill_in("photo[standard_price]", with: photo.standard_price)
       fill_in("photo[commercial_price]", with: photo.commercial_price)
       page.attach_file("photo[file]", Rails.root + "spec/fixtures/test_photo_1.jpg")
-      select("Landscape", :from => 'photo[category_id]')
+      select("Lifestyle", :from => 'photo[category_id]')
 
       click_button("Create Photo")
 
