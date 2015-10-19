@@ -7,9 +7,7 @@ class Stores::PhotosController < ApplicationController
   end
 
   def categories(store)
-    if store.photos.joins(:categories).empty?
-      nil
-    else
+    if !store.photos.joins(:categories).empty?
       Category.joins(:photos).where(photos: {store_id: store.id}).uniq
     end
   end
