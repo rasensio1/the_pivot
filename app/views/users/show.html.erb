@@ -78,14 +78,19 @@
     <div class="row">
       <div class="col-md-4"><h2>Download Center</h2></div>
     </div>
-    <div class="row">
-      <div class="col-md-12">
-        <div>
+    <div class="row item-info item-list">
           <% @photos.each do |photo| %>
-            <%= link_to image_tag(photo.file_location(:thumbnail), size: "80"), store_photo_path(photo.store.slug, photo) %>
-          <% end %>
+      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 item-box download-center">
+        <div class="thumbnail download-center">
+            <%= link_to image_tag(photo.file_location(:thumbnail), size: "80"), store_photo_path(photo.store.slug, photo, style: "max-width: auto") %>
+            <div class="caption download-center text-center">
+              <%= link_to photo.file_location(:full), class: "btn btn-success btn-xs" do %>
+                <i class="glyphicon glyphicon-download"></i>
+              <% end %>
+            </div>
         </div>
       </div>
+          <% end %>
     </div>
   </div>
 
