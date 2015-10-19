@@ -10,7 +10,7 @@ class Stores::PhotosController < ApplicationController
     if store.photos.joins(:categories).empty?
       nil
     else
-      store.photos.map(&:categories).map(&:to_a).flatten.uniq
+      Category.joins(:photos).where(photos: {store_id: store.id}).uniq
     end
   end
 end

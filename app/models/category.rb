@@ -1,5 +1,6 @@
 class Category < ActiveRecord::Base
-  has_many :photos
+  has_many :photos, through: :photo_categories
+  has_many :photo_categories
   validate :check_for_spaces, :check_for_special_characters
   validates :name, presence: true, uniqueness: true
 
