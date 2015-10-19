@@ -24,7 +24,7 @@ class Photo < ActiveRecord::Base
     if cat_id == "0"
       active.all
     else
-      active.joins(:categories).where(photo_categories: {category_id: cat_id}).all
+      Category.find(cat_id).photos.where(active: true)
     end
   end
 
