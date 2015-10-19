@@ -1,2 +1,5 @@
-admin_store_photo_category:
-  name: "Completed"
+Lifestyle:
+  name: "Lifestyle"
+
+Architecture:
+  name: "Architecture"
