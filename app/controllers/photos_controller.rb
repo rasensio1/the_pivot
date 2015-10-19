@@ -9,5 +9,4 @@ class PhotosController < ApplicationController
     @photos = Photo.category_photos(filter_id).paginate(page: params[:page])
     @categories = Category.all
   end
-
 end

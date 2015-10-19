@@ -12,7 +12,7 @@ class Store < ActiveRecord::Base
     if cat_id == "0"
       photos.active.all
     else
-      photos.active.joins(:categories).where(photo_categories: {category_id: cat_id}).all
+      Category.find(cat_id).photos.active.where(store_id: self.id)
     end
   end
 
