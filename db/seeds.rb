@@ -3,10 +3,9 @@ class Seed
   def initialize
     @store_count       = 20
     @user_count        = 99
-    @photo_count       = 512
+    @photo_count       = 301
     @order_count       = 500
     @order_items_count = 2500
-    @photo_category_count = 500
     create_categories
     create_users
     create_stores
@@ -18,8 +17,9 @@ class Seed
   end
 
   def create_photo_categories
-    @photo_category_count.times do 
-      PhotoCategory.create(photo_id: Photo.all.sample.id, category_id: Category.all.sample.id)
+    seed_photo_categories = [1, 1, 1, 2, 6, 5, 2, 6, 5, 3, 4, 7, 3, 6, 6, 6, 6, 5, 6, 8, 6, 8, 7, 2, 8, 6, 7, 7, 6, 5, 6, 6, 2, 7, 6, 6, 7, 2, 7, 6]
+    @photo_count.times do |index|
+      PhotoCategory.create(photo_id: (index + 1), category_id: seed_photo_categories[(index + 1) % seed_photo_categories.size])
     end
   end
 
@@ -77,14 +77,15 @@ class Seed
   end
 
   def create_photos
-    seed_photo_categories = [1, 1, 1, 2, 6, 5, 2, 6, 5, 3, 4, 7, 3, 6, 6, 6, 6, 5, 6, 8, 6, 8, 7, 2, 8, 6, 7, 7, 6, 5, 6, 6, 2, 7, 6, 6, 7, 2, 7, 6]
-    @photo_count.times do |index|
-      Photo.create(title:            "Example Title #{index + 1}",
+    # @photo_count.times do |index|
+
+    File.open("#{Rails.root}/spec/fixtures/photo_urls.txt").readlines.each_with_index do |line, index|
+      photo = Photo.create(title:    "Example Title #{index + 1}",
                    description:      "Fairly long and very expressive title that makes you really think about your place in life #{index + 1}",
                    standard_price:   (rand(5) * 100) + 99,
                    commercial_price: ((rand(20) + 89) * 100) + 99,
-                   seed_name:        (index + 1).to_s.rjust(3, "0"),
                    store_id:         Store.all.sample.id)
+      photo.update_column(:file, line.chomp)
     end
 
     Photo.create(title:            "Andrew's One Photo",
