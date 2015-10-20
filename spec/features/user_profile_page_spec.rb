@@ -38,9 +38,14 @@ RSpec.describe "the user profile page", type: :feature do
       end
     end
 
-    xit 'can download mutiple photos at once' do
+    it 'can download mutiple photos at once' do
+      all('input[type=checkbox]').each do |checkbox|
+         if checkbox.checked? then 
+           checkbox.click
+         end
+      end
 
+      click_on "Download checked"
     end
-
   end
 end

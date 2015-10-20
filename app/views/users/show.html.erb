@@ -79,18 +79,7 @@
       <div class="col-md-4"><h2>Download Center</h2></div>
     </div>
     <div class="row item-info item-list">
-          <% @photos.each do |photo| %>
-      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 item-box download-center">
-        <div class="thumbnail download-center">
-            <%= link_to image_tag(photo.file_url(:thumbnail), size: "80"), store_photo_path(photo.store.slug, photo, style: "max-width: auto") %>
-            <div class="caption download-center text-center">
-              <%= link_to photo.file_url(:full), class: "btn btn-success btn-xs" do %>
-                <i class="glyphicon glyphicon-cloud-download"></i>
-              <% end %>
-            </div>
-        </div>
-      </div>
-          <% end %>
+      <%= render partial: "layouts/user_photo", collection: @user_photos %>
     </div>
   </div>
 

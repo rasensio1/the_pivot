@@ -17,7 +17,7 @@ class UsersController < ApplicationController
   def show
     if current_user
       @orders = current_user.orders
-      @photos = current_user.photos
+      @user_photos = current_user.photos
       @admin_stores = current_user.stores
     else
       redirect_to "/404"
