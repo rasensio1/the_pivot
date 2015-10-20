@@ -35,12 +35,11 @@ class UsersController < ApplicationController
   end
 
   def export
+    clear_tmp
 
     data = JSON.parse(params.first.first)
     ids = data.select{ |k,_| k =~ /\A\d*\z/}.map{ |_,v| v}.map(&:to_i)
     valid_ids = ids.select{ |num| current_user.photos.pluck(:id).include?(num) }
-
-
 
    image_urls = valid_ids.map do |id|  
      Photo.find(id).file_url(:full)
@@ -58,20 +57,23 @@ class UsersController < ApplicationController
     files = `ls tmp/images`
     file_names = files.chomp.split("\n")
 
+    clear_zip
+
     Zip::File.open(zipfile_name, Zip::File::CREATE) do |zipfile|
       Zip.continue_on_exists_proc = true
         file_names.each do |filename|
           zipfile.add(filename, folder + "/" + filename)
         end
-       zipfile.get_output_stream("myFile") { |os| os.write "myFile contains just this" }
     end
-
-    clear_tmp
 
   end
 
   def clear_tmp
     `rm -rf tmp/images/*`
+  end
+
+  def clear_zip 
+    `rm -rf tmp/zip/*`
   end
 
   def edit
