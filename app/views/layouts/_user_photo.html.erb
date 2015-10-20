@@ -5,6 +5,9 @@
         <%= link_to user_photo.file_location(:full), class: "btn btn-success btn-xs" do %>
           <i class="glyphicon glyphicon-cloud-download"></i>
         <% end %>
+        <%= fields_for user_photo do |f| %>
+          <%= f.check_box :title, class: "#{user_photo.id}" %>
+        <% end %>
       </div>
   </div>
 </div>
