@@ -77,8 +77,13 @@
   <div class="container well transparent">
     <div class="row">
       <div class="col-md-4"><h2>Download Center</h2></div>
-      <div class="col-md-8 text-right"><h4><%= link_to "Download Checked", download_path, class: "btn btn-primary" %></h4></div>
+      <div class="col-md-8 text-right"><div class = "btn btn-primary" id = "download">
+        <h5>Download Checked</h5>
+      </div>
     </div>
+    <div class = "small-spacer"></div>
+    <div class = "small-spacer"></div>
+
     <div class="row item-info item-list">
       <%= render partial: "layouts/user_photo", collection: @user_photos %>
     </div>

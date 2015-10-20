@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  skip_before_action :verify_authenticity_token
+
   def new
     @user = User.new
   end
@@ -25,8 +27,18 @@ class UsersController < ApplicationController
   end
 
   def export
+    byebug
 
-   image_urls = ['https://s3-us-west-2.amazonaws.com/fordo/seo40.png', "https://s3-us-west-2.amazonaws.com/fordo/smiley3.png"] 
+    data = JSON.parse(params.first.first)
+
+    ids = data.select{ |k,_| k =~ /\A\d*\z/}.map{ |_,v| v}.map(&:to_i)
+
+    valid_ids = ids.select{ |num| current_user.photos.pluck(:id).include?(num) }
+
+    byebug
+
+
+   image_urls = ['https://s3-us-west-2.amazonaws.com/fordo/seo40.png', "https://s3-us-west-2.amazonaws.com/fordo/smiley3.png"]
 
    image_urls.each do |url|
      tail = URI(url).path.split('/').last
@@ -54,9 +66,22 @@ class UsersController < ApplicationController
             type: "zip"
             )
 
-    #clear_tmp
+    clear_tmp
+
+    #  $('#download').click(function(){
+    #   var ids = $(':checked').map(function(){
+    #         return $(this).attr('class')
+    #     })
+    #     var json = JSON.stringify(ids)
+    #    $.ajax({
+    #      method: "POST",
+    #      url: "http://localhost:8080/download",
+    #      data: json
+    #    })
+    #  })
+
   end
-  
+
   def clear_tmp
     `rm -rf tmp/images/*`
   end
