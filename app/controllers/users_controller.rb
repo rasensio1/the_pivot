@@ -26,17 +26,19 @@ class UsersController < ApplicationController
 
   def export
 
-    input_filenames = ["https://s3-us-west-2.amazonaws.com/fordo/seo40.png"]
-    zipfile_name = "/test_files.zip"
+    folder = "tmp/zip/files"
+    zipfile_name = "tmp/zip/test_files.zip"
+    file_names = ["hello.txt", "yeah.txt"]
 
     Zip::File.open(zipfile_name, Zip::File::CREATE) do |zipfile|
-        input_filenames.each do |filename|
-
-           zipfile.add("my_image.png", url_list)
-
-         end
+      Zip.continue_on_exists_proc = true
+        file_names.each do |filename|
+          zipfile.add(filename, folder + "/" + filename)
+        end
        zipfile.get_output_stream("myFile") { |os| os.write "myFile contains just this" }
     end
+
+    redirect_to profile_path
   end
 
   def edit
