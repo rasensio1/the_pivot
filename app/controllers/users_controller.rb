@@ -26,8 +26,15 @@ class UsersController < ApplicationController
     end
   end
 
+  def getfiles
+    send_file(
+          "#{Rails.root}/tmp/zip/images.zip",
+            filename: "your_images.zip",
+            type: "zip"
+            )
+  end
+
   def export
-    byebug
 
     data = JSON.parse(params.first.first)
     ids = data.select{ |k,_| k =~ /\A\d*\z/}.map{ |_,v| v}.map(&:to_i)
@@ -39,8 +46,6 @@ class UsersController < ApplicationController
      Photo.find(id).file_url(:full)
    end
 
-    byebug
-
    image_urls.each do |url|
      tail = URI(url).path.split('/').last
       open("tmp/images/#{tail}", 'wb') do |file|
@@ -49,7 +54,7 @@ class UsersController < ApplicationController
    end
 
     folder = "tmp/images"
-    zipfile_name = "tmp/zip/test_files.zip"
+    zipfile_name = "tmp/zip/images.zip"
     files = `ls tmp/images`
     file_names = files.chomp.split("\n")
 
@@ -61,20 +66,13 @@ class UsersController < ApplicationController
        zipfile.get_output_stream("myFile") { |os| os.write "myFile contains just this" }
     end
 
-    send_file(
-          "#{Rails.root}/tmp/zip/test_files.zip",
-            filename: "your_images.zip",
-            type: "zip"
-            )
-
     clear_tmp
+
   end
 
   def clear_tmp
     `rm -rf tmp/images/*`
   end
-
-
 
   def edit
     @user = current_user
