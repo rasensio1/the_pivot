@@ -30,15 +30,16 @@ class UsersController < ApplicationController
     byebug
 
     data = JSON.parse(params.first.first)
-
     ids = data.select{ |k,_| k =~ /\A\d*\z/}.map{ |_,v| v}.map(&:to_i)
-
     valid_ids = ids.select{ |num| current_user.photos.pluck(:id).include?(num) }
 
+
+
+   image_urls = valid_ids.map do |id|  
+     Photo.find(id).file_url(:full)
+   end
+
     byebug
-
-
-   image_urls = ['https://s3-us-west-2.amazonaws.com/fordo/seo40.png', "https://s3-us-west-2.amazonaws.com/fordo/smiley3.png"]
 
    image_urls.each do |url|
      tail = URI(url).path.split('/').last
@@ -67,19 +68,6 @@ class UsersController < ApplicationController
             )
 
     clear_tmp
-
-    #  $('#download').click(function(){
-    #   var ids = $(':checked').map(function(){
-    #         return $(this).attr('class')
-    #     })
-    #     var json = JSON.stringify(ids)
-    #    $.ajax({
-    #      method: "POST",
-    #      url: "http://localhost:8080/download",
-    #      data: json
-    #    })
-    #  })
-
   end
 
   def clear_tmp
