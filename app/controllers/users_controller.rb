@@ -28,14 +28,14 @@ class UsersController < ApplicationController
 
   def getfiles
     send_file(
-          "#{Rails.root}/tmp/zip/images.zip",
-            filename: "your_images.zip",
+          "#{Rails.root}/tmp/images.zip",
+            filename: "images.zip",
             type: "zip"
             )
   end
 
   def export
-    clear_tmp
+    #clear_tmp
 
     data = JSON.parse(params.first.first)
     ids = data.select{ |k,_| k =~ /\A\d*\z/}.map{ |_,v| v}.map(&:to_i)
@@ -46,35 +46,35 @@ class UsersController < ApplicationController
    end
 
    image_urls.each do |url|
-     tail = URI(url).path.split('/').last
-      open("tmp/images/#{tail}", 'wb') do |file|
+      tail = tail(url) 
+      open("#{Rails.root}/tmp/#{tail}", 'wb') do |file|
           file << open(url).read
       end
    end
 
-    folder = "tmp/images"
-    zipfile_name = "tmp/zip/images.zip"
-    files = `ls tmp/images`
-    file_names = files.chomp.split("\n")
+    folder = "#{Rails.root}/tmp/"
+    zipfile_name = folder + "images.zip"
+    file_paths = Find.find(Rails.root.join('tmp')).select { |p| /.*\.jpg$/ =~ p }
 
-    clear_zip
+    file_names = file_paths.map { |path| tail(path) }
 
     Zip::File.open(zipfile_name, Zip::File::CREATE) do |zipfile|
       Zip.continue_on_exists_proc = true
         file_names.each do |filename|
-          zipfile.add(filename, folder + "/" + filename)
+          zipfile.add(filename, folder + filename)
         end
     end
 
   end
 
-  def clear_tmp
-    `rm -rf tmp/images/*`
+  def tail(url)
+     URI(url).path.split('/').last
   end
 
-  def clear_zip 
-    `rm -rf tmp/zip/*`
+  def clear_tmp
+    `rm -rf tmp/*`
   end
+
 
   def edit
     @user = current_user
