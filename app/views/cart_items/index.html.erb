@@ -31,7 +31,7 @@
       </tr>
       <tr>
         <% @cart_items.each do |cart_item| %>
-          <td><%= image_tag(cart_item.file_location(:thumbnail), height: 80, width: 80, class: "img-circle") %></td>
+          <td><%= image_tag(cart_item.file_url(:thumbnail), height: 80, width: 80, class: "img-circle") %></td>
           <td><%= cart_item.title %></td>
           <td><%= cart_item.description %></td>
           <td><%= dollars(cart_item.standard_price) %></td>

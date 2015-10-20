@@ -35,7 +35,7 @@
             <%= order_item.photo.shortened_description %>
           </td>
           <td>
-            <%= link_to order_item.photo.file_location(:full), class: "btn btn-success btn-xs" do %>
+            <%= link_to order_item.photo.file_url, class: "btn btn-success btn-xs" do %>
               <i class="glyphicon glyphicon-cloud-download"></i>
             <% end %>
           </td>
