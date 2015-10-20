@@ -4,6 +4,8 @@ rvm:
 script:
 - bundle install
 - bundle exec rake db:create db:schema:load
+- rake assets:clobber RAILS_ENV=production
+- rake assets:precompile RAILS_ENV=production
 - bundle exec rspec
 deploy:
   provider: heroku
