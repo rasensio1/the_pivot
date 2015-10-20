@@ -37,5 +37,10 @@ RSpec.describe "the user profile page", type: :feature do
         expect(page).to have_content "Mia"
       end
     end
+
+    xit 'can download mutiple photos at once' do
+
+    end
+
   end
 end
