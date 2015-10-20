@@ -26,9 +26,19 @@ class UsersController < ApplicationController
 
   def export
 
-    folder = "tmp/zip/files"
+   image_urls = ['https://s3-us-west-2.amazonaws.com/fordo/seo40.png', "https://s3-us-west-2.amazonaws.com/fordo/smiley3.png"] 
+
+   image_urls.each do |url|
+     tail = URI(url).path.split('/').last
+      open("tmp/images/#{tail}", 'wb') do |file|
+          file << open(url).read
+      end
+   end
+
+    folder = "tmp/images"
     zipfile_name = "tmp/zip/test_files.zip"
-    file_names = ["hello.txt", "yeah.txt"]
+    files = `ls tmp/images`
+    file_names = files.chomp.split("\n")
 
     Zip::File.open(zipfile_name, Zip::File::CREATE) do |zipfile|
       Zip.continue_on_exists_proc = true
@@ -38,8 +48,20 @@ class UsersController < ApplicationController
        zipfile.get_output_stream("myFile") { |os| os.write "myFile contains just this" }
     end
 
-    redirect_to profile_path
+    send_file(
+          "#{Rails.root}/tmp/zip/test_files.zip",
+            filename: "your_images.zip",
+            type: "zip"
+            )
+
+    #clear_tmp
   end
+  
+  def clear_tmp
+    `rm -rf tmp/images/*`
+  end
+
+
 
   def edit
     @user = current_user
