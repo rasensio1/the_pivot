@@ -7,7 +7,7 @@ class OrderItem < ActiveRecord::Base
   end
 
   def image_url(type = :preview)
-    photo.file_location(type)
+    photo.file_url(type)
   end
 
   def description

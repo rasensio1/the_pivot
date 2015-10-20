@@ -1,6 +1,6 @@
 <div class="col-sm-4 col-lg-4 col-md-4 item-box">
   <div class="thumbnail">
-    <%= link_to image_tag(photo.file_location(:preview), alt: "A picture", class: "item-image"), store_photo_path(photo.store, photo) %>
+    <%= link_to image_tag(photo.file_url(:preview), alt: "A picture", class: "item-image"), store_photo_path(photo.store, photo) %>
     <div class="caption">
       <h4 class="pull-right"><%= dollars(photo.standard_price) %></h4>
       <h4><%= link_to photo.title, store_photo_path(photo.store, photo) %></h4>
