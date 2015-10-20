@@ -24,6 +24,21 @@ class UsersController < ApplicationController
     end
   end
 
+  def export
+
+    input_filenames = ["https://s3-us-west-2.amazonaws.com/fordo/seo40.png"]
+    zipfile_name = "/test_files.zip"
+
+    Zip::File.open(zipfile_name, Zip::File::CREATE) do |zipfile|
+        input_filenames.each do |filename|
+
+           zipfile.add("my_image.png", url_list)
+
+         end
+       zipfile.get_output_stream("myFile") { |os| os.write "myFile contains just this" }
+    end
+  end
+
   def edit
     @user = current_user
   end

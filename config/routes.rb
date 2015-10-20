@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get "/sign_up", to: "users#new"
   post "/sign_up", to: "users#create"
   get "/profile", to: "users#show"
+  get "/download", to: "users#export"
   patch "/profile", to: "users#update"
   get "/profile/edit", to: "users#edit"
 
