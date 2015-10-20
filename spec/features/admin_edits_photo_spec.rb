@@ -45,7 +45,7 @@ RSpec.describe "a store admin" do
         fill_in "Title", with: "New Title"
         click_button "Submit"
 
-        within("table") do
+        within("#active-photos") do
           expect(page).to have_content("New Title")
         end
       end
@@ -54,7 +54,7 @@ RSpec.describe "a store admin" do
         fill_in "Description", with: "New Description"
         click_button "Submit"
 
-        within("table") do
+        within("#active-photos") do
           expect(page).to have_content("New Description")
         end
       end
@@ -63,7 +63,7 @@ RSpec.describe "a store admin" do
         fill_in "Standard price", with: 51
         click_button "Submit"
 
-        within("table") do
+        within("#active-photos") do
           expect(page).to have_content("$51.00")
         end
       end
@@ -72,7 +72,7 @@ RSpec.describe "a store admin" do
         fill_in "Commercial price", with: "$1,287.33"
         click_button "Submit"
 
-        within("table") do
+        within("#active-photos") do
           expect(page).to have_content("$1,287.33")
         end
       end
