@@ -4,6 +4,8 @@ require 'uri'
 class UsersController < ApplicationController
   skip_before_action :verify_authenticity_token
 
+  attr_accessor :image_ids
+
   def new
     @user = User.new
   end
@@ -33,7 +35,7 @@ class UsersController < ApplicationController
     sleep(10)
     file = Cloudinary::Uploader.multi("download", :format => 'zip')['url'] 
 
-     $image_ids.each do |id|
+     image_ids.each do |id|
        Cloudinary::Api.update(id, :tags => "hi")
      end
 
@@ -45,11 +47,11 @@ class UsersController < ApplicationController
     ids = data.select{ |k,_| k =~ /\A\d*\z/}.map{ |_,v| v}.map(&:to_i)
     valid_ids = ids.select{ |num| current_user.photos.pluck(:id).include?(num) }
 
-   $image_ids = valid_ids.map do |id|  
+   image_ids = valid_ids.map do |id|  
      Photo.find(id).file.file.public_id
    end
 
-   $image_ids.each do |id|
+   image_ids.each do |id|
      Cloudinary::Api.update(id, :tags => "download")
    end
   end
