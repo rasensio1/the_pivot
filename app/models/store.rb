@@ -16,6 +16,10 @@ class Store < ActiveRecord::Base
     end
   end
 
+  def watermark_accessor
+    Photo.find(watermark_id).file.file.public_id
+  end
+
   private
     def set_slug
       self.slug = name.parameterize

@@ -14,8 +14,12 @@
     <div class="col-md-9">
 
       <div class="">
-        <%= image_tag @photo.file_url(:preview), class: "img-responsive" %>
+        <%= cl_image_tag(@photo.file,
+                         :transformation => {:height => 350, :crop => :fill},
+                         :overlay => @photo.store.watermark_accessor,
+                         :gravity => :south_east, :x => 5, :y => 5) %>
       </div>
+
     </div>
   </div>
 </div>
