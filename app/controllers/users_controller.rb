@@ -29,15 +29,6 @@ class UsersController < ApplicationController
   end
 
   def getfiles
-    data = params[:photos].select { |_,v| v['title'] == "1"}
-    ids = data.keys.map(&:to_i)
-    
-    valid_ids = ids.select{ |num| current_user.photos.pluck(:id).include?(num) }
-
-    image_ids = valid_ids.map do |id|  
-      Photo.find(id).file.file.public_id
-    end
-
     image_ids.each do |id|
       Cloudinary::Api.update(id, :tags => "download")
     end
@@ -62,6 +53,17 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def image_ids
+    data = params[:photos].select { |_,v| v['title'] == "1"}
+    ids = data.keys.map(&:to_i)
+    
+    valid_ids = ids.select{ |num| current_user.photos.pluck(:id).include?(num) }
+
+    valid_ids.map do |id|  
+      Photo.find(id).file.file.public_id
+    end
+  end
 
   def user_params
     params.require(:user).permit(:name, :password, :email)
