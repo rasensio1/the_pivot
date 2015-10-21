@@ -27,6 +27,7 @@ class UsersController < ApplicationController
   end
 
   def getfiles
+    clear_tmp
     send_file(
           "#{Rails.root}/tmp/images.zip",
             filename: "images.zip",
@@ -35,7 +36,7 @@ class UsersController < ApplicationController
   end
 
   def export
-    #clear_tmp
+    kill_zip
 
     data = JSON.parse(params.first.first)
     ids = data.select{ |k,_| k =~ /\A\d*\z/}.map{ |_,v| v}.map(&:to_i)
@@ -59,7 +60,6 @@ class UsersController < ApplicationController
     file_names = file_paths.map { |path| tail(path) }
 
     Zip::File.open(zipfile_name, Zip::File::CREATE) do |zipfile|
-      Zip.continue_on_exists_proc = true
         file_names.each do |filename|
           zipfile.add(filename, folder + filename)
         end
@@ -72,7 +72,13 @@ class UsersController < ApplicationController
   end
 
   def clear_tmp
-    `rm -rf tmp/*`
+    file_paths = Find.find(Rails.root.join('tmp')).select { |p| /.*\.jpg$/ =~ p }
+    FileUtils.rm file_paths
+    #FileUtils.rm ["#{Rails.root.join('tmp/images.zip')}"]
+  end
+
+  def kill_zip
+    FileUtils.rm ["#{Rails.root.join('tmp/images.zip')}"]
   end
 
 
