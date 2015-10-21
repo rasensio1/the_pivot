@@ -76,22 +76,44 @@
 
   <div class="container well transparent">
     <div class="row">
-      <div class="col-md-4"><h2>Download Center</h2></div>
-    </div>
-    <div class="row item-info item-list">
-          <% @photos.each do |photo| %>
-      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 item-box download-center">
-        <div class="thumbnail download-center">
-            <%= link_to image_tag(photo.file_url(:thumbnail), size: "80"), store_photo_path(photo.store.slug, photo, style: "max-width: auto") %>
-            <div class="caption download-center text-center">
-              <%= link_to photo.file_url(:full), class: "btn btn-success btn-xs" do %>
-                <i class="glyphicon glyphicon-cloud-download"></i>
-              <% end %>
-            </div>
-        </div>
-      </div>
-          <% end %>
-    </div>
-  </div>
+    <div class="col-md-4"><h1>Download Center</h1></div>
+    <div class = "small-spacer"></div>
+    <div class = "small-spacer"></div>
 
+
+      <%= form_tag getfiles_path, method: :post,  class: "form-inline", id: "no-bg" do %>
+        <div class = "row">
+          <div class = "col-md-offset-8 col-md-4">
+              <%= submit_tag "Download Selected", class: "btn btn-primary btn-lg" %>
+         </div>
+       </div>
+    <div class = "small-spacer"></div>
+        <% @user_photos.each do |photo| %> 
+          <%= fields_for "photos[#{photo.id}]", photo do |pf| %>
+              <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 item-box download-center">
+                <div class="thumbnail download-center">
+                    <%= link_to image_tag(photo.file_url(:thumbnail), size: "80"), store_photo_path(photo.store.slug, photo, style: "max-width: auto") %>
+                    <div class="caption download-center text-center">
+                  <div class = "row">
+                    <div class = "col-md-offset-1 col-md-4 text-center">
+                      <%= link_to photo.file_url(:full), class: "btn btn-success btn-xs", id: 'float-left' do %>
+                        <i class="glyphicon glyphicon-cloud-download"></i>
+                      <% end %>
+                    </div>
+                    <div class = "col-md-5 pull-left">
+                        <%= pf.check_box :title, class: "#{photo.id}", id: "my-check" %>
+                    </div>
+                    </div>
+                  </div>
+                  <!-- ROW -->
+
+
+                </div>
+              </div>
+          <% end %>
+       <% end %>
+    <% end %>
+
+
+  </div>
 </div>

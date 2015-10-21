@@ -19,6 +19,7 @@ gem "bootstrap-will_paginate", "0.0.10"
 gem "carrierwave"
 gem "cloudinary"
 gem "figaro"
+gem 'rubyzip', '~> 1.1', '>= 1.1.7'
 
 group :development, :test do
   gem 'byebug'

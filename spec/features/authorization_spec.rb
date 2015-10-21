@@ -1,4 +1,5 @@
 require "rails_helper"
+
 RSpec.describe "Authorization: " do
   fixtures :users
   fixtures :stores

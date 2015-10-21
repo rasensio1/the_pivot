@@ -29,8 +29,9 @@ class Admin::PhotosController < Admin::BaseController
 
   def update
     if my_photo.update_attributes(photo_params)
+      PhotoCreator.edit_relationships(my_photo, params)
       flash[:success] = "'#{my_photo.title}' has been updated!"
-      redirect_to admin_store_path(my_photo.store.slug)
+      redirect_to :back
     else
       set_flash_errors(Photo.update(my_photo.id, photo_params))
       redirect_to :back
