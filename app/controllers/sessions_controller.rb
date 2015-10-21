@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
       redirect_to user_home_page(@user)
       flash[:success] = "YeeHaw! #{@user.name} is signed in!"
     else
-      redirect_to login_path
+      redirect_to `login_path`
       flash[:danger] = "Sorry m'friend. You go HUNGRY!"
     end
   end
