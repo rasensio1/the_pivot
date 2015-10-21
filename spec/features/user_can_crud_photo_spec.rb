@@ -80,9 +80,11 @@ RSpec.describe "photos" do
       starting_photo_count = store.photos.active.count
       first(:link, "Delete").click
 
+
       expect(current_path).to eq(admin_store_path(store_admin.store.slug))
       expect(store.photos.active.count).to eq(starting_photo_count - 1)
       expect(page).to have_content(photo.title + " photo has been removed")
+
       within("#active-photos") do
         expect(page).to_not have_content(photo.title)
         expect(page).to_not have_content(photo.description)

@@ -12,7 +12,7 @@ RSpec.describe "User profile page: ", type: :feature do
   let!(:user)       {order.user}
   let!(:photo)      {order.order_items.first.photo}
 
-  context "User is not signed in" do
+  context "User is not signed in",:order => :defined do
     it "cannot visit the profile page" do
       visit root_path
       expect(page).to_not have_link("Profile")
