@@ -46,7 +46,7 @@ RSpec.describe "an admin on their dashboards" do
       StoreAdmin.create(user_id: ryan.id, store_id: store.id)
     end
 
-    it "and the new admin can visit the shop" do
+    it "can visit the shop" do
       sign_in(ryan)
 
       click_on "The Store"
@@ -56,7 +56,7 @@ RSpec.describe "an admin on their dashboards" do
       expect(page).to_not have_content("Add an Admin")
     end
 
-    it "and the new admin can add a photo" do
+    it "can add a photo" do
       sign_in(ryan)
 
       click_on "The Store"
