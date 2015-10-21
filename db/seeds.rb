@@ -14,6 +14,7 @@ class Seed
     create_orders
     create_order_items
     create_photo_categories
+    create_platform_admin
   end
 
   def create_photo_categories
@@ -60,10 +61,6 @@ class Seed
                  password:              "password",
                  password_confirmation: "password")
 
-    User.create!(name:                  "Platform Admin Jr.",
-                 email:                 "pa@turing.io",
-                 password:              "password",
-                 password_confirmation: "password")
   end
 
   def create_stores
@@ -121,6 +118,16 @@ class Seed
                        photo_id: Photo.all.sample.id,
                        quantity: 1)
     end
+  end
+
+  def create_platform_admin
+    #This user should not have any stores or orders
+    User.create!(id:                    User.last.id + 100,
+                 name:                  "Platform Admin Jr.",
+                 email:                 "pa@turing.io",
+                 password:              "password",
+                 password_confirmation: "password",
+                 platform_admin:        true)
   end
 
 end
