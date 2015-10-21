@@ -15,6 +15,18 @@ RSpec.describe "a platform admin", type: :feature do
   let!(:category2) {Category.second}
   let!(:category3) {Category.third}
 
+  it "can access the platform dashboard" do
+    sign_in(platform_admin)
+
+
+    expect(current_path).to eq(god_dashboard_path)
+    expect(page).to have_content("You are all Powerful!")
+
+    within("table") do
+      expect(page).to have_link(store.name)
+    end
+  end
+
   it "can add a photo to any store" do
     sign_in(platform_admin)
 
@@ -37,4 +49,5 @@ RSpec.describe "a platform admin", type: :feature do
     expect(page).to have_content("#{photo.title} photo has been added!")
     expect(page).to have_content(photo.title)
   end
+
 end
