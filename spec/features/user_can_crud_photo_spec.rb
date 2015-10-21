@@ -69,10 +69,17 @@ RSpec.describe "photos" do
       fill_in("photo[title]", with: "Another title")
       fill_in("photo[description]", with: "Woohoo")
 
+      check "Lifestyle"
+      check "Architecture"
+      check "Landscape"
+
       click_on "Submit"
       expect(current_path).to eq(admin_store_path(photo.store.slug))
       expect(page).to have_content("Another title")
       expect(page).to have_content("Woohoo")
+      expect(page).to have_content(category1.name)
+      expect(page).to have_content(category2.name)
+      expect(page).to have_content(category3.name)
     end
 
     it "can delete a photo" do

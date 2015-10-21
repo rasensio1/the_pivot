@@ -9,4 +9,11 @@ class PhotoCreator
       PhotoCategory.create(photo_id: photo.id, category_id: id)
     end
   end
+
+  def self.edit_relationships(photo, all_params)
+    photo.photo_categories.delete
+    all_params[:photo][:category_ids].each do |id|
+      PhotoCategory.create(photo_id: photo.id, category_id: id)
+    end
+  end
 end

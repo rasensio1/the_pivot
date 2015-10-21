@@ -1,6 +1,12 @@
 require "rails_helper"
 
 RSpec.describe "the user profile page", type: :feature do
+  fixtures :photos
+  fixtures :stores
+  fixtures :order_items
+  fixtures :orders
+  fixtures :users
+
   context "a logged in user" do
     let!(:user) { Fabricate(:user) }
 
@@ -36,6 +42,16 @@ RSpec.describe "the user profile page", type: :feature do
         expect(current_path).to eq profile_path(user)
         expect(page).to have_content "Mia"
       end
+    end
+
+    xit 'can download mutiple photos at once' do
+      user1 = User.first
+      sign_in(user1)
+
+      first(:checkbox, "my-check").set(true)
+
+      click_on "Download Selected"
+      expect(page.response_headers['Content-Type']).to eq('text/csv')
     end
   end
 end

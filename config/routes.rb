@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root to: "site#index"
 
+  post "/download", to: "users#export"
+  post "/getfiles", to: "users#getfiles"
   get "/sign_up", to: "users#new"
   post "/sign_up", to: "users#create"
   get "/profile", to: "users#show"

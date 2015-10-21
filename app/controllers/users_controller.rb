@@ -1,4 +1,8 @@
 class UsersController < ApplicationController
+  skip_before_action :verify_authenticity_token
+
+  attr_accessor :image_ids
+
   def new
     @user = User.new
   end
@@ -17,11 +21,34 @@ class UsersController < ApplicationController
   def show
     if current_user
       @orders = current_user.orders
-      @photos = current_user.photos
+      @user_photos = current_user.photos
       @admin_stores = current_user.stores
     else
       redirect_to "/404"
     end
+  end
+
+  def getfiles
+    data = params[:photos].select { |_,v| v['title'] == "1"}
+    ids = data.keys.map(&:to_i)
+    
+    valid_ids = ids.select{ |num| current_user.photos.pluck(:id).include?(num) }
+
+    image_ids = valid_ids.map do |id|  
+      Photo.find(id).file.file.public_id
+    end
+
+    image_ids.each do |id|
+      Cloudinary::Api.update(id, :tags => "download")
+    end
+
+    file = Cloudinary::Uploader.multi("download", :format => 'zip')['url'] 
+
+    image_ids.each do |id|
+      Cloudinary::Api.update(id, :tags => "hi")
+    end
+
+    redirect_to file
   end
 
   def edit
