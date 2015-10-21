@@ -25,89 +25,79 @@ RSpec.describe "a platform admin", type: :feature do
     expect(page).to have_link(store.name)
   end
 
-  it "has their dashboard link in the header" do
-    sign_in(platform_admin)
-
-    within(".navbar") do
-      expect(page).to have_link("Dashboard")
-      click_on "Dashboard"
+  context "who is logged in" do
+    before do
+      sign_in(platform_admin)
+      store.photos.last.delete
+      visit admin_store_path(store.slug)
     end
 
-    expect(current_path).to eq(god_dashboard_path)
-  end
+    it "has their dashboard link in the header" do
+      within(".navbar") do
+        expect(page).to have_link("Dashboard")
+        click_on "Dashboard"
+      end
 
-  it "can add a photo to any store" do
-    sign_in(platform_admin)
-
-    visit admin_store_path(store.slug)
-
-    click_on "Add a photo"
-    fill_in("photo[title]", with: photo.title)
-    fill_in("photo[description]", with: photo.description)
-    fill_in("photo[standard_price]", with: photo.standard_price)
-    fill_in("photo[commercial_price]", with: photo.commercial_price)
-    page.attach_file("photo[file]", Rails.root + "spec/fixtures/test_photo_1.jpg")
-
-    check "Lifestyle"
-    check "Architecture"
-    check "Landscape"
-
-    click_button("Create Photo")
-
-    expect(current_path).to eq(admin_store_path(store.slug))
-    expect(page).to have_content("#{photo.title} photo has been added!")
-    expect(page).to have_content(photo.title)
-  end
-
-  it "can edit a photo for any store" do
-    sign_in(platform_admin)
-
-    visit admin_store_path(store.slug)
-
-    within "#active-photos" do
-      first(:link, "Edit").click
+      expect(current_path).to eq(god_dashboard_path)
     end
 
-    expect(current_path).to eq(edit_store_photo_path(store.slug, photo))
+    it "can add a photo to any store" do
+      click_on "Add a photo"
+      fill_in("photo[title]", with: photo.title)
+      fill_in("photo[description]", with: photo.description)
+      fill_in("photo[standard_price]", with: photo.standard_price)
+      fill_in("photo[commercial_price]", with: photo.commercial_price)
+      page.attach_file("photo[file]", Rails.root + "spec/fixtures/test_photo_1.jpg")
 
-    fill_in("photo[title]", with: "Another title")
-    fill_in("photo[description]", with: "Woohoo")
+      check "Lifestyle"
+      check "Architecture"
+      check "Landscape"
 
-    click_on "Submit"
-    expect(current_path).to eq(admin_store_path(store.slug))
-    expect(page).to have_content("Another title")
-    expect(page).to have_content("Woohoo")
-  end
+      click_button("Create Photo")
 
-  it "can delete a photo for any store" do
-    store.photos.last.delete
-    sign_in(platform_admin)
-
-    visit admin_store_path(store.slug)
-
-    within "#active-photos" do
-      first(:link, "Delete").click
+      expect(current_path).to eq(admin_store_path(store.slug))
+      expect(page).to have_content("#{photo.title} photo has been added!")
+      expect(page).to have_content(photo.title)
     end
 
-    expect(current_path).to eq(admin_store_path(store.slug))
-    expect(page).to have_content(photo.title + " photo has been removed")
+    it "can edit a photo for any store" do
+      within "#active-photos" do
+        first(:link, "Edit").click
+      end
 
-    within("#active-photos") do
-      expect(page).to_not have_content(photo.title)
-      expect(page).to_not have_content(photo.description)
+      expect(current_path).to eq(edit_store_photo_path(store.slug, photo))
+
+      fill_in("photo[title]", with: "Another title")
+      fill_in("photo[description]", with: "Woohoo")
+
+      click_on "Submit"
+      expect(current_path).to eq(admin_store_path(store.slug))
+      expect(page).to have_content("Another title")
+      expect(page).to have_content("Woohoo")
     end
-  end
 
-  it "can add an admin to any store" do
-    sign_in(platform_admin)
+    it "can delete a photo for any store" do
+      within "#active-photos" do
+        first(:link, "Delete").click
+      end
 
-    visit admin_store_path(store.slug)
+      expect(current_path).to eq(admin_store_path(store.slug))
+      expect(page).to have_content(photo.title + " photo has been removed")
 
-    fill_in("user[email]", with: new_admin.email)
-    click_on "Add Admin"
+      within("#active-photos") do
+        expect(page).to_not have_content(photo.title)
+        expect(page).to_not have_content(photo.description)
+      end
+    end
 
-    expect(page).to have_content(new_admin.name)
-    expect(page).to have_content(new_admin.email)
+    it "can add an admin to any store" do
+      fill_in("user[email]", with: new_admin.email)
+      click_on "Add Admin"
+
+      expect(page).to have_content(new_admin.name)
+      expect(page).to have_content(new_admin.email)
+    end
+
   end
 
 end
