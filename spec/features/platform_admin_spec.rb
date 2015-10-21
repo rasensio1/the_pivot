@@ -105,5 +105,14 @@ RSpec.describe "a platform admin", type: :feature do
       expect(page).to have_content(store_admin.name)
       expect(page).to have_content(store_admin.email)
     end
+
+    it "can edit a stores info" do
+      fill_in "Name", with: "Mia"
+      fill_in "Tagline", with: "Yep"
+      click_button "Update Info"
+
+      expect(page).to have_content "Mia"
+      expect(page).to have_content "Yep"
+    end
   end
 end
