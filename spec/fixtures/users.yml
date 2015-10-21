@@ -27,3 +27,10 @@ store_admin:
   name: admin
   email: admin@admin.com
   password_digest: <%= User.digest("password") %>
+
+platform_admin:
+  id: 2001
+  name: admin
+  email: platform_admin@admin.com
+  platform_admin: true
+  password_digest: <%= User.digest("password") %>
