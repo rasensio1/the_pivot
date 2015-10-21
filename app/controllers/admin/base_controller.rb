@@ -8,7 +8,6 @@ class Admin::BaseController < ApplicationController
     authorization_error unless platform_admin?
   end
 
-
   private
 
   def store_admin?
