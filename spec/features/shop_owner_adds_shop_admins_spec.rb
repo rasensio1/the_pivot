@@ -27,18 +27,6 @@ RSpec.describe "an admin on their dashboards" do
     expect(page).to have_content("The Store")
   end
 
-  it "and the new admin can visit the shop" do
-    StoreAdmin.create(user_id: ryan.id, store_id: store.id)
-
-    sign_in(ryan)
-
-    click_on "The Store"
-
-    expect(current_path).to eq(admin_store_path(store.slug))
-    expect(page).to have_content("For everyone")
-    expect(page).to_not have_content("Add an Admin")
-  end
-
   it "can not add an admin that is not regestered" do
     unregistered_user = "unregestered@user.boo"
     sign_in(admin)
@@ -51,5 +39,31 @@ RSpec.describe "an admin on their dashboards" do
     expect(current_path).to eq(admin_store_path(store.slug))
 
     expect(page).to have_content("Sorry, but #{unregistered_user} is not a Photo's Ready user.")
+  end
+
+  context "the new admin" do
+    before do
+      StoreAdmin.create(user_id: ryan.id, store_id: store.id)
+    end
+
+    it "and the new admin can visit the shop" do
+      sign_in(ryan)
+
+      click_on "The Store"
+
+      expect(current_path).to eq(admin_store_path(store.slug))
+      expect(page).to have_content("For everyone")
+      expect(page).to_not have_content("Add an Admin")
+    end
+
+    it "and the new admin can add a photo" do
+      sign_in(ryan)
+
+      click_on "The Store"
+      click_on "Add a photo"
+
+      expect(current_path).to eq(new_store_photo_path(store.slug))
+      expect(page).to have_content("Add a Photo")
+    end
   end
 end
