@@ -14,6 +14,7 @@ RSpec.describe "Authorization: " do
     it "cant create a shop" do
       visit new_store_path
       expect(page).to have_content("Not Authorized")
+      expect(page).to have_link("Feel free to enjoy our lovely home page though!")
     end
 
     it "cant view shop admin page" do
@@ -50,4 +51,5 @@ RSpec.describe "Authorization: " do
       expect(page).to have_content("Not Authorized")
     end
   end
+
 end
