@@ -4,6 +4,7 @@ class Admin::StoresController < Admin::BaseController
   def edit
     @user = User.new
     @store = current_store
+    @photo = Photo.new
     @photos = current_store.photos.where(active: true)
     @store_admins = current_store.users
   end

@@ -5,7 +5,7 @@ class Photo < ActiveRecord::Base
 
   mount_uploader :file, PhotoUploader
 
-  validates :title, :description, :standard_price, :store_id,  presence: true
+  validates :title, :description, :standard_price, :store_id, :file,  presence: true
   validates :standard_price, :commercial_price, numericality: { greater_than: 0, message: "must contain only integers and be greater than 0" }
 
   def shortened_description
@@ -22,6 +22,10 @@ class Photo < ActiveRecord::Base
     else
       Category.find(cat_id).photos.active
     end
+  end
+
+  def watermark?
+    id == store.watermark_id
   end
 
 end
