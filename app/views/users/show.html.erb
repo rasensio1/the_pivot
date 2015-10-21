@@ -78,19 +78,15 @@
 
   <div class="container well transparent">
     <div class="row">
-      <div class="col-md-4"><h2>Download Center</h2></div>
-      <div class="col-md-8 text-right">
-        <%= button_to "Download Selected", getfiles_path, method: :post, id: "download", class: "btn btn-primary" %>
-      </div>
+    <div class="col-md-4"><h1>Download Center</h1></div>
     <div class = "small-spacer"></div>
     <div class = "small-spacer"></div>
 
-    <div class="row item-info item-list">
 
-      <%= form_tag getfiles_path, method: :post,  class: "form-inline" do %>
+      <%= form_tag getfiles_path, method: :post,  class: "form-inline", id: "no-bg" do %>
         <div class = "row">
-          <div class = "col-md-12 text-right">
-             <%= submit_tag "GETEM" %>
+          <div class = "col-md-offset-8 col-md-4">
+              <%= submit_tag "Download Selected", class: "btn btn-primary btn-lg" %>
          </div>
        </div>
     <div class = "small-spacer"></div>
@@ -100,11 +96,20 @@
                 <div class="thumbnail download-center">
                     <%= link_to image_tag(photo.file_url(:thumbnail), size: "80"), store_photo_path(photo.store.slug, photo, style: "max-width: auto") %>
                     <div class="caption download-center text-center">
-                      <%= link_to photo.file_url(:full), class: "btn btn-success btn-xs" do %>
+                  <div class = "row">
+                    <div class = "col-md-offset-1 col-md-4 text-center">
+                      <%= link_to photo.file_url(:full), class: "btn btn-success btn-xs", id: 'float-left' do %>
                         <i class="glyphicon glyphicon-cloud-download"></i>
                       <% end %>
-                        <%= pf.check_box :title, class: "#{photo.id}" %>
                     </div>
+                    <div class = "col-md-5 pull-left">
+                        <%= pf.check_box :title, class: "#{photo.id}", id: "my-check" %>
+                    </div>
+                    </div>
+                  </div>
+                  <!-- ROW -->
+
+
                 </div>
               </div>
           <% end %>
@@ -112,7 +117,6 @@
     <% end %>
 
 
-    </div>
   </div>
 </div>
 
