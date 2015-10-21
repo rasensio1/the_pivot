@@ -17,7 +17,8 @@ class Store < ActiveRecord::Base
   end
 
   def watermark_accessor
-    Photo.find(watermark_id).file.file.public_id
+    photo = Photo.find_by(id: watermark_id)
+    photo.file.file.public_id if photo
   end
 
   private
