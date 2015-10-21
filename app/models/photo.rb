@@ -5,7 +5,7 @@ class Photo < ActiveRecord::Base
 
   mount_uploader :file, PhotoUploader
 
-  validates :title, :description, :standard_price, :store_id, :file,  presence: true
+  validates :title, :description, :standard_price, :store_id, :file, presence: true
   validates :standard_price, :commercial_price, numericality: { greater_than: 0, message: "must contain only integers and be greater than 0" }
 
   def shortened_description

@@ -1,6 +1,8 @@
 class Store < ActiveRecord::Base
-  before_validation :set_slug
+  before_save :set_slug
   after_create :create_store_admin
+
+  validates :name, :tagline, presence: true
 
   belongs_to :user
   has_many :users, through: :store_admins

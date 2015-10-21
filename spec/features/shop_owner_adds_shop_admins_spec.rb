@@ -14,7 +14,7 @@ RSpec.describe "an admin on their dashboards" do
     visit admin_store_path(store.slug)
 
     fill_in("user[email]", with: "ryan@yeah.com")
-    click_on "Add Admin"
+    click_on "Add New Admin"
 
     expect(page).to have_content("Regular Ryan")
     expect(page).to have_content("ryan@yeah.com")
@@ -34,7 +34,7 @@ RSpec.describe "an admin on their dashboards" do
     visit admin_store_path(store.slug)
 
     fill_in("user[email]", with: unregistered_user)
-    click_on "Add Admin"
+    click_on "Add New Admin"
 
     expect(current_path).to eq(admin_store_path(store.slug))
 
