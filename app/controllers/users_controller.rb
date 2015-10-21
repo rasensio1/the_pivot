@@ -45,21 +45,13 @@ class UsersController < ApplicationController
       Cloudinary::Api.update(id, :tags => "download")
     end
 
+    file = Cloudinary::Uploader.multi("download", :format => 'zip')['url'] 
+
+    image_ids.each do |id|
+      Cloudinary::Api.update(id, :tags => "hi")
+    end
+
     redirect_to file
-  end
-
-  def export
-    data = JSON.parse(params.first.first)
-    ids = data.select{ |k,_| k =~ /\A\d*\z/}.map{ |_,v| v}.map(&:to_i)
-    valid_ids = ids.select{ |num| current_user.photos.pluck(:id).include?(num) }
-
-   image_ids = valid_ids.map do |id|  
-     Photo.find(id).file.file.public_id
-   end
-
-   image_ids.each do |id|
-     Cloudinary::Api.update(id, :tags => "download")
-   end
   end
 
   def edit
