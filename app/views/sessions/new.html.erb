@@ -8,7 +8,7 @@
         <%= form_for(:session, url: login_path) do |f| %>
           <div class="form-group">
             <%= f.label :email %>
-            <%= f.text_field :email, class: "form-control", placeholder: "Email" %>
+            <%= f.email_field :email, class: "form-control", placeholder: "Email" %>
           </div>
 
           <div class="form-group">

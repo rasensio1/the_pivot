@@ -1,44 +1,48 @@
 <div class="row">
-  <%= form_for [:admin, @store], html: {class: "edit-store"} do |f| %>
-    <div class="col-md-1 edit-store-label">
-      <%= f.label :name %><br><br>
-      <%= f.label :tagline %>
-    </div>
-    <div class="col-md-5 edit-store-input">
-      <%= f.text_field :name, class: "form-control", placeholder: @store.name %>
-      <%= f.hidden_field :id, value: @store.id %>
-      <br>
-      <%= f.text_field :tagline, class: "form-control", placeholder: @store.tagline %>
-      <br>
-      <%= f.submit "Update Info", class: "btn btn-primary" %>
-    </div>
-  <% end %>
+  <div class="col-md-6">
+    <%= form_for [:admin, @store], html: {class: "edit-store"} do |f| %>
+      <div class="col-md-2 edit-store-label">
+        <%= f.label :name %><br><br>
+        <%= f.label :tagline %>
+      </div>
+      <div class="col-md-10 edit-store-input">
+        <%= f.text_field :name, class: "form-control", placeholder: @store.name %>
+        <%= f.hidden_field :id, value: @store.id %>
+        <br>
+        <%= f.text_field :tagline, class: "form-control", placeholder: @store.tagline %>
+        <br>
+        <%= f.submit "Update Info", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
 
   <div class="col-md-6">
 
     <%= form_for [:admin, @photo], url: store_photos_path(@store.slug), html: {class: "edit-store"} do |f| %>
-
       <div class="form-group">
         <%= f.label "Watermark", class: "edit-store-label" %><br>
+        (Use a semi-transparent .PNG file)
         <%= f.file_field :file, class: "form-control" %>
         <%= f.hidden_field :file_cache %>
       </div>
 
       <%= f.hidden_field :store_id, value: @store.id %>
-      <%= f.hidden_field :watermark, value: true %>
+      <%= f.hidden_field :watermark, value: "true" %>
 
       <%= f.submit "Add Watermark", class: "btn btn-primary" %>
     <% end %>
 
-    <div class="center-block">
-    <% if @store.watermark_id %>
-      <%= cl_image_tag(Photo.first.file.file.public_id,
-                       :transformation => {:height => 200, :crop => :fill},
-                       :overlay => @store.watermark_accessor,
-                       :gravity => :south_east, :x => 5, :y => 5,
-                       :html_width => 100, :html_height => 100) %>
-      <%= link_to "Delete Current Watermark", store_photo_path(@store.slug, @store.watermark_id), method: :delete, class: "btn btn-danger" %>
-    <% end %>
-    </div>
+      <div class="text-center">
+      <% if @store.watermark_id %>
+        <br><br>
+        <%= cl_image_tag(Photo.first.file.file.public_id,
+                         :transformation => {:height => 250, :crop => :fill},
+                         :overlay => @store.watermark_accessor,
+                         :gravity => :south_east, :x => 5, :y => 5,
+                         :html_width => 100, :html_height => 100) %><br><br>
+        <%= link_to "Delete Current Watermark", store_photo_path(@store.slug, @store.watermark_id), method: :delete, class: "btn btn-danger" %>
+      <% end %>
+      </div>
+
   </div>
 </div>
