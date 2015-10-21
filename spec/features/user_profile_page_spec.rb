@@ -1,6 +1,12 @@
 require "rails_helper"
 
 RSpec.describe "the user profile page", type: :feature do
+  fixtures :photos
+  fixtures :stores
+  fixtures :order_items
+  fixtures :orders
+  fixtures :users
+
   context "a logged in user" do
     let!(:user) { Fabricate(:user) }
 
@@ -39,13 +45,14 @@ RSpec.describe "the user profile page", type: :feature do
     end
 
     it 'can download mutiple photos at once' do
-      all('input[type=checkbox]').each do |checkbox|
-         if checkbox.checked? then 
-           checkbox.click
-         end
-      end
+      user1 = User.first
+      sign_in(user1)
 
-      click_on "Download checked"
+      first(:checkbox, "my-check").set(true)
+
+
+      click_on "Download Selected"
+      expect(page.response_headers['Content-Type']).to eq('text/csv')
     end
   end
 end
