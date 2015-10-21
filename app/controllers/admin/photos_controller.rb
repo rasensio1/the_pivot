@@ -23,13 +23,13 @@ class Admin::PhotosController < Admin::BaseController
       redirect_to admin_store_path(photo.store.slug)
     else
       set_flash_errors(photo)
-      redirect_to new_store_photo_path(photo.store.slug)
+      redirect_to :back
     end
   end
 
   def update
     if my_photo.update_attributes(photo_params)
-      flash[:success] = "#{my_photo.title} photo has been updated!"
+      flash[:success] = "'#{my_photo.title}' has been updated!"
       redirect_to admin_store_path(my_photo.store.slug)
     else
       set_flash_errors(Photo.update(my_photo.id, photo_params))
@@ -38,8 +38,14 @@ class Admin::PhotosController < Admin::BaseController
   end
 
   def destroy
-    my_photo.update(active: false)
-    flash[:info] = "#{my_photo.title} photo has been removed"
+    photo = my_photo
+    if photo.watermark?
+      photo.store.update(watermark_id: nil)
+      photo.destroy
+    else
+      photo.update(active: false)
+    end
+    flash[:info] = "'#{photo.title}' has been removed."
     redirect_to admin_store_path(current_user.store.slug)
   end
 
