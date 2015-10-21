@@ -80,13 +80,39 @@
     <div class="row">
       <div class="col-md-4"><h2>Download Center</h2></div>
       <div class="col-md-8 text-right">
-        <%= link_to "Download Selected", getfiles_path, id: "download", class: "btn btn-primary" %>
+        <%= button_to "Download Selected", getfiles_path, method: :post, id: "download", class: "btn btn-primary" %>
       </div>
     <div class = "small-spacer"></div>
     <div class = "small-spacer"></div>
 
     <div class="row item-info item-list">
-      <%= render partial: "layouts/user_photo", collection: @user_photos %>
+
+      <%= form_tag getfiles_path, method: :post,  class: "form-inline" do %>
+        <div class = "row">
+          <div class = "col-md-12 text-right">
+             <%= submit_tag "GETEM" %>
+         </div>
+       </div>
+    <div class = "small-spacer"></div>
+        <% @user_photos.each do |photo| %> 
+          <%= fields_for "photos[#{photo.id}]", photo do |pf| %>
+              <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 item-box download-center">
+                <div class="thumbnail download-center">
+                    <%= link_to image_tag(photo.file_url(:thumbnail), size: "80"), store_photo_path(photo.store.slug, photo, style: "max-width: auto") %>
+                    <div class="caption download-center text-center">
+                      <%= link_to photo.file_url(:full), class: "btn btn-success btn-xs" do %>
+                        <i class="glyphicon glyphicon-cloud-download"></i>
+                      <% end %>
+
+                        <%= pf.check_box :title, class: "#{photo.id}" %>
+                    </div>
+                </div>
+              </div>
+          <% end %>
+       <% end %>
+    <% end %>
+
+
     </div>
   </div>
 </div>
