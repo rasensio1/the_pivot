@@ -30,59 +30,30 @@ class UsersController < ApplicationController
   end
 
   def getfiles
-    clear_tmp
-    send_file(
-          "#{Rails.root}/tmp/images.zip",
-            filename: "images.zip",
-            type: "zip"
-            )
+    sleep(2)
+
+    file = Cloudinary::Uploader.multi("download", :format => 'zip')['url'] 
+
+     $image_ids.each do |id|
+       Cloudinary::Api.update(id, :tags => "hi")
+     end
+
+    redirect_to file
   end
 
   def export
-
     data = JSON.parse(params.first.first)
     ids = data.select{ |k,_| k =~ /\A\d*\z/}.map{ |_,v| v}.map(&:to_i)
     valid_ids = ids.select{ |num| current_user.photos.pluck(:id).include?(num) }
 
-   image_urls = valid_ids.map do |id|  
-     Photo.find(id).file_url(:full)
+   $image_ids = valid_ids.map do |id|  
+     Photo.find(id).file.file.public_id
    end
 
-   image_urls.each do |url|
-      tail = tail(url) 
-      open("#{Rails.root}/tmp/#{tail}", 'wb') do |file|
-          file << open(url).read
-      end
+   $image_ids.each do |id|
+     Cloudinary::Api.update(id, :tags => "download")
    end
-
-    folder = "#{Rails.root}/tmp/"
-    zipfile_name = folder + "images.zip"
-    file_paths = Find.find(Rails.root.join('tmp')).select { |p| /.*\.jpg$/ =~ p }
-
-    file_names = file_paths.map { |path| tail(path) }
-
-    Zip::File.open(zipfile_name, Zip::File::CREATE) do |zipfile|
-        file_names.each do |filename|
-          zipfile.add(filename, folder + filename)
-        end
-    end
-
   end
-
-  def tail(url)
-     URI(url).path.split('/').last
-  end
-
-  def clear_tmp
-    file_paths = Find.find(Rails.root.join('tmp').to_s).select { |p| /.*\.jpg$/ =~ p }
-    FileUtils.rm file_paths
-    #FileUtils.rm ["#{Rails.root.join('tmp/images.zip')}"]
-  end
-
-  def kill_zip
-    FileUtils.rm ["#{Rails.root.join('tmp/images.zip')}"]
-  end
-
 
   def edit
     @user = current_user

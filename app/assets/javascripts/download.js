@@ -1,5 +1,4 @@
 $(document).ready(function() {
-  alert("Hello! I am an alert box!!")
   $('#download').click(function(){
      var ids = $(':checked').map(function(){
        return $(this).attr('class')
