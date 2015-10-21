@@ -30,7 +30,7 @@ class UsersController < ApplicationController
   end
 
   def getfiles
-    sleep(2)
+    sleep(5)
 
     file = Cloudinary::Uploader.multi("download", :format => 'zip')['url'] 
 
