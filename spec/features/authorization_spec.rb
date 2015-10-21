@@ -7,7 +7,7 @@ RSpec.describe "Authorization: " do
   let!(:admin) { User.find_by(name: "admin") }
   let!(:store) { admin.store }
   let!(:photo) { admin.store.photos.first }
-  let!(:other_store) { Store.second }
+  let!(:other_store) { Store.joins(:photos).first }
 
   context "not logged in" do
 
