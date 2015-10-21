@@ -16,6 +16,14 @@ RSpec.describe "a platform admin", type: :feature do
   let!(:category2) { Category.second }
   let!(:category3) { Category.third }
 
+  it "dashboard cannot be accessed by store_admin" do
+    sign_in(new_admin)
+
+    visit(god_dashboard_path)
+
+    expect(page).to have_content("Not Authorized")
+  end
+
   it "goes to dashboard after login" do
     sign_in(platform_admin)
 
@@ -91,13 +99,11 @@ RSpec.describe "a platform admin", type: :feature do
     end
 
     it "can add an admin to any store" do
-      fill_in("user[email]", with: new_admin.email)
+      fill_in("user[email]", with: store_admin.email)
       click_on "Add Admin"
 
-      expect(page).to have_content(new_admin.name)
-      expect(page).to have_content(new_admin.email)
+      expect(page).to have_content(store_admin.name)
+      expect(page).to have_content(store_admin.email)
     end
-
   end
-
 end
