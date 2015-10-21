@@ -70,7 +70,7 @@ RSpec.describe "a platform admin", type: :feature do
       click_button("Create Photo")
 
       expect(current_path).to eq(admin_store_path(store.slug))
-      expect(page).to have_content("#{photo.title} photo has been added!")
+      expect(page).to have_content("#{photo.title}' has been added!")
       expect(page).to have_content(photo.title)
     end
 
@@ -96,7 +96,7 @@ RSpec.describe "a platform admin", type: :feature do
       end
 
       expect(current_path).to eq(admin_store_path(store.slug))
-      expect(page).to have_content(photo.title + " photo has been removed")
+      expect(page).to have_content(photo.title + "' has been removed")
 
       within("#active-photos") do
         expect(page).to_not have_content(photo.title)
@@ -106,7 +106,7 @@ RSpec.describe "a platform admin", type: :feature do
 
     it "can add an admin to any store" do
       fill_in("user[email]", with: store_admin.email)
-      click_on "Add Admin"
+      click_on "Add New Admin"
 
       expect(page).to have_content(store_admin.name)
       expect(page).to have_content(store_admin.email)

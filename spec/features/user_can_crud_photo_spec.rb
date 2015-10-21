@@ -36,7 +36,7 @@ RSpec.describe "photos" do
       click_button("Create Photo")
 
       expect(current_path).to eq(admin_store_path(store.slug))
-      expect(page).to have_content("#{photo.title} photo has been added!")
+      expect(page).to have_content("'#{photo.title}' has been added!")
       expect(page).to have_content(photo.title)
       expect(page).to have_content(photo.description)
       expect(page).to have_content(category1.name)
@@ -90,7 +90,7 @@ RSpec.describe "photos" do
 
       expect(current_path).to eq(admin_store_path(store_admin.store.slug))
       expect(store.photos.active.count).to eq(starting_photo_count - 1)
-      expect(page).to have_content(photo.title + " photo has been removed")
+      expect(page).to have_content("'#{photo.title}' has been removed")
 
       within("#active-photos") do
         expect(page).to_not have_content(photo.title)

@@ -14,9 +14,13 @@ RSpec.describe Store, type: :model do
                               store_id: 1)}
 
   it "is invalid without a name" do
+    store.update(name: nil)
+    expect(store).to be_invalid
   end
 
   it "is invalid without a tagline" do
+    store.update(tagline: nil)
+    expect(store).to be_invalid
   end
 
   context "with no watermark id" do
