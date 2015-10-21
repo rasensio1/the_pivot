@@ -72,7 +72,7 @@ class UsersController < ApplicationController
   end
 
   def clear_tmp
-    file_paths = Find.find(Rails.root.join('tmp')).select { |p| /.*\.jpg$/ =~ p }
+    file_paths = Find.find(Rails.root.join('tmp').to_s).select { |p| /.*\.jpg$/ =~ p }
     FileUtils.rm file_paths
     #FileUtils.rm ["#{Rails.root.join('tmp/images.zip')}"]
   end
