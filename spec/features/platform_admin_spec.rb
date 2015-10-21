@@ -49,6 +49,12 @@ RSpec.describe "a platform admin", type: :feature do
       expect(current_path).to eq(god_dashboard_path)
     end
 
+    it "does not have a profile link in header" do
+      within(".navbar") do
+        expect(page).not_to have_link("Profile")
+      end
+    end
+
     it "can add a photo to any store" do
       click_on "Add a photo"
       fill_in("photo[title]", with: photo.title)

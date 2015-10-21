@@ -24,7 +24,10 @@
           <li><%= link_to "Dashboard", god_dashboard_path %></li>
         <% end %>
 
-        <li><%= link_to "Profile", profile_path %></li>
+        <% if !current_user.platform_admin? %>
+          <li><%= link_to "Profile", profile_path %></li>
+        <% end %>
+
         <li><%= link_to "Sign Out", logout_path, method: :delete %></li>
 
       <% else %>
