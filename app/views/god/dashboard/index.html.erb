@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+
+      <h1>You are all Powerful!</h1>
+
+        <% @stores.each_with_index do |store, index| %>
+          <div class="store-title-button">
+            <%= link_to link_to store.name, admin_store_path(store.slug), class: "btn btn-primary btn-lg" %>
+          </div>
+        <% end %>
+
+    </div>
+  </div>
+</div>
+

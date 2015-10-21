@@ -13,10 +13,13 @@ Rails.application.routes.draw do
 
   namespace "admin" do
     resources :orders, only: [:show, :update]
-    resource :dashboard, only: [:show]
     get ":store_name/edit", as: :store, to: "stores#edit"
     resources :stores, path: ":store_name", only: [:update]
     resources :store_admins, only: [:create]
+  end
+
+  namespace "god" do
+    get "dashboard", to: "dashboard#index"
   end
 
   namespace "stores", as: "store", path: ":store_name" do

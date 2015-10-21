@@ -46,7 +46,7 @@ class Admin::PhotosController < Admin::BaseController
       photo.update(active: false)
     end
     flash[:info] = "'#{photo.title}' has been removed."
-    redirect_to admin_store_path(current_user.store.slug)
+    redirect_to :back
   end
 
   private
@@ -75,22 +75,10 @@ class Admin::PhotosController < Admin::BaseController
 
   def new_photo
     if params[:photo][:watermark] == "true"
-      watermark_photo
+      PhotoCreator.watermark_photo(params)
     else
       PhotoCreator.photo(photo_params)
     end
-  end
-
-  def watermark_photo
-    store = params[:photo][:store_id]
-    file = params[:photo][:file]
-    Photo.new(title: "Store #{store} Watermark #{Time.now.strftime('%s')}",
-              description: "Store #{store} Watermark",
-              standard_price: 1,
-              commercial_price: 1,
-              store_id: store,
-              file: file,
-              active: false)
   end
 
   def photo_params
