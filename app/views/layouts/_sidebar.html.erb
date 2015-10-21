@@ -2,11 +2,8 @@
   <div class="well">
     <ul>
       <li><%= link_to "All Photos", photos_path(filter: 0), class: "side-nav-element"%></li>
-        <%= render partial: "layouts/category", collection: @categories %>
+      <%= render partial: "layouts/category", collection: @categories, locals: {path: :photos_path} %>
     </ul>
   </div>
-    <div class = "well" >
-      <h4> Want your own shop? </h4>
-      <%= link_to "Sign Up!", "/login", class: "list-group-item text-center" %>
-    </div>
+  <%= render "layouts/new_shop" %>
 </div>

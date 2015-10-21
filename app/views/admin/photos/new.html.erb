@@ -46,7 +46,7 @@
             </div>
           </div>
 
-          <%= f.hidden_field :store_id, value: current_user.store.id %>
+          <%= f.hidden_field :store_id, value: @store.id %>
 
           <%= f.submit "Create Photo", class: "btn btn-primary" %>
         <% end %>

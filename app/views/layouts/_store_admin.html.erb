@@ -1,1 +1,18 @@
-<li class = 'store-admin'><%=store_admin.name%> | <%=store_admin.email%></li>
+
+<table class="table table-striped table-hover">
+  <caption>Current Administrators</caption>
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% admins.each do |admin| %>
+    <tr>
+      <td><%= admin.name %></td>
+      <td><%= admin.email %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

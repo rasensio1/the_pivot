@@ -7,13 +7,14 @@ RSpec.describe "Authorization: " do
   let!(:admin) { User.find_by(name: "admin") }
   let!(:store) { admin.store }
   let!(:photo) { admin.store.photos.first }
-  let!(:other_store) { Store.second }
+  let!(:other_store) { Store.joins(:photos).first }
 
   context "not logged in" do
 
     it "cant create a shop" do
       visit new_store_path
       expect(page).to have_content("Not Authorized")
+      expect(page).to have_link("Feel free to enjoy our lovely home page though!")
     end
 
     it "cant view shop admin page" do
@@ -50,4 +51,5 @@ RSpec.describe "Authorization: " do
       expect(page).to have_content("Not Authorized")
     end
   end
+
 end
