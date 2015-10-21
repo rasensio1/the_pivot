@@ -39,7 +39,6 @@ class UsersController < ApplicationController
   end
 
   def export
-    kill_zip
 
     data = JSON.parse(params.first.first)
     ids = data.select{ |k,_| k =~ /\A\d*\z/}.map{ |_,v| v}.map(&:to_i)
