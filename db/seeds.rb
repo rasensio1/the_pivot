@@ -6,10 +6,10 @@ class Seed
     @photo_count       = 301
     @order_count       = 500
     @order_items_count = 2500
-    create_categories
     create_users
     create_stores
     create_photos
+    create_categories
     create_statuses
     create_orders
     create_order_items
@@ -79,15 +79,17 @@ class Seed
   end
 
   def create_photos
-    # @photo_count.times do |index|
-
     File.open("#{Rails.root}/spec/fixtures/photo_urls.txt").readlines.each_with_index do |line, index|
       photo = Photo.create(title:            "Example Title #{index + 1}",
                            description:      "Fairly long and very expressive title that makes you really think about your place in life #{index + 1}",
                            standard_price:   (rand(5) * 100) + 99,
                            commercial_price: ((rand(20) + 89) * 100) + 99,
-                           store_id:         Store.all.sample.id)
+                           store_id:         Store.all.sample.id,
+                           file: "temp-file-name")
+
       photo.update_column(:file, line.chomp)
+
+      puts("photo id: #{photo.id}")
     end
 
     Photo.create(title:            "Andrew's One Photo",
