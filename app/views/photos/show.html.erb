@@ -12,14 +12,12 @@
     </div>
 
     <div class="col-md-9">
-
       <div class="">
         <%= cl_image_tag(@photo.file,
                          :transformation => {:height => 500, :crop => :fill},
                          :overlay => @photo.store.watermark_accessor,
                          :gravity => :south_east, :x => 10, :y => 10) %>
       </div>
-
     </div>
   </div>
 </div>
