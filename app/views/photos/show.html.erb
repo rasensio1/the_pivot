@@ -15,9 +15,9 @@
 
       <div class="">
         <%= cl_image_tag(@photo.file,
-                         :transformation => {:height => 350, :crop => :fill},
+                         :transformation => {:height => 500, :crop => :fill},
                          :overlay => @photo.store.watermark_accessor,
-                         :gravity => :south_east, :x => 5, :y => 5) %>
+                         :gravity => :south_east, :x => 10, :y => 10) %>
       </div>
 
     </div>

@@ -1,5 +1,5 @@
 class Admin::PhotosController < Admin::BaseController
-  before_action :require_shop_admin 
+  before_action :require_shop_admin
 
   def index
     @photos = Photo.all
@@ -15,11 +15,11 @@ class Admin::PhotosController < Admin::BaseController
   end
 
   def create
-    photo = PhotoCreator.photo(photo_params)
+    photo = new_photo
 
     if photo.save
       PhotoCreator.create_relations(photo, params)
-      flash[:success] = "#{photo.title} photo has been added!"
+      flash[:success] = "'#{photo.title}' has been added!"
       redirect_to admin_store_path(photo.store.slug)
     else
       set_flash_errors(photo)
@@ -67,6 +67,26 @@ class Admin::PhotosController < Admin::BaseController
     Photo.find(params[:id])
   end
 
+  def new_photo
+    if params[:photo][:watermark] == "true"
+      watermark_photo
+    else
+      PhotoCreator.photo(photo_params)
+    end
+  end
+
+  def watermark_photo
+    store = params[:photo][:store_id]
+    file = params[:photo][:file]
+    Photo.new(title: "Store #{store} Watermark #{Time.now.strftime('%s')}",
+              description: "Store #{store} Watermark",
+              standard_price: 1,
+              commercial_price: 1,
+              store_id: store,
+              file: file,
+              active: false)
+  end
+
   def photo_params
     convert_currency_fields(
     params.require(:photo).permit(
@@ -77,8 +97,7 @@ class Admin::PhotosController < Admin::BaseController
       :file,
       :created_at,
       :updated_at,
-      :store_id,
-      :category_id)
+      :store_id)
     )
   end
 end
