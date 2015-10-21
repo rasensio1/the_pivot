@@ -58,4 +58,44 @@ RSpec.describe "a platform admin", type: :feature do
     expect(page).to have_content(photo.title)
   end
 
+  it "can edit a photo for any store" do
+    sign_in(platform_admin)
+
+    visit admin_store_path(store.slug)
+
+    within "#active-photos" do
+      first(:link, "Edit").click
+    end
+
+    expect(current_path).to eq(edit_store_photo_path(store.slug, photo))
+
+    fill_in("photo[title]", with: "Another title")
+    fill_in("photo[description]", with: "Woohoo")
+
+    click_on "Submit"
+    expect(current_path).to eq(admin_store_path(store.slug))
+    expect(page).to have_content("Another title")
+    expect(page).to have_content("Woohoo")
+  end
+
+  it "can delete a photo for any store" do
+    store.photos.last.delete
+    sign_in(platform_admin)
+
+    visit admin_store_path(store.slug)
+
+    within "#active-photos" do
+      first(:link, "Delete").click
+    end
+    save_and_open_page
+
+    expect(current_path).to eq(admin_store_path(store.slug))
+    expect(page).to have_content(photo.title + " photo has been removed")
+
+    within("#active-photos") do
+      expect(page).to_not have_content(photo.title)
+      expect(page).to_not have_content(photo.description)
+    end
+  end
+
 end
