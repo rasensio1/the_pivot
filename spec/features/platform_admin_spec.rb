@@ -7,24 +7,32 @@ RSpec.describe "a platform admin", type: :feature do
   fixtures :categories
   fixtures :photos
 
-  let!(:platform_admin) {User.find_by(email: "platform_admin@admin.com")}
-  let!(:store_admin) {User.find_by(email: "admin@admin.com")}
-  let!(:store) {store_admin.store}
-  let!(:photo) {store.photos.first}
-  let!(:category1) {Category.first}
-  let!(:category2) {Category.second}
-  let!(:category3) {Category.third}
+  let!(:platform_admin) { User.find_by(email: "platform_admin@admin.com") }
+  let!(:store_admin) { User.find_by(email: "admin@admin.com") }
+  let!(:store) { store_admin.store }
+  let!(:photo) { store.photos.first }
+  let!(:category1) { Category.first }
+  let!(:category2) { Category.second }
+  let!(:category3) { Category.third }
 
-  it "can access the platform dashboard" do
+  it "goes to dashboard after login" do
     sign_in(platform_admin)
-
 
     expect(current_path).to eq(god_dashboard_path)
     expect(page).to have_content("You are all Powerful!")
 
-    within("table") do
-      expect(page).to have_link(store.name)
+    expect(page).to have_link(store.name)
+  end
+
+  it "has their dashboard link in the header" do
+    sign_in(platform_admin)
+
+    within(".navbar") do
+      expect(page).to have_link("Dashboard")
+      click_on "Dashboard"
     end
+
+    expect(current_path).to eq(god_dashboard_path)
   end
 
   it "can add a photo to any store" do
