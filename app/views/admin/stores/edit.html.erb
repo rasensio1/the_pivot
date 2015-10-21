@@ -21,7 +21,7 @@
     </div>
   </div>
 
-  <% if current_user.store == @store %>
+  <% if current_user.store == @store || current_user.platform_admin? %>
     <div class="row">
       <div class="col-md-12 well">
         <%= render partial: "layouts/store_admin", locals: { admins: @store_admins } %>

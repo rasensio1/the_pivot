@@ -9,6 +9,7 @@ RSpec.describe "a platform admin", type: :feature do
 
   let!(:platform_admin) { User.find_by(email: "platform_admin@admin.com") }
   let!(:store_admin) { User.find_by(email: "admin@admin.com") }
+  let!(:new_admin) { User.find_by(email: "jason@example.ninja") }
   let!(:store) { store_admin.store }
   let!(:photo) { store.photos.first }
   let!(:category1) { Category.first }
@@ -87,7 +88,6 @@ RSpec.describe "a platform admin", type: :feature do
     within "#active-photos" do
       first(:link, "Delete").click
     end
-    save_and_open_page
 
     expect(current_path).to eq(admin_store_path(store.slug))
     expect(page).to have_content(photo.title + " photo has been removed")
@@ -96,6 +96,18 @@ RSpec.describe "a platform admin", type: :feature do
       expect(page).to_not have_content(photo.title)
       expect(page).to_not have_content(photo.description)
     end
+  end
+
+  it "can add an admin to any store" do
+    sign_in(platform_admin)
+
+    visit admin_store_path(store.slug)
+
+    fill_in("user[email]", with: new_admin.email)
+    click_on "Add Admin"
+
+    expect(page).to have_content(new_admin.name)
+    expect(page).to have_content(new_admin.email)
   end
 
 end
