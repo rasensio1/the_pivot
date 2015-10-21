@@ -4,7 +4,7 @@ class Admin::StoreAdminsController < Admin::BaseController
     new_admin = User.find_by(email: params[:user][:email])
 
     if new_admin
-      StoreAdmin.create(user_id: new_admin.id, store_id: current_user.store.id)
+      StoreAdmin.create(user_id: new_admin.id, store_id: params[:user][:store_id])
     else
       flash[:warning] = "Sorry, but #{params[:user][:email]} is not a Photo's Ready user."
     end

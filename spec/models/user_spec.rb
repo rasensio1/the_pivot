@@ -22,5 +22,10 @@ RSpec.describe "the user", type: :model do
       user.email = nil
       expect(user).to_not be_valid
     end
+
+    it "not a platform admin by default" do
+      user = User.create(name: "name", email: "name@name.com", password: "password")
+      expect(user.platform_admin?).to eq(false)
+    end
   end
 end

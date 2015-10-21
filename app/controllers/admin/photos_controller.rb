@@ -40,7 +40,7 @@ class Admin::PhotosController < Admin::BaseController
   def destroy
     my_photo.update(active: false)
     flash[:info] = "#{my_photo.title} photo has been removed"
-    redirect_to admin_store_path(current_user.store.slug)
+    redirect_to admin_store_path(my_photo.store.slug)
   end
 
   private
