@@ -10,7 +10,7 @@ class PhotosController < ApplicationController
 
   def index
     @label = Category.label(filter_id)
-    @photos = Photo.category_photos(filter_id).paginate(page: params[:page])
     @categories = Category.all.sample(8)
+    @photos = photos_for_sale.category_photos(filter_id).paginate(page: params[:page])
   end
 end

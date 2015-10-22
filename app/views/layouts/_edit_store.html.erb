@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-6">
-    <%= form_for [:admin, @store], html: {class: "edit-store"} do |f| %>
+    <%= form_for [:admin, @store], url: admin_store_path(@store.slug), html: {class: "edit-store"} do |f| %>
       <div class="col-md-2 edit-store-label">
         <%= f.label :name %><br><br>
         <%= f.label :tagline %>
