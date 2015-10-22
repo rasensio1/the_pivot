@@ -20,7 +20,6 @@
             <td>
               <%= form_for ["admin", store], url: admin_store_path(store.slug) do |f| %>
                   <%= f.check_box :active %>
-                  <%= f.hidden_field :id, value: store.id %>
                   <%= f.submit "Update", class: "btn" %>
               <% end %>
             </td>

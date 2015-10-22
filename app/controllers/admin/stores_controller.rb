@@ -11,7 +11,7 @@ class Admin::StoresController < Admin::BaseController
   end
 
   def update
-    store = Store.find(params[:store][:id])
+    store = current_store
     store.update(store_params)
     flash[:success] = "#{store.name} has been updated!"
 
