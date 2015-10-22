@@ -8,7 +8,7 @@
         <% if !current_user.store %>
           <%= link_to "Create Store", new_store_path, class: "btn btn-primary btn-lg" %>
         <% else %>
-          <%= link_to "My Store", admin_store_path(current_user.store.slug), class: "btn btn-primary" %>
+          <%= link_to "My Store", admin_store_path(current_user.store.slug), class: "btn btn-primary btn-lg" %>
         <% end %>
       </div>
     </div>
@@ -86,7 +86,7 @@
          </div>
        </div>
     <div class = "small-spacer"></div>
-        <% @user_photos.each do |photo| %> 
+        <% @user_photos.each do |photo| %>
           <%= fields_for "photos[#{photo.id}]", photo do |pf| %>
               <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 item-box download-center">
                 <div class="thumbnail download-center">

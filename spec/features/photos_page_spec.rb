@@ -58,9 +58,10 @@ RSpec.describe "the photos view", type: :feature do
 
   context "a user visits the single photo show page of an active photo" do
     before do
+      photo1.update(title: "1 Test This Link")
       visit root_path
       click_link "All Photos"
-      click_link "Example Title 1"
+      click_link "1 Test This Link"
     end
 
     it "displays a page with a photo summary" do
@@ -72,10 +73,9 @@ RSpec.describe "the photos view", type: :feature do
       expect(page).to have_link("Add to Cart")
     end
 
-    xit "has a link to the photo's store" do
-      # I don't know why this test doesn't pass.
-      # It claims the link isn't found, but it's there, plain as day.
-      expect(page).to have_link(store_photos_path(store.slug))
+    it "has a link to the photo's store" do
+      click_link "Visit Store"
+      expect(current_path).to eq(store_photos_path(store.slug))
     end
   end
 

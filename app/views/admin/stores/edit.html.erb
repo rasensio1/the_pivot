@@ -10,15 +10,15 @@
 
   <div class="row">
     <div class="col-md-6">
-      <h1><%= @store.name %></h1>
-
-      <h3><%= @store.tagline %></h3>
+      <%= render partial: "layouts/page_title", locals: {page_title: "#{@store.name}"} %>
     </div>
 
     <div class="col-md-6">
       <div class="row text-center">
+        <h3><%= @store.tagline %></h3>
         <%= link_to "Add a photo", new_store_photo_path(@store.slug), class: "btn btn-primary btn-lg" %>
         <%= link_to "View Store", store_photos_path(@store.slug), class: "btn btn-primary btn-lg" %>
+        <%= link_to "Sales History", admin_store_sales_path(@store.slug), class: "btn btn-primary btn-lg" %>
       </div>
     </div>
   </div>
@@ -47,7 +47,7 @@
         <tr>
           <th>Image</th>
           <th>Title</th>
-          <th>Category</th>
+          <th>Categories</th>
           <th>Description</th>
           <th>Standard Price</th>
           <th>Links</th>

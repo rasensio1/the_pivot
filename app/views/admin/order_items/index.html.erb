@@ -1,45 +1,47 @@
-<%= render partial: "layouts/page_title", locals: {page_title: "#{@store.name} Sales"} %>
+<div class="container">
+  <%= render partial: "layouts/page_title", locals: {page_title: "#{@store.name} Sales"} %>
 
-
-
-STORE SALES
-
-
-<div class="row">
-  <div class="col-md-3"></div>
-  <div class="col-md-6 list-group">
-    <% @statuses.each do |status| %>
-      <%= link_to status.name, "/admin/orders/#{status.name}", class: "list-group-item btn btn-default order-list-button" %>
-      <div class="total-orders"><strong>Total: <%= Order.where(status_id: status.id).count %></strong></div>
-      <% end %>
+  <div class="row">
+    <div class="col-lg-8 well">
+      <h1>Sales to Date: <%= dollars(@store.sales_amount) %></h1>
+    </div>
   </div>
-  <div class="col-md-3"></div>
-</div>
 
-<div class="row">
-  <!-- Grid being used for spacing maybe try to do it with sass in view refactor -->
-  <div class="col-md-3"><h4>Details:</h4></div>
-  <div class="col-md-9"></div>
-</div>
-
-<div class="table-responsive">
-  <table class="table table-striped orders">
-
-    <tr>
-      <th>Order Number</th>
-      <th>Total</th>
-      <th>Order Updated Date</th>
-      <th></th>
-    </tr>
-
-    <% @orders.each do |order| %>
-      <tr>
-        <td><%= link_to order.id, "/orders/#{order.id}" %></td>
-        <td><%= dollars(order.total) %></td>
-        <td><%= order.updated_at.strftime("%A, %b %d %Y %l:%M %p") %></td>
-        <td><%= link_to "View", order_path(order) %></td>
-      </tr>
-    <% end %>
-  </table>
-
+  <div class="row">
+    <div class="col-md-12 well">
+      <table class="table table-striped table-hover">
+        <thead>
+        <tr>
+          <th>Image</th>
+          <th>Title</th>
+          <th>Categories</th>
+          <th>Sale Count</th>
+          <th>Revenue</th>
+        </tr>
+        </thead>
+        <tbody id="active-photos">
+          <% @photos.each do |photo| %>
+            <tr>
+              <td><%= link_to image_tag(photo.file_url(:thumbnail), alt: "A picture", class: "admin_image"), store_photo_path(photo.store.slug,photo) %>
+              <td><%= link_to photo.title, store_photo_path(photo.store.slug, photo) %></td>
+              <td><% photo.categories.each do |cat| %>
+                  <%= cat.name %>
+                <%end%> </td>
+              <td><%= photo.sales_quantity %></td>
+              <td><%= dollars(photo.sales_total) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td></td>
+            <td></td>
+            <td><h3>Totals:</h3></td>
+            <td id="total-quantity"><h3><%= @store.sales_quantity %></td>
+            <td id="total-sales"><h3><%= dollars(@store.sales_amount) %></h3></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
 </div>
