@@ -54,7 +54,7 @@ RSpec.describe "a platform admin", type: :feature do
       end
     end
 
-    it "can deactivate a store" do
+    xit "can deactivate a store" do
       within("##{store.slug}") do
         expect(find_field("store[active]")).to be_checked
         uncheck("store[active]")
@@ -68,7 +68,7 @@ RSpec.describe "a platform admin", type: :feature do
       end
     end
 
-    it "can activate a store" do
+    xit "can activate a store" do
       store.update_attribute(:active, false)
       visit god_dashboard_path
 

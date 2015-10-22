@@ -20,7 +20,7 @@
             <td><%= link_to store.tagline, admin_store_path(store.slug) %></td>
             <td>
               <%= form_for ["admin", store], url: admin_store_path(store.slug) do |f| %>
-                <%= f.check_box :active %>
+                <%= f.check_box :active, class: "activate-store-button" %>
                 </td>
                 <td>
                 <%= f.submit "Update", class: "btn btn-primary" %>

@@ -1,4 +1,4 @@
 $(document).ready(function() {
-  $("[id='store_active']").bootstrapSwitch();
+  $("[class='activate-store-button']").bootstrapSwitch();
   $('.bootstrap-switch').addClass('bootstrap-switch-mini')
 })
