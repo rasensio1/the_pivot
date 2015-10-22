@@ -32,13 +32,10 @@ class UsersController < ApplicationController
     image_ids.each do |id|
       Cloudinary::Api.update(id, :tags => "download")
     end
-
     file = Cloudinary::Uploader.multi("download", :format => 'zip')['url'] 
-
     image_ids.each do |id|
       Cloudinary::Api.update(id, :tags => "hi")
     end
-
     redirect_to file
   end
 
@@ -48,7 +45,7 @@ class UsersController < ApplicationController
 
   def update
     current_user.update_attributes(user_params)
-    current_user.save!
+    set_flash_errors(current_user) unless current_user.save 
     redirect_to profile_path(current_user)
   end
 

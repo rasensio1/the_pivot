@@ -31,7 +31,6 @@ RSpec.describe "a store admin" do
         expect(page).to have_selector("input[value='#{photo.title}']")
         expect(page).to have_selector("input[value='#{photo.description}']")
         expect(page).to have_selector("input[value='$23.00']")
-        expect(page).to have_selector("input[value='$35.00']")
       end
 
       it "shows store admin page after submit" do
@@ -65,15 +64,6 @@ RSpec.describe "a store admin" do
 
         within("#active-photos") do
           expect(page).to have_content("$51.00")
-        end
-      end
-
-      it "updates the commercial price" do
-        fill_in "Commercial price", with: "$1,287.33"
-        click_button "Submit"
-
-        within("#active-photos") do
-          expect(page).to have_content("$1,287.33")
         end
       end
 

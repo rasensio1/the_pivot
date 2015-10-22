@@ -64,12 +64,11 @@ ActiveRecord::Schema.define(version: 20151022004248) do
     t.string   "title"
     t.string   "description"
     t.integer  "standard_price"
-    t.integer  "commercial_price"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.integer  "store_id"
     t.string   "file"
-    t.boolean  "active",           default: true
+    t.boolean  "active",         default: true
   end
 
   add_index "photos", ["store_id"], name: "index_photos_on_store_id", using: :btree
