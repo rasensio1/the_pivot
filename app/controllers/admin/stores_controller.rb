@@ -12,7 +12,7 @@ class Admin::StoresController < Admin::BaseController
 
   def update
     store = current_store
-    store.update(store_params)
+    store.update_attributes(store_params)
     flash[:success] = "#{store.name} has been updated!"
 
     redirect_to correct_admin_page(store, params)
