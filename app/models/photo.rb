@@ -30,4 +30,8 @@ class Photo < ActiveRecord::Base
     id == store.watermark_id
   end
 
+  def public_id
+    file.file.public_id
+  end
+
 end
