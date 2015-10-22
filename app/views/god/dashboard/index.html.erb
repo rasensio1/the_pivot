@@ -1,10 +1,11 @@
+
 <div class="container">
   <div class="row">
     <div class="col-md-12">
 
       <h1>You are all Powerful!</h1>
 
-      <table class="table table-striped table-hover well">
+      <table id="platform-admin-stores" class="table table-striped table-hover well">
         <thead>
         <tr>
           <th>Store</th>
@@ -20,7 +21,9 @@
             <td>
               <%= form_for ["admin", store], url: admin_store_path(store.slug) do |f| %>
                 <%= f.check_box :active %>
-                <%= f.submit "Update", class: "btn" %>
+                </td>
+                <td>
+                <%= f.submit "Update", class: "btn btn-primary" %>
               <% end %>
             </td>
           </tr>
@@ -31,4 +34,5 @@
     </div>
   </div>
 </div>
+
 
