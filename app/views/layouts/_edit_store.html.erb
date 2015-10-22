@@ -35,7 +35,7 @@
       <div class="text-center">
       <% if @store.watermark_id %>
         <br><br>
-        Example of your current watermark
+        <div>Example of your current watermark</div>
         <%= cl_image_tag(@watermark_demo.public_id,
                          :transformation => {:height => 250, :crop => :fill},
                          :overlay => @store.watermark_accessor,

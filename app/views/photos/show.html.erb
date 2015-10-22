@@ -7,17 +7,13 @@
           <%= @photo.description %>
         </p>
         <h4><%= dollars(@photo.standard_price) %></h4>
-        <%= button_to "Add to Cart", cart_items_path(photo_id: @photo.id), class: "btn btn-primary" %>
-        <%= link_to "Back to Store", store_photos_path(@photo.store.slug), class: "btn btn-primary" %>
+        <%= link_to "Visit Store", store_photos_path(@photo.store.slug), class: "btn btn-info in-line" %>
+        <%= link_to "Add to Cart", cart_items_path(photo_id: @photo.id), method: :post, class: "btn btn-primary in-line", id: "photo_show_add_to_cart" %>
     </div>
 
     <div class="col-md-9">
-      <div class="">
-        <%= cl_image_tag(@photo.file,
-                         :transformation => {:height => 500, :crop => :fill},
-                         :overlay => @photo.store.watermark_accessor,
-                         :html_height => 200, :gravity => :south_east, :x => 10, :y => 10) %>
-      </div>
+      <%# This method lives in application_helper.rb %>
+      <%= photo_preview(@photo) %>
     </div>
   </div>
 </div>
