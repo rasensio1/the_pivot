@@ -1,7 +1,9 @@
 <div class = "container">
   <%= render partial: "layouts/page_title", locals: { page_title: @store.name } %>
-        <h3><%= @store.tagline %></h3>
-</div>
+<div class="row page-title">
+  <div class="col-md-offset-3 col-lg-9  text-center">
+      <h3><%= @store.tagline %></h3>
+  </div>
 
   <div class="items-list">
     <div class="row">
