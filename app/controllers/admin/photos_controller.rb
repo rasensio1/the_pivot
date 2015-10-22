@@ -52,13 +52,6 @@ class Admin::PhotosController < Admin::BaseController
 
   private
 
-  def set_flash_errors(object)
-    object.errors.messages.each do |attr, msg|
-      flash[:danger] ||= ""
-      flash[:danger] += "#{attr.to_s.humanize} - #{msg.first.humanize} <br>"
-    end
-  end
-
   def convert_currency_fields(photo_params)
     photo_params[:standard_price] = cents(photo_params[:standard_price])
     photo_params[:commercial_price] = cents(photo_params[:commercial_price])
