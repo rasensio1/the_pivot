@@ -30,7 +30,7 @@ store_admin:
 
 platform_admin:
   id: 2001
-  name: admin
+  name: platform_admin
   email: platform_admin@admin.com
   platform_admin: true
   password_digest: <%= User.digest("password") %>

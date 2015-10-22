@@ -31,7 +31,7 @@ class Store < ActiveRecord::Base
     photos.reduce(0) {|sum, photo| sum += photo.sales_quantity}
   end
 
-  def sales_amount
+  def sales_total
     photos.reduce(0) {|sum, photo| sum += photo.sales_total}
   end
 

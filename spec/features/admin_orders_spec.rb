@@ -9,8 +9,7 @@ RSpec.describe "an admin" do
   fixtures :statuses
 
   let!(:store_admin) { User.find_by(name: "admin") }
-  let!(:other_store) { Store.find_by(name: "Alons Store")
-  }
+  let!(:other_store) { Store.find_by(name: "Alons Store") }
   let!(:order1) { store_admin.orders.first }
   let!(:order2) { store_admin.orders.last }
   let!(:admin_order_item_1) { order2.order_items.first }
