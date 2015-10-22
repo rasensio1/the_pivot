@@ -43,7 +43,7 @@ RSpec.describe "the user profile page", type: :feature do
         expect(page).to have_content "Mia"
       end
 
-      it "is told to enter a password" do
+      it "is told to entder a password" do
         click_link "Edit Profile"
         expect(current_path).to eq profile_edit_path
 
