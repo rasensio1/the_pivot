@@ -27,7 +27,7 @@ RSpec.describe "an admin on their dashboards" do
     expect(page).to have_content("The Store")
   end
 
-  it "can not add an admin that is not regestered" do
+  it "can not add duplicate admins" do
 
     ryan = User.create(name: "Regular Ryan", email: "ryan@yeah.com", password: "password")
     sign_in(admin)
@@ -46,7 +46,7 @@ RSpec.describe "an admin on their dashboards" do
     expect(page).to have_content("Cannot add duplicate admins!")
   end
 
-  it "can not add an admin multiple times" do
+  it "can not add an admin that is not regestered" do
     unregistered_user = "unregestered@user.boo"
     sign_in(admin)
 
