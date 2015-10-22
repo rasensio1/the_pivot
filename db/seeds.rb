@@ -74,8 +74,7 @@ class Seed
 
     Store.create(name:    "Andrew's Photo HyperMegaMart",
                  tagline: "Bargain photo's for those who don't need the best, or even close.",
-                 user_id: User.find_by(email: "andrew@turing.io").id
-    )
+                 user_id: User.find_by(email: "andrew@turing.io").id)
   end
 
   def create_photos

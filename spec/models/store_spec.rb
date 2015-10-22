@@ -2,16 +2,13 @@ require 'rails_helper'
 
 RSpec.describe Store, type: :model do
   fixtures :users
+  fixtures :photos
+  let!(:photo) {Photo.find(1)}
   let!(:store) {Store.create(name: "Test Store",
                               tagline: "Test Tagline",
                               user_id: 1,
                               slug: "test-store",
                               watermark_id: nil)}
-  let!(:photo) {Photo.create(title: "Test Photo",
-                              description: "Test Description",
-                              standard_price: 1,
-                              commercial_price: 1,
-                              store_id: 1)}
 
   it "is invalid without a name" do
     store.update(name: nil)
