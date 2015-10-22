@@ -2,8 +2,9 @@
   <%= render partial: "layouts/page_title", locals: {page_title: "#{@store.name} Sales"} %>
 
   <div class="row">
-    <div class="col-lg-8 well">
-      <h1>Sales to Date: <%= dollars(@store.sales_amount) %></h1>
+    <div class="col-lg-8 well tagline in-line">
+      Sales to Date: <%= dollars(@store.sales_amount) %>
+      <%= link_to "Back to Dashboard", admin_store_path(@store.slug), class: "btn btn-primary button-right" %>
     </div>
   </div>
 
