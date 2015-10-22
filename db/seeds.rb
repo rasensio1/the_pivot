@@ -118,9 +118,11 @@ class Seed
 
   def create_order_items
     @order_items_count.times do |index|
+      photo_id = Photo.all.sample.id
       OrderItem.create(order_id: Order.all.sample.id,
-                       photo_id: Photo.all.sample.id,
-                       quantity: 1)
+                       photo_id: photo_id,
+                       quantity: 1,
+                       sale_amount: Photo.find(photo_id).standard_price)
       puts "OrderItem: #{index}"
     end
   end
