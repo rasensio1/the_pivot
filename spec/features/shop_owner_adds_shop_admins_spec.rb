@@ -43,7 +43,7 @@ RSpec.describe "an admin on their dashboards" do
     fill_in("user[email]", with: "ryan@yeah.com")
     click_on "Add New Admin"
 
-    expect(page).to have_content("Cannot add duplicate Admins!")
+    expect(page).to have_content("Cannot add duplicate admins!")
   end
 
   it "can not add an admin multiple times" do
