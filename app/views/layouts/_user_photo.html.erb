@@ -1,14 +1,20 @@
-<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 item-box download-center">
-  <div class="thumbnail download-center">
-      <%= link_to image_tag(user_photo.file_url(:thumbnail), size: "80"), store_photo_path(user_photo.store.slug, user_photo, style: "max-width: auto") %>
-      <div class="caption download-center text-center">
-        <%= link_to user_photo.file_url(:full), class: "btn btn-success btn-xs" do %>
-          <i class="glyphicon glyphicon-cloud-download"></i>
-        <% end %>
+ <%= fields_for "photos[#{user_photo.id}]", user_photo do |pf| %>
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 item-box download-center">
+        <div class="thumbnail download-center">
+            <%= link_to image_tag(user_photo.file_url(:thumbnail), size: "80"), store_photo_path(user_photo.store.slug, user_photo, style: "max-width: auto") %>
+            <div class="caption download-center text-center">
+          <div class = "row">
+            <div class = "col-md-offset-1 col-md-4 text-center">
+              <%= link_to user_photo.file_url(:full), class: "btn btn-success btn-xs", id: 'float-left' do %>
+                <i class="glyphicon glyphicon-cloud-download"></i>
+              <% end %>
+            </div>
+            <div class = "col-md-5 pull-left">
+                <%= pf.check_box :title, class: "#{user_photo.id}", id: "my-check" %>
+            </div>
+            </div>
+          </div>
 
-        <%= fields_for user_photo do |photo| %>
-          <%= photo.check_box :title, class: "#{user_photo.id}" %>
-        <% end %>
-      </div>
-  </div>
-</div>
+        </div>
+    </div>
+<% end %>
