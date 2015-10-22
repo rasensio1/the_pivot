@@ -7,7 +7,11 @@
           <%= @photo.description %>
         </p>
         <h4><%= dollars(@photo.standard_price) %></h4>
-        <%= button_to "Add to Cart", cart_items_path(photo_id: @photo.id), class: "btn btn-primary" %>
+        <% if current_user && current_user.photos.include?(@photo) %>
+          <%= link_to "Download", @photo.file_url(:full), class: "btn btn-success" %>
+        <% else %>
+          <%= link_to "Add to Cart", cart_items_path(photo_id: @photo.id), method: :post, class: "btn btn-primary" %>
+        <% end %>
         <%= link_to "Back to Store", store_photos_path(@photo.store.slug), class: "btn btn-primary" %>
     </div>
 
