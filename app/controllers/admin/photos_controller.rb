@@ -54,7 +54,6 @@ class Admin::PhotosController < Admin::BaseController
 
   def convert_currency_fields(photo_params)
     photo_params[:standard_price] = cents(photo_params[:standard_price])
-    photo_params[:commercial_price] = cents(photo_params[:commercial_price])
     photo_params
   end
 
@@ -81,7 +80,6 @@ class Admin::PhotosController < Admin::BaseController
       :title,
       :description,
       :standard_price,
-      :commercial_price,
       :file,
       :created_at,
       :updated_at,
