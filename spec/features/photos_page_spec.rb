@@ -60,7 +60,7 @@ RSpec.describe "the photos view", type: :feature do
     before do
       visit root_path
       click_link "All Photos"
-      click_link "Example Title 1"
+      first(:link, "Example Title 1").click
     end
 
     it "displays a page with a photo summary" do
