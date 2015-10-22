@@ -3,7 +3,7 @@
 
   <div class="row">
     <div class="col-lg-8 well tagline in-line">
-      Sales to Date: <%= dollars(@store.sales_amount) %>
+      Sales to Date: <%= dollars(@store.sales_total) %>
       <%= link_to "Back to Dashboard", admin_store_path(@store.slug), class: "btn btn-primary button-right" %>
     </div>
   </div>
@@ -24,22 +24,22 @@
           <% @photos.each do |photo| %>
             <tr>
               <td><%= link_to image_tag(photo.file_url(:thumbnail), alt: "A picture", class: "admin_image"), store_photo_path(photo.store.slug,photo) %>
-              <td><%= link_to photo.title, store_photo_path(photo.store.slug, photo) %></td>
-              <td><% photo.categories.each do |cat| %>
+              <td id="title-<%= photo.id %>"><%= link_to photo.title, store_photo_path(photo.store.slug, photo) %></td>
+              <td id="categories-<%= photo.id %>"><% photo.categories.each do |cat| %>
                   <%= cat.name %>
                 <%end%> </td>
-              <td><%= photo.sales_quantity %></td>
-              <td><%= dollars(photo.sales_total) %></td>
+              <td id="quantity-<%= photo.id %>"><%= photo.sales_quantity %></td>
+              <td id="revenue-<%= photo.id %>"><%= dollars(photo.sales_total) %></td>
             </tr>
           <% end %>
         </tbody>
-        <tfoot>
+        <tfoot id="footer">
           <tr>
             <td></td>
             <td></td>
             <td><h3>Totals:</h3></td>
             <td id="total-quantity"><h3><%= @store.sales_quantity %></td>
-            <td id="total-sales"><h3><%= dollars(@store.sales_amount) %></h3></td>
+            <td id="total-revenue"><h3><%= dollars(@store.sales_total) %></h3></td>
           </tr>
         </tfoot>
       </table>
