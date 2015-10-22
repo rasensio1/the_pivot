@@ -27,6 +27,14 @@ class Store < ActiveRecord::Base
     photo.file.file.public_id if photo
   end
 
+  def sales_quantity
+    photos.reduce(0) {|sum, photo| sum += photo.sales_quantity}
+  end
+
+  def sales_amount
+    photos.reduce(0) {|sum, photo| sum += photo.sales_total}
+  end
+
   private
     def set_slug
       self.slug = name.parameterize

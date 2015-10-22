@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     get ":store_name/edit", as: :store, to: "stores#edit"
     resources :stores, path: ":store_name", only: [:update]
     resources :store_admins, only: [:create]
+    get ":store_name/sales", as: :store_sales, to: "order_items#index"
   end
 
   namespace "god" do
@@ -35,7 +36,7 @@ Rails.application.routes.draw do
   scope ":store_name", as: "store" do
     resources :photos, only: [:show]
   end
-  
+
   resources :photos, only: [:index]
 
   get "/cart", to: "cart_items#index"

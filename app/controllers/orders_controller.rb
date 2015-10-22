@@ -22,21 +22,21 @@ class OrdersController < ApplicationController
 
   private
 
-  def add_order_items(order)
-    cart.photos.each do |cart_item|
-      order.order_items.new(photo: cart_item.photo, quantity: cart_item.quantity)
+    def add_order_items(order)
+      cart.photos.each do |cart_item|
+        order.order_items.new(photo: cart_item.photo, quantity: cart_item.quantity, sale_amount: cart_item.photo.standard_price)
+      end
     end
-  end
 
-  def create_order
-    order = current_user.orders.new
-    add_order_items(order)
-    order.status_id = 1
-    order.save
-  end
+    def create_order
+      order = current_user.orders.new
+      add_order_items(order)
+      order.status_id = 1
+      order.save
+    end
 
-  def empty_cart
-    session[:cart] = {}
-    cart.empty
-  end
+    def empty_cart
+      session[:cart] = {}
+      cart.empty
+    end
 end

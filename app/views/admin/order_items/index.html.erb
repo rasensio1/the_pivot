@@ -1,0 +1,48 @@
+<div class="container">
+  <%= render partial: "layouts/page_title", locals: {page_title: "#{@store.name} Sales"} %>
+
+  <div class="row">
+    <div class="col-lg-8 well tagline in-line">
+      Sales to Date: <%= dollars(@store.sales_amount) %>
+      <%= link_to "Back to Dashboard", admin_store_path(@store.slug), class: "btn btn-primary button-right" %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 well">
+      <table class="table table-striped table-hover">
+        <thead>
+        <tr>
+          <th>Image</th>
+          <th>Title</th>
+          <th>Categories</th>
+          <th>Sale Count</th>
+          <th>Revenue</th>
+        </tr>
+        </thead>
+        <tbody id="active-photos">
+          <% @photos.each do |photo| %>
+            <tr>
+              <td><%= link_to image_tag(photo.file_url(:thumbnail), alt: "A picture", class: "admin_image"), store_photo_path(photo.store.slug,photo) %>
+              <td><%= link_to photo.title, store_photo_path(photo.store.slug, photo) %></td>
+              <td><% photo.categories.each do |cat| %>
+                  <%= cat.name %>
+                <%end%> </td>
+              <td><%= photo.sales_quantity %></td>
+              <td><%= dollars(photo.sales_total) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td></td>
+            <td></td>
+            <td><h3>Totals:</h3></td>
+            <td id="total-quantity"><h3><%= @store.sales_quantity %></td>
+            <td id="total-sales"><h3><%= dollars(@store.sales_amount) %></h3></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>

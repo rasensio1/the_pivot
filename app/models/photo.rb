@@ -2,6 +2,7 @@ class Photo < ActiveRecord::Base
   belongs_to :store
   has_many :categories, through: :photo_categories
   has_many :photo_categories
+  has_many :order_items
 
   mount_uploader :file, PhotoUploader
 
@@ -32,6 +33,14 @@ class Photo < ActiveRecord::Base
 
   def public_id
     file.file.public_id
+  end
+
+  def sales_quantity
+    order_items.count
+  end
+
+  def sales_total
+    order_items.sum(:sale_amount)
   end
 
 end
