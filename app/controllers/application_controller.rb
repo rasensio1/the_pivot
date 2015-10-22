@@ -17,6 +17,10 @@ class ApplicationController < ActionController::Base
     current_user && !current_user.stores.nil?
   end
 
+  def current_store
+    Store.find_by(slug: params[:store_name])
+  end
+
   def authorization_error
     render file: "/public/404_authorization.html", layout: false, status: 404
   end
@@ -36,4 +40,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def photos_for_sale
+    Photo.where(active: true).joins(:store).where(stores: {active: true})
+  end
 end
