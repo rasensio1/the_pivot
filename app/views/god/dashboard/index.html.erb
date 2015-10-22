@@ -13,18 +13,18 @@
         </tr>
         </thead>
         <tbody>
-          <% @stores.each do |store| %>
-          <tr>
+        <% @stores.each do |store| %>
+          <tr id=<%= store.slug %>>
             <td><%= link_to store.name, admin_store_path(store.slug) %></td>
             <td><%= link_to store.tagline, admin_store_path(store.slug) %></td>
             <td>
               <%= form_for ["admin", store], url: admin_store_path(store.slug) do |f| %>
-                  <%= f.check_box :active %>
-                  <%= f.submit "Update", class: "btn" %>
+                <%= f.check_box :active %>
+                <%= f.submit "Update", class: "btn" %>
               <% end %>
             </td>
           </tr>
-          <% end %>
+        <% end %>
         </tbody>
       </table>
 
