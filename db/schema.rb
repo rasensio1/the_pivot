@@ -93,10 +93,11 @@ ActiveRecord::Schema.define(version: 20151022024419) do
     t.string   "name"
     t.string   "tagline"
     t.integer  "user_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.string   "slug"
     t.integer  "watermark_id"
+    t.boolean  "active",       default: true
   end
 
   add_index "stores", ["user_id"], name: "index_stores_on_user_id", using: :btree

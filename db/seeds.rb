@@ -36,11 +36,6 @@ class Seed
   end
 
   def create_users
-    User.create!(name:                  "Josh",
-                 email:                 "josh@turing.io",
-                 password:              "password",
-                 password_confirmation: "password")
-
     password = "password"
     @user_count.times do |n|
       name  = Faker::Name.name
@@ -61,11 +56,16 @@ class Seed
                  password:              "password",
                  password_confirmation: "password")
 
-    User.create!(name:                  "platform admin",
-                 email:                 "pa@turing.io",
+    # User.create!(name:                  "platform admin",
+    #              email:                 "pa@turing.io",
+    #              password:              "password",
+    #              password_confirmation: "password",
+    #              platform_admin:        true)
+
+    User.create!(name:                  "Josh",
+                 email:                 "josh@turing.io",
                  password:              "password",
-                 password_confirmation: "password",
-                 platform_admin:        true)
+                 password_confirmation: "password")
   end
 
   def create_stores
@@ -83,7 +83,6 @@ class Seed
   end
 
   def create_photos
-
     File.open("#{Rails.root}/spec/fixtures/photo_urls.txt").readlines.each_with_index do |line, index|
       photo = Photo.new(title:          "Example Title #{index + 1}",
                         description:    "Fairly long and very expressive title that makes you really think about your place in life #{index + 1}",
@@ -127,9 +126,7 @@ class Seed
   end
 
   def create_platform_admin
-    #This user should not have any stores or orders
-    User.create!(id:                    User.last.id + 100,
-                 name:                  "Platform Admin Jr.",
+    User.create!(name:                  "Platform Admin Jr.",
                  email:                 "pa@turing.io",
                  password:              "password",
                  password_confirmation: "password",
