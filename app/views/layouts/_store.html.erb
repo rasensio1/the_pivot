@@ -2,7 +2,7 @@
   <div class="thumbnail store-collage-container">
     <div class="caption">
       <h4><%= link_to store.name, store_photos_path(store.slug) %></h4>
-        <% store.photos.sample(4).each do |photo| %>
+        <% store.collage_sample.each do |photo| %>
           <div class="store-collage">
             <%= link_to image_tag(photo.file_url(:thumbnail)), store_photos_path(store.slug) %>
           </div>

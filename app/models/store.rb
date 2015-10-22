@@ -18,6 +18,10 @@ class Store < ActiveRecord::Base
     end
   end
 
+  def collage_sample
+    photos.active.sample(4)
+  end
+
   def watermark_accessor
     photo = Photo.find_by(id: watermark_id)
     photo.file.file.public_id if photo
