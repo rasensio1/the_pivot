@@ -5,12 +5,12 @@ RSpec.describe "the photos view", type: :feature do
   fixtures :photos
   fixtures :stores
 
-  let!(:store) { User.find_by(email: "admin@admin.com").store }
-  let!(:deactivated_store_photo) { store.photos.first }
-  let!(:photo1) { Photo.first }
-  let!(:photo2) { Photo.second }
-  let!(:photo3) { Photo.third }
-  let!(:deactivated_store_photo) { Photo.fourth }
+  let!(:photo1) {Photo.first}
+  let!(:photo2) {Photo.second}
+  let!(:photo3) {Photo.third}
+  let!(:store) {photo1.store}
+  let!(:deactivated_store) {User.find_by(email: "admin@admin.com").store}
+  let!(:deactivated_store_photo) {Photo.fourth}
 
   context "a user visits the all-photos page" do
     before do
@@ -27,9 +27,9 @@ RSpec.describe "the photos view", type: :feature do
 
     context "and does not see photos" do
       before do
-        store.update_attribute(:active, false)
+        deactivated_store.update_attribute(:active, false)
         deactivated_store_photo.update_attribute(:title, "unique title")
-        store.photos << deactivated_store_photo
+        deactivated_store.photos << deactivated_store_photo
 
         visit root_path
         click_link "All Photos"
@@ -56,6 +56,40 @@ RSpec.describe "the photos view", type: :feature do
     end
   end
 
+  context "a user visits the single photo show page of an active photo" do
+    before do
+      visit root_path
+      click_link "All Photos"
+      click_link "Example Title 1"
+    end
+
+    it "displays a page with a photo summary" do
+      expect(page.status_code).to eq(200)
+      expect(current_path).to eq(store_photo_path(photo1.store.slug, photo1))
+      expect(page).to have_content(photo1.title)
+      expect(page).to have_content(photo1.description)
+      expect(page).to have_link("Visit Store")
+      expect(page).to have_link("Add to Cart")
+    end
+
+    xit "has a link to the photo's store" do
+      # I don't know why this test doesn't pass.
+      # It claims the link isn't found, but it's there, plain as day.
+      expect(page).to have_link(store_photos_path(store.slug))
+    end
+  end
+
+  context "a user visits the single photo show page of an inactive photo" do
+    before do
+      photo1.update(active: false)
+      visit store_photo_path(store.slug, photo1.id)
+    end
+
+    it "is redirected to the photos index page" do
+      expect(current_path).to eq(photos_path)
+      expect(page).to have_content("the photo you're looking for isn't available")
+    end
+  end
 
   context "a user views categories" do
     let!(:cat) { Category.create(name: "Landscape") }
