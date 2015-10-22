@@ -61,6 +61,11 @@ class Seed
                  password:              "password",
                  password_confirmation: "password")
 
+    User.create!(name:                  "platform admin",
+                 email:                 "pa@turing.io",
+                 password:              "password",
+                 password_confirmation: "password",
+                 platform_admin:        true)
   end
 
   def create_stores
@@ -80,21 +85,21 @@ class Seed
   def create_photos
 
     File.open("#{Rails.root}/spec/fixtures/photo_urls.txt").readlines.each_with_index do |line, index|
-      photo = Photo.new(title:            "Example Title #{index + 1}",
-                           description:      "Fairly long and very expressive title that makes you really think about your place in life #{index + 1}",
-                           standard_price:   (rand(5) * 100) + 99,
-                           store_id:         Store.all.sample.id)
-                           
+      photo = Photo.new(title:          "Example Title #{index + 1}",
+                        description:    "Fairly long and very expressive title that makes you really think about your place in life #{index + 1}",
+                        standard_price: (rand(5) * 100) + 99,
+                        store_id:       Store.all.sample.id)
+
       photo.save(validate: false)
       photo.update_column(:file, line.chomp)
       puts("Photo: #{index}")
     end
 
-    Photo.create(title:            "Andrew's One Photo",
-                 description:      "You really only need this photo.",
-                 standard_price:   500,
-                 file:             File.open("#{Rails.root}/spec/fixtures/test_photo_1.jpg"),
-                 store_id:         User.find_by(email: "andrew@turing.io").store.id)
+    Photo.create(title:          "Andrew's One Photo",
+                 description:    "You really only need this photo.",
+                 standard_price: 500,
+                 file:           File.open("#{Rails.root}/spec/fixtures/test_photo_1.jpg"),
+                 store_id:       User.find_by(email: "andrew@turing.io").store.id)
   end
 
   def create_statuses
