@@ -28,7 +28,7 @@ class PhotoCreator
   end
 
   def self.edit_relationships(photo, all_params)
-    photo.photo_categories.delete
+    photo.photo_categories.destroy_all
     all_params[:photo][:category_ids].each do |id|
       PhotoCategory.create(photo_id: photo.id, category_id: id)
     end
