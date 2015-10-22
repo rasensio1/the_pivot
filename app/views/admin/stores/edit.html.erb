@@ -1,5 +1,13 @@
 <div class="container">
 
+  <% unless @store.active? %>
+    <div class="row">
+      <p id="store-deactivated-message">
+        This store is not currently activated. No photos will be available for purchase!
+      </p>
+    </div>
+  <% end %>
+
   <div class="row">
     <div class="col-md-6">
       <h1><%= @store.name %></h1>
