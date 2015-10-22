@@ -73,7 +73,7 @@ RSpec.describe "User profile page: ", type: :feature do
 
         it "sees the order total" do
           within("#total") do
-            expect(page).to have_content("Total: $#{order.total.to_f / 100}")
+            expect(page).to have_content("$#{order.total.to_f / 100}")
           end
         end
 
