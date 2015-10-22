@@ -29,4 +29,11 @@ class ApplicationController < ActionController::Base
     params[:filter] || "0"
   end
 
+  def set_flash_errors(object)
+    object.errors.messages.each do |attr, msg|
+      flash[:danger] ||= ""
+      flash[:danger] += "#{attr.to_s.humanize} - #{msg.first.humanize} <br>"
+    end
+  end
+
 end

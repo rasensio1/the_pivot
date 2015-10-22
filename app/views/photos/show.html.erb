@@ -7,8 +7,17 @@
           <%= @photo.description %>
         </p>
         <h4><%= dollars(@photo.standard_price) %></h4>
-        <%= link_to "Visit Store", store_photos_path(@photo.store.slug), class: "btn btn-info in-line" %>
-        <%= link_to "Add to Cart", cart_items_path(photo_id: @photo.id), method: :post, class: "btn btn-primary in-line", id: "photo_show_add_to_cart" %>
+
+        <%= link_to "Visit Store", store_photos_path(@photo.store.slug), class: "btn btn-info btn-lg in-line" %>
+        <div class="photo-show-action">
+          <% if current_user && current_user.photos.include?(@photo) %>
+            <%= link_to @photo.file_url(:full), class: "btn btn-success btn-lg" do %>
+              <i class="glyphicon glyphicon-cloud-download"></i>
+            <% end %>
+          <% else %>
+            <%= link_to "Add to Cart", cart_items_path(photo_id: @photo.id), method: :post, class: "btn btn-primary btn-lg", id: "photo_show_add_to_cart" %>
+          <% end %>
+        </div>
     </div>
 
     <div class="col-md-9">

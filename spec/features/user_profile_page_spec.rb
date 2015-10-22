@@ -42,6 +42,17 @@ RSpec.describe "the user profile page", type: :feature do
         expect(current_path).to eq profile_path(user)
         expect(page).to have_content "Mia"
       end
+
+      it "is told to entder a password" do
+        click_link "Edit Profile"
+        expect(current_path).to eq profile_edit_path
+
+        fill_in "Name", with: "Mia"
+        click_button "Update Info"
+
+        expect(current_path).to eq profile_path(user)
+        expect(page).to have_content "Password - Can't be blank"
+      end
     end
 
     xit 'can download mutiple photos at once' do

@@ -78,17 +78,17 @@ class Seed
   end
 
   def create_photos
+
     File.open("#{Rails.root}/spec/fixtures/photo_urls.txt").readlines.each_with_index do |line, index|
-      photo = Photo.create(title:            "Example Title #{index + 1}",
+      photo = Photo.new(title:            "Example Title #{index + 1}",
                            description:      "Fairly long and very expressive title that makes you really think about your place in life #{index + 1}",
                            standard_price:   (rand(5) * 100) + 99,
                            commercial_price: ((rand(20) + 89) * 100) + 99,
-                           store_id:         Store.all.sample.id,
-                           file: "temp-file-name")
-
+                           store_id:         Store.all.sample.id)
+                           
+      photo.save(validate: false)
       photo.update_column(:file, line.chomp)
-
-      puts("photo id: #{photo.id}")
+      puts("Photo: #{index}")
     end
 
     Photo.create(title:            "Andrew's One Photo",
@@ -107,17 +107,19 @@ class Seed
   end
 
   def create_orders
-    @order_count.times do
+    @order_count.times do |index|
       Order.create(user_id:   User.all.sample.id,
                    status_id: Status.find_by(name: "Completed").id)
+      puts "Order: #{index}"
     end
   end
 
   def create_order_items
-    @order_items_count.times do
+    @order_items_count.times do |index|
       OrderItem.create(order_id: Order.all.sample.id,
                        photo_id: Photo.all.sample.id,
                        quantity: 1)
+      puts "OrderItem: #{index}"
     end
   end
 
