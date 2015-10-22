@@ -25,10 +25,6 @@ class Admin::StoresController < Admin::BaseController
     params.require(:store).permit(:name, :tagline, :active)
   end
 
-  def current_store
-    Store.find_by(slug: params[:store_name])
-  end
-
   def correct_admin_page(store, params)
     return god_dashboard_path if store_status_changed?(params)
     admin_store_path(store.slug)
