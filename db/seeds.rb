@@ -84,9 +84,9 @@ class Seed
                            description:      "Fairly long and very expressive title that makes you really think about your place in life #{index + 1}",
                            standard_price:   (rand(5) * 100) + 99,
                            commercial_price: ((rand(20) + 89) * 100) + 99,
-                           store_id:         Store.all.sample.id,
-                           file: line.chomp)
+                           store_id:         Store.all.sample.id)
       photo.save(validate: false)
+      photo.update_column(:file, line.chomp)
       puts("Photo: #{index}")
     end
 
