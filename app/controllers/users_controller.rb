@@ -45,10 +45,7 @@ class UsersController < ApplicationController
 
   def update
     current_user.update_attributes(user_params)
-    if current_user.save!
-    else
-    end
-
+    set_flash_errors(current_user) unless current_user.save 
     redirect_to profile_path(current_user)
   end
 

@@ -51,7 +51,7 @@ RSpec.describe "the user profile page", type: :feature do
         click_button "Update Info"
 
         expect(current_path).to eq profile_path(user)
-        expect(page).to have_content "Enter your password to update your information."
+        expect(page).to have_content "Password - Can't be blank"
       end
     end
 
