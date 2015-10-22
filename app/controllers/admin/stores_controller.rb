@@ -1,5 +1,5 @@
 class Admin::StoresController < Admin::BaseController
-  before_filter :require_shop_admin, only: [:edit]
+  before_filter :require_shop_admin
 
   def edit
     @user = User.new

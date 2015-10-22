@@ -8,7 +8,7 @@ RSpec.describe "the user profile page", type: :feature do
   fixtures :users
 
   context "a logged in user" do
-    let!(:user) { Fabricate(:user) }
+    let!(:user) {User.first }
 
     before do
       sign_in(user)
