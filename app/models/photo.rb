@@ -34,4 +34,12 @@ class Photo < ActiveRecord::Base
     file.file.public_id
   end
 
+  def sales_quantity
+    OrderItem.where(photo_id: id).count
+  end
+
+  def sales_total
+
+  end
+
 end
