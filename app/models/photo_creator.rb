@@ -10,7 +10,6 @@ class PhotoCreator
     Photo.new(title: "Store #{store} Watermark #{Time.now.strftime('%s')}",
               description: "Store #{store} Watermark",
               standard_price: 1,
-              commercial_price: 1,
               store_id: store,
               file: file,
               active: false)

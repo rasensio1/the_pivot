@@ -83,7 +83,6 @@ class Seed
       photo = Photo.new(title:            "Example Title #{index + 1}",
                            description:      "Fairly long and very expressive title that makes you really think about your place in life #{index + 1}",
                            standard_price:   (rand(5) * 100) + 99,
-                           commercial_price: ((rand(20) + 89) * 100) + 99,
                            store_id:         Store.all.sample.id)
                            
       photo.save(validate: false)
@@ -94,7 +93,6 @@ class Seed
     Photo.create(title:            "Andrew's One Photo",
                  description:      "You really only need this photo.",
                  standard_price:   500,
-                 commercial_price: 200,
                  file:             File.open("#{Rails.root}/spec/fixtures/test_photo_1.jpg"),
                  store_id:         User.find_by(email: "andrew@turing.io").store.id)
   end
