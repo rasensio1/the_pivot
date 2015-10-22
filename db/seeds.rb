@@ -85,6 +85,7 @@ class Seed
                            standard_price:   (rand(5) * 100) + 99,
                            commercial_price: ((rand(20) + 89) * 100) + 99,
                            store_id:         Store.all.sample.id)
+                           
       photo.save(validate: false)
       photo.update_column(:file, line.chomp)
       puts("Photo: #{index}")
